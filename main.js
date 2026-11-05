@@ -127,7 +127,9 @@
     const pts = [[0, t], [w - tw, t], [w - tw, 0], [w, 0], [w, h]];
     if (!mobile) { const lw = 56, lb = 180; pts.push([lw, h], [lw, h - lb], [0, h - lb]); }
     else pts.push([0, h]);
-    stagePath.setAttribute('d', roundedPoly(pts, mobile ? 22 : 32));
+    const d = roundedPoly(pts, mobile ? 22 : 32);
+    stagePath.setAttribute('d', d);
+    document.getElementById('stageEdgePath').setAttribute('d', d);
   }
   new ResizeObserver(shapeStage).observe(stage);
 
@@ -159,6 +161,24 @@
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
+
+  /* ---------- Contour waves ---------- */
+  document.querySelectorAll('svg[data-waves]').forEach(svg => {
+    const n = +svg.dataset.waves, W = 1600, H = 900;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    let out = '';
+    for (let k = 0; k < n; k++) {
+      const base = H * (.38 + k * .065), amp = 40 + k * 9, ph = k * .55;
+      let d = `M-100 ${base}`;
+      for (let x = -100; x <= W + 100; x += 50) {
+        const y = base + Math.sin(x / 260 + ph) * amp + Math.sin(x / 113 + ph * 2) * amp * .25;
+        d += ` L${x} ${y.toFixed(1)}`;
+      }
+      out += `<path d="${d}" style="--i:${k}"/>`;
+    }
+    svg.innerHTML = out;
+  });
 
   /* ---------- Module explorer ---------- */
   const explorer = document.getElementById('explorer');
