@@ -285,7 +285,12 @@
     set('sBefore', (before / docs).toFixed(1));
     set('sAfter', (after / docs).toFixed(1));
     set('sHours', fmt(Math.round(saved)));
-    set('sDays', (saved * 12 / 176).toFixed(1));
+    const bh = before / 60, ah = after / 60;
+    set('hBefore', t('u.h', { n: fmt(Math.round(bh)) }));
+    set('hAfter', t('u.h', { n: ah < 10 ? ah.toFixed(1) : fmt(Math.round(ah)) }));
+    document.getElementById('cmpBefore').style.width = '100%';
+    document.getElementById('cmpAfter').style.width = Math.max(ah / bh * 100, 1.5) + '%';
+    set('sPct', Math.round((1 - after / before) * 100));
   }
   range.addEventListener('input', calc);
   calc();
