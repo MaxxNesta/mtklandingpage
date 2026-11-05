@@ -133,7 +133,7 @@
                 <div class="panel panel--chart">
                   <div class="panel__h"><span>Cash flow</span><span class="muted">Last 12 weeks</span></div>
                   <svg viewBox="0 0 400 140" preserveAspectRatio="none" class="chart">
-                    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffdb54" stop-opacity=".35"/><stop offset="1" stop-color="#ffdb54" stop-opacity="0"/></linearGradient></defs>
+                    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0071e3" stop-opacity=".22"/><stop offset="1" stop-color="#0071e3" stop-opacity="0"/></linearGradient></defs>
                     <path class="chart__area" d="M0 110 C30 100 50 104 80 92 S130 70 160 78 S210 60 240 52 S300 58 330 36 S380 22 400 18 V140 H0Z" fill="url(#g)"/>
                     <path class="chart__line" d="M0 110 C30 100 50 104 80 92 S130 70 160 78 S210 60 240 52 S300 58 330 36 S380 22 400 18"/>
                     <path class="chart__line chart__line--2" d="M0 120 C40 118 70 112 100 114 S160 104 200 100 S260 96 300 88 S360 80 400 76"/>
@@ -151,7 +151,7 @@
               </div>
             </div>
           </div>
-          <div class="toast" id="toast"><span class="toast__ico"><svg viewBox="0 0 20 20" width="18" height="18"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="#ffdb54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>Invoice matched</strong><span>INV‑2041 ↔ PO‑8842 ↔ GRN‑551</span></div></div>
+          <div class="toast" id="toast"><span class="toast__ico"><svg viewBox="0 0 20 20" width="18" height="18"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>Invoice matched</strong><span>INV‑2041 ↔ PO‑8842 ↔ GRN‑551</span></div></div>
         </div>
       </div>
 
@@ -455,41 +455,55 @@
         <span class="footer__acts"><a href="#">Log in</a><a href="#demo" class="footer__go">Book a demo <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></span>
       </div>
       <div class="footer__art" aria-hidden="true">
-        <svg viewBox="0 0 1600 380" preserveAspectRatio="xMidYMax slice">
+        <svg viewBox="0 0 1600 440" preserveAspectRatio="xMidYMax slice">
           <defs>
             <filter id="paint" x="-5%" y="-5%" width="110%" height="110%">
               <feTurbulence type="fractalNoise" baseFrequency=".022 .07" numOctaves="4" seed="7" result="n"/>
-              <feDisplacementMap in="SourceGraphic" in2="n" scale="15"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="13"/>
             </filter>
-            <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .2  0 0 0 0 .12  0 0 0 .35 0"/></filter>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f2ea" stop-opacity="0"/><stop offset=".55" stop-color="#dfe8d5"/><stop offset="1" stop-color="#c9dbbd"/></linearGradient>
-            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".35" stop-color="#fff"/></linearGradient>
-            <mask id="fadeMask"><rect width="1600" height="380" fill="url(#fade)"/></mask>
-            <g id="tr"><path d="M-3 0h6l-1-34h-4z" fill="#3a2f22"/><circle cx="0" cy="-48" r="22" fill="#2f5a3c"/><circle cx="-16" cy="-38" r="16" fill="#3d6b46"/><circle cx="15" cy="-36" r="17" fill="#3d6b46"/><circle cx="-4" cy="-62" r="15" fill="#4f7d52"/><circle cx="22" cy="-52" r="11" fill="#2f5a3c"/><circle cx="8" cy="-50" r="10" fill="#7fa978"/><circle cx="-10" cy="-54" r="6" fill="#9cc08f"/><circle cx="-20" cy="-30" r="8" fill="#2f5a3c"/><circle cx="14" cy="-68" r="7" fill="#6e9a66"/></g>
+            <filter id="paintS" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency=".08" numOctaves="2" seed="4" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+            </filter>
+            <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .2  0 0 0 0 .12  0 0 0 .3 0"/></filter>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f2ea" stop-opacity="0"/><stop offset=".45" stop-color="#e3ebd9"/><stop offset="1" stop-color="#cfe0c4"/></linearGradient>
+            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".2" stop-color="#fff"/></linearGradient>
+            <mask id="fadeMask"><rect width="1600" height="440" fill="url(#fade)"/></mask>
+            <g id="tr"><path d="M-3 0h6l-1-34h-4z" fill="#4a3a28"/><circle cx="0" cy="-48" r="22" fill="#2f5a3c"/><circle cx="-16" cy="-38" r="16" fill="#3d6b46"/><circle cx="15" cy="-36" r="17" fill="#3d6b46"/><circle cx="-4" cy="-62" r="15" fill="#4f7d52"/><circle cx="22" cy="-52" r="11" fill="#2f5a3c"/><circle cx="8" cy="-50" r="10" fill="#7fa978"/><circle cx="-10" cy="-54" r="6" fill="#9cc08f"/><circle cx="-20" cy="-30" r="8" fill="#2f5a3c"/><circle cx="14" cy="-68" r="7" fill="#6e9a66"/></g>
+            <g id="hA"><rect x="-34" y="-46" width="68" height="46" fill="#f5ecd8"/><rect x="18" y="-82" width="10" height="22" fill="#8e4529"/><path d="M-42 -44 L0 -80 L42 -44Z" fill="#c4683f"/><path d="M-42 -44 L0 -80 L42 -44" fill="none" stroke="#8e4529" stroke-width="3" stroke-linejoin="round"/><path d="M-7 0v-17a7 7 0 0 1 14 0v17z" fill="#5c4030"/><rect x="-27" y="-35" width="13" height="13" rx="2" fill="#ffd66b" stroke="#8e4529" stroke-width="2"/><rect x="14" y="-35" width="13" height="13" rx="2" fill="#ffd66b" stroke="#8e4529" stroke-width="2"/><path d="M-36 0h72" stroke="#5c7d4d" stroke-width="4"/></g>
+            <g id="hB"><rect x="-24" y="-64" width="48" height="64" fill="#efe5cc"/><path d="M-31 -62 L0 -96 L31 -62Z" fill="#2f5a3c"/><path d="M-31 -62 L0 -96 L31 -62" fill="none" stroke="#1f3f2a" stroke-width="3" stroke-linejoin="round"/><circle cx="0" cy="-72" r="6" fill="#ffd66b" stroke="#1f3f2a" stroke-width="2"/><rect x="-16" y="-48" width="11" height="13" rx="2" fill="#ffd66b" stroke="#1f3f2a" stroke-width="2"/><rect x="5" y="-48" width="11" height="13" rx="2" fill="#ffd66b" stroke="#1f3f2a" stroke-width="2"/><path d="M-7 0v-16a7 7 0 0 1 14 0v16z" fill="#c4683f"/></g>
+            <g id="hC"><rect x="-48" y="-38" width="96" height="38" fill="#f6eddb"/><path d="M-54 -36 L-30 -64 L30 -64 L54 -36Z" fill="#d9a441"/><path d="M-54 -36 L-30 -64 L30 -64 L54 -36" fill="none" stroke="#9c6d1f" stroke-width="3" stroke-linejoin="round"/><rect x="-13" y="-30" width="26" height="30" fill="#8e4529"/><path d="M-13 -30 L13 0 M13 -30 L-13 0" stroke="#f6eddb" stroke-width="2.5"/><rect x="-38" y="-28" width="13" height="11" rx="2" fill="#ffd66b" stroke="#9c6d1f" stroke-width="2"/><rect x="25" y="-28" width="13" height="11" rx="2" fill="#ffd66b" stroke="#9c6d1f" stroke-width="2"/></g>
+            <g id="fence" stroke="#e9dfc8" stroke-width="3" stroke-linecap="round"><path d="M0 0v-14M14 0v-14M28 0v-14M42 0v-14M56 0v-14M70 0v-14M-2 -10h74M-2 -4h74"/></g>
           </defs>
           <g mask="url(#fadeMask)">
-            <rect width="1600" height="380" fill="url(#sky)"/>
+            <rect width="1600" height="440" fill="url(#sky)"/>
             <g filter="url(#paint)">
-              <path d="M0 230 C160 196 300 214 460 200 S760 170 900 190 S1200 168 1360 184 S1540 176 1600 186 V380 H0Z" fill="#b7cdb0"/>
-              <path d="M0 262 C200 246 380 258 560 248 S900 234 1100 246 S1440 236 1600 244 V380 H0Z" fill="#94b68b"/>
-              <g fill="#5f8a58" opacity=".85"><ellipse cx="90" cy="252" rx="40" ry="11"/><ellipse cx="330" cy="250" rx="60" ry="12"/><ellipse cx="520" cy="246" rx="34" ry="9"/><ellipse cx="930" cy="243" rx="52" ry="11"/><ellipse cx="1180" cy="245" rx="70" ry="12"/><ellipse cx="1480" cy="242" rx="46" ry="10"/></g>
-              <path d="M0 286 C260 276 520 290 800 280 S1340 272 1600 282 V380 H0Z" fill="#76a06c"/>
-              <g fill="#8fb886" opacity=".6"><path d="M0 300 C300 292 500 304 800 296 L800 300 C500 308 300 296 0 306Z"/><path d="M800 296 C1100 288 1300 300 1600 292 L1600 298 C1300 306 1100 294 800 302Z"/></g>
-              <g stroke="#5f8f5c" stroke-width="5" fill="none" opacity=".7"><path d="M800 282 L120 380"/><path d="M800 282 L420 380"/><path d="M800 282 L700 380"/><path d="M800 282 L980 380"/><path d="M800 282 L1260 380"/><path d="M800 282 L1540 380"/></g>
-              <path d="M0 330 C300 318 600 336 900 326 S1400 318 1600 330 V380 H0Z" fill="#4f7d52"/>
-              <g transform="translate(700 268)">
-                <path d="M0 0v-26l40-20 40 20v26z" fill="#e9e4d4"/><path d="M-6 -24l46-24 46 24" stroke="#5c4a36" stroke-width="7" fill="none"/>
-                <rect x="30" y="-16" width="20" height="16" fill="#5c4a36"/>
-                <path d="M86 0v-16l28-14 28 14v16z" fill="#ddd6c2"/><path d="M82 -15l32-17 32 17" stroke="#5c4a36" stroke-width="6" fill="none"/>
-              </g>
-              <use href="#tr" transform="translate(150 300) scale(.9)"/><use href="#tr" transform="translate(260 288) scale(.6)"/>
-              <use href="#tr" transform="translate(420 312) scale(1.05)"/><use href="#tr" transform="translate(560 282) scale(.55)"/>
-              <use href="#tr" transform="translate(640 296) scale(.8)"/><use href="#tr" transform="translate(1000 290) scale(.65)"/>
-              <use href="#tr" transform="translate(1130 304) scale(.9)"/><use href="#tr" transform="translate(1270 282) scale(.5)"/>
-              <use href="#tr" transform="translate(1420 340) scale(1.9)"/><use href="#tr" transform="translate(1530 312) scale(1.1)"/>
-              <use href="#tr" transform="translate(40 350) scale(1.4)"/><use href="#tr" transform="translate(860 292) scale(.45)"/><use href="#tr" transform="translate(330 296) scale(.4)"/><use href="#tr" transform="translate(1340 300) scale(.7)"/><use href="#tr" transform="translate(1590 360) scale(1.5)"/>
+              <path d="M0 250 C160 214 300 232 460 218 S760 186 900 206 S1200 184 1360 200 S1540 192 1600 202 V440 H0Z" fill="#b7cdb0"/>
+              <g fill="#6f9a68" opacity=".8"><ellipse cx="90" cy="276" rx="40" ry="11"/><ellipse cx="330" cy="272" rx="60" ry="12"/><ellipse cx="1180" cy="266" rx="70" ry="12"/><ellipse cx="1480" cy="264" rx="46" ry="10"/></g>
+              <path d="M0 290 C200 272 380 284 560 274 S900 260 1100 272 S1440 262 1600 270 V440 H0Z" fill="#94b68b"/>
+              <path d="M0 322 C260 310 520 326 800 316 S1340 306 1600 318 V440 H0Z" fill="#76a06c"/>
+              <g stroke="#5f8f5c" stroke-width="6" fill="none" opacity=".7"><path d="M800 318 L60 440"/><path d="M800 318 L380 440"/><path d="M800 318 L680 440"/><path d="M800 318 L960 440"/><path d="M800 318 L1260 440"/><path d="M800 318 L1560 440"/></g>
+              <path d="M0 378 C300 364 600 384 900 372 S1400 364 1600 378 V440 H0Z" fill="#4f7d52"/>
+              <use href="#tr" transform="translate(150 336) scale(.9)"/><use href="#tr" transform="translate(250 322) scale(.55)"/>
+              <use href="#tr" transform="translate(470 352) scale(1.05)"/><use href="#tr" transform="translate(600 300) scale(.5)"/>
+              <use href="#tr" transform="translate(1010 312) scale(.6)"/><use href="#tr" transform="translate(1110 344) scale(.95)"/>
+              <use href="#tr" transform="translate(1340 330) scale(.7)"/><use href="#tr" transform="translate(1440 400) scale(2)"/>
+              <use href="#tr" transform="translate(1560 360) scale(1.15)"/><use href="#tr" transform="translate(40 404) scale(1.5)"/>
             </g>
-            <rect width="1600" height="380" filter="url(#grain)" opacity=".75"/>
+            <g filter="url(#paintS)">
+              <use href="#hA" transform="translate(560 286) scale(.55)"/>
+              <use href="#hC" transform="translate(705 318) scale(1.05)"/>
+              <use href="#hA" transform="translate(818 324) scale(1.15)"/>
+              <use href="#hB" transform="translate(905 318)"/>
+              <use href="#fence" transform="translate(948 330) scale(.9)"/>
+              <use href="#fence" transform="translate(600 334) scale(.9)"/>
+              <use href="#hA" transform="translate(300 340) scale(.8)"/>
+              <use href="#hB" transform="translate(1235 308) scale(.7)"/>
+              <use href="#tr" transform="translate(990 336) scale(.75)"/>
+            </g>
+            <g class="smoke" fill="#fff"><circle cx="840" cy="230" r="5"/><circle cx="846" cy="218" r="7"/><circle cx="842" cy="202" r="9"/></g>
+            <rect y="420" width="1600" height="20" fill="#4f7d52"/>
+            <rect width="1600" height="440" filter="url(#grain)" opacity=".7"/>
           </g>
         </svg>
       </div>
