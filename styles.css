@@ -8,9 +8,9 @@
   --forest-500: #1e7458;
   --moss: #8fc6a8;
   --mint: #b9e2c9;
-  --cream: #f1efe4;
-  --cream-dim: #e0e3d8;
-  --muted: #a8bbb0;
+  --cream: #f7f5ee;
+  --cream-dim: #eaece2;
+  --muted: #bccbc2;
   --line: rgba(185, 226, 201, .16);
   --line-strong: rgba(185, 226, 201, .3);
   --yellow: #ffdb54;
@@ -39,6 +39,7 @@ body {
   color: var(--cream);
   font-family: var(--sans);
   font-size: 16px;
+  font-weight: 450;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -807,7 +808,7 @@ h2 .soft { color: var(--mint); }
 :root { --peri: #a9b8ff; --peri-d: #7f93f5; }
 .section--fx { position: relative; isolation: isolate; margin-block: 18px; padding-block: clamp(48px, 6vw, 88px); }
 .fx { position: absolute; inset: 0 clamp(0px, 1vw, 12px); z-index: -1; overflow: hidden; border-radius: 32px;
-  background: linear-gradient(155deg, #14513f 0%, #0f4234 45%, #0c362b 100%);
+  background: radial-gradient(90% 70% at 0% 0%, #10402f, transparent 60%), linear-gradient(155deg, #0b3226 0%, #082a1f 50%, #061f17 100%);
   border: 1px solid rgba(241, 239, 228, .14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1); }
 .fx__dots { position: absolute; right: -2%; top: -6%; width: 46%; height: 70%; pointer-events: none;
   background-image: radial-gradient(circle, rgba(241, 239, 228, .55) 1.6px, transparent 1.9px);
@@ -946,3 +947,26 @@ h2 .soft { color: var(--mint); }
   .sum__item b { font-size: 26px; }
   .trace__head { align-items: flex-start; }
 }
+
+/* ---------- Contrast & weight pass ---------- */
+.hero__title { font-weight: 560; }
+h2 { font-weight: 580; }
+.body, .hero__sub p, .xp__txt, .faq p, .cta p { font-weight: 450; color: var(--cream); }
+.section--fx h2 { color: #fff; }
+.section--fx .body { color: #f2f3ec; }
+.chip-tag, .tag, .auto__k, .matrix th, .access__hint, .calc__top label, .trace__head p, .trace__key, .calc__legend, .closecal__note, .sum__note, .compare__note { font-weight: 500; }
+.row__t b, .sum__item b, .calc__top output, .trace__head h3, .tnode b, .row__n b, .row__s b { font-weight: 600; }
+.row__t span, .row__n span, .row__s span, .row__bars span, .sum__item > span, .sum__item em, .tnode span { font-weight: 500; color: #eef0e7; }
+.row__s b, .sum__item b .blue { color: #7cc1ff; }
+.row__bars i.m, .calc__legend i.m { background: rgba(247, 245, 238, .55); }
+.glass, .automation, .access { background: linear-gradient(160deg, rgba(169, 184, 255, .16), rgba(247, 245, 238, .05) 45%, rgba(169, 184, 255, .08)); }
+.tnode { background: rgba(2, 14, 9, .6); }
+.tnode span { color: #dfe3d8; }
+.tnode.is-sel span { color: var(--forest-700); }
+.tnode.is-dim { opacity: .55; }
+.fx__strings path { stroke: rgba(247, 245, 238, .13); }
+.explorer__tabs button { font-weight: 500; }
+.status li, .kpis span, .industries { font-weight: 500; }
+.nav__pill, .floatnav__links { font-weight: 500; color: var(--cream); }
+.sum__item--big > span, .sum__item--big em { color: #515154; }
+.hero__title { font-size: clamp(46px, 6.6vw, 104px); }
