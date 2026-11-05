@@ -282,17 +282,16 @@
 
   /* ---------- Document trace map ---------- */
   const NODES = [
-    { id: 'req', c: 0, r: 0, k: 'Purchase request', n: 'REQ‑77' },
-    { id: 'po', c: 1, r: 0, k: 'Purchase order', n: 'PO‑8842' },
-    { id: 'lcb', c: 1, r: 1, k: 'Freight & duty bill', n: 'BILL‑310' },
-    { id: 'grn', c: 2, r: 0, k: 'Goods receipt', n: 'GRN‑551' },
-    { id: 'lcv', c: 2, r: 1, k: 'Landed cost voucher', n: 'JV‑3107' },
-    { id: 'sinv', c: 3, r: 0, k: 'Supplier invoice', n: 'INV‑S‑2041' },
-    { id: 'sale', c: 3, r: 1, k: 'Sales invoice · IMEI', n: 'INV‑2088' },
-    { id: 'pay', c: 4, r: 0, k: 'Supplier payment', n: 'PAY‑118' },
-    { id: 'rcpt', c: 4, r: 1, k: 'Customer receipt', n: 'RCPT‑903' }
+    { id: 'po', c: 0, r: 0, k: 'Purchase order', n: 'PO‑8842' },
+    { id: 'lcb', c: 0, r: 1, k: 'Freight & duty bill', n: 'BILL‑310' },
+    { id: 'grn', c: 1, r: 0, k: 'Goods receipt', n: 'GRN‑551' },
+    { id: 'lcv', c: 1, r: 1, k: 'Landed cost voucher', n: 'JV‑3107' },
+    { id: 'sinv', c: 2, r: 0, k: 'Supplier invoice', n: 'INV‑S‑2041' },
+    { id: 'sale', c: 2, r: 1, k: 'Sales invoice · IMEI', n: 'INV‑2088' },
+    { id: 'pay', c: 3, r: 0, k: 'Supplier payment', n: 'PAY‑118' },
+    { id: 'rcpt', c: 3, r: 1, k: 'Customer receipt', n: 'RCPT‑903' }
   ];
-  const EDGES = [['req', 'po'], ['po', 'grn'], ['po', 'lcb'], ['lcb', 'lcv'], ['grn', 'lcv'], ['grn', 'sinv'], ['sinv', 'pay'], ['grn', 'sale'], ['sale', 'rcpt']];
+  const EDGES = [['po', 'grn'], ['po', 'lcb'], ['lcb', 'lcv'], ['grn', 'lcv'], ['grn', 'sinv'], ['sinv', 'pay'], ['grn', 'sale'], ['sale', 'rcpt']];
   const map = document.getElementById('traceMap');
   const traceSvg = document.getElementById('traceLines');
   const nodeEls = {};
@@ -320,9 +319,13 @@
     const up = walk(selected, 'up'), down = walk(selected, 'down');
     traceSvg.innerHTML = EDGES.map(([f, t]) => {
       const a = nodeEls[f].getBoundingClientRect(), b = nodeEls[t].getBoundingClientRect();
-      const x1 = a.right - mr.left, y1 = a.top + a.height / 2 - mr.top;
-      const x2 = b.left - mr.left, y2 = b.top + b.height / 2 - mr.top;
+      const vertical = Math.abs(a.left - b.left) < 4;
+      const x1 = vertical ? a.left + a.width / 2 - mr.left : a.right - mr.left;
+      const y1 = vertical ? a.bottom - mr.top : a.top + a.height / 2 - mr.top;
+      const x2 = vertical ? b.left + b.width / 2 - mr.left : b.left - mr.left;
+      const y2 = vertical ? b.top - mr.top : b.top + b.height / 2 - mr.top;
       const dx = (x2 - x1) * .5;
+      if (vertical) return `<path class="${down.has(t) && (down.has(f) || f === selected) ? 'down' : up.has(f) && (up.has(t) || t === selected) ? 'up' : ''}" d="M${x1} ${y1} L${x2} ${y2}"/>`;
       const cls = down.has(t) && (down.has(f) || f === selected) ? 'down'
         : up.has(f) && (up.has(t) || t === selected) ? 'up' : '';
       return `<path class="${cls}" d="M${x1} ${y1} C${x1 + dx} ${y1} ${x2 - dx} ${y2} ${x2} ${y2}"/>`;

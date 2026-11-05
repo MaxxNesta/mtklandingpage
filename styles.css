@@ -880,7 +880,7 @@ h2 .soft { color: var(--mint); }
 .trace__read { padding: 8px 14px; border-radius: 999px; background: rgba(4, 16, 11, .4); border: 1px solid rgba(241, 239, 228, .18); font-size: 13px !important; color: var(--cream) !important; }
 .trace__read b { font-weight: 500; color: var(--yellow); }
 .trace__scroll { overflow-x: auto; scrollbar-width: thin; margin: 0 -6px; padding: 6px; }
-.trace__map { position: relative; display: grid; grid-template-columns: repeat(5, minmax(130px, 1fr)); grid-auto-rows: auto; gap: 34px 46px; min-width: 820px; }
+.trace__map { position: relative; display: grid; grid-template-columns: repeat(4, minmax(140px, 1fr)); grid-auto-rows: auto; gap: 40px 56px; min-width: 700px; }
 .trace__lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
 .trace__lines path { fill: none; stroke: rgba(241, 239, 228, .22); stroke-width: 1.5; transition: stroke .3s; }
 .trace__lines path.up { stroke: var(--peri); stroke-width: 2; stroke-dasharray: 6 6; animation: flow 1s linear infinite; }
@@ -970,3 +970,20 @@ h2 { font-weight: 580; }
 .nav__pill, .floatnav__links { font-weight: 500; color: var(--cream); }
 .sum__item--big > span, .sum__item--big em { color: #515154; }
 .hero__title { font-size: clamp(46px, 6.6vw, 104px); }
+
+/* ---------- Flatten time-saved section (no nested cards) ---------- */
+.eff { gap: 0; grid-template-columns: 1.65fr 1fr; }
+.calc { padding-right: clamp(24px, 3.5vw, 56px); border-right: 1px solid rgba(247, 245, 238, .18); }
+.sum { padding-left: clamp(24px, 3.5vw, 56px); }
+.sum__item--big { margin-top: auto; padding: 22px 0 0; border-radius: 0; background: none; color: var(--cream); }
+.sum__item--big > span, .sum__item--big em { color: #eef0e7; }
+.sum__item--big b { color: #7cc1ff; }
+.trace { margin-top: clamp(40px, 5vw, 64px); padding-top: clamp(32px, 4vw, 48px); border-top: 1px solid rgba(247, 245, 238, .18); }
+@media (max-width: 900px) {
+  .eff { grid-template-columns: 1fr; }
+  .calc { padding: 0 0 28px; border-right: 0; border-bottom: 1px solid rgba(247, 245, 238, .18); }
+  .sum { padding: 20px 0 0; }
+}
+#close .fx__strings { opacity: .6; -webkit-mask-image: linear-gradient(90deg, #000, transparent 12%, transparent 88%, #000); mask-image: linear-gradient(90deg, #000, transparent 12%, transparent 88%, #000); }
+.sum__item--big { margin-top: 8px; }
+@media (max-width: 760px) { .sum__item--big b { font-size: 48px; } }
