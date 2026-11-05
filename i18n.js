@@ -17,8 +17,8 @@
     'form.done': { my: 'ကျေးဇူးပါ၊ အီးမေးလ် ပို့ပေးပါမည်', zh: '谢谢，我们会发邮件给你' },
 
     'hero.title': {
-      my: '<span class="line"><span>လုပ်ငန်းတစ်ခုလုံးကို</span></span><span class="line"><span><em class="mark">လယ်ဂျာ</em> တစ်ခုတည်းဖြင့်</span></span><span class="line"><span>စီမံပါ</span></span>',
-      zh: '<span class="line"><span>用<em class="mark">一本账</em></span></span><span class="line"><span>管好整盘</span></span><span class="line"><span>生意</span></span>'
+      my: '<span class="line"><span>လုပ်ငန်းတစ်ခုလုံးကို</span></span><span class="line"><span><em class="mark">စနစ်</em> တစ်ခုတည်းဖြင့်</span></span><span class="line"><span>စီမံပါ</span></span>',
+      zh: '<span class="line"><span>用<em class="mark">一套系统</em></span></span><span class="line"><span>管好整盘</span></span><span class="line"><span>生意</span></span>'
     },
     'hero.sub': {
       my: 'အရောင်း၊ ကုန်လက်ကျန်၊ အဝယ်နှင့် ပုံသေပိုင်ဆိုင်မှုများကို မှတ်တမ်းတင်သည့်အချိန်မှာပင် တူညီသော အထွေထွေလယ်ဂျာထဲ စာရင်းသွင်းပေးသဖြင့် သင့်စာရင်းကိုင်နှင့် ဂိုဒေါင်မန်နေဂျာတို့ တူညီသော ကိန်းဂဏန်းများကိုသာ ကြည့်ရှုရပါမည်။',
