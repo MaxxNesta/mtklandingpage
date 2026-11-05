@@ -1073,3 +1073,9 @@ html:lang(my) .floatnav__links { gap: 16px; }
 .sum__item--big em { display: block; margin-top: 4px; }
 .sum__item--big > b { font-size: clamp(34px, 3.4vw, 50px); }
 html:lang(my) .sum__item--big > b { font-size: clamp(28px, 2.8vw, 40px); }
+
+/* section tags: solid, high contrast */
+.chip-tag { padding: 7px 14px 7px 11px; border: 0; background: var(--peri); color: #0b1a3a; font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: .01em; box-shadow: 0 6px 18px -8px rgba(169, 184, 255, .6); }
+.chip-tag i { width: 7px; height: 7px; background: #0b1a3a; }
+.automation .auto__step { opacity: .72; }
+.automation .auto__k { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .06em; background: rgba(247, 245, 238, .2); }
