@@ -135,7 +135,7 @@
   const app = document.getElementById('app');
   const floatnav = document.getElementById('floatnav');
   const scrub = document.getElementById('scrub');
-  const keys = new Set(['MTK', 'one', 'ledger.']);
+  const keys = new Set(['MTK']);
   scrub.innerHTML = scrub.textContent.trim().split(/\s+/)
     .map(w => `<span class="w${keys.has(w) ? ' is-key' : ''}">${w}</span>`).join(' ');
   const words = [...scrub.querySelectorAll('.w')];
@@ -159,6 +159,45 @@
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
+
+  /* ---------- Module explorer ---------- */
+  const explorer = document.getElementById('explorer');
+  const tabs = [...explorer.querySelectorAll('[role="tab"]')];
+  const DWELL = 7000;
+  let current = 0, timer = null, auto = !reduce;
+  explorer.style.setProperty('--dwell', DWELL + 'ms');
+
+  function show(i, focus) {
+    current = (i + tabs.length) % tabs.length;
+    tabs.forEach((t, j) => {
+      const on = j === current;
+      const panel = document.getElementById(t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.hidden = !on;
+      panel.classList.remove('is-play');
+      if (on) requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('is-play')));
+    });
+    if (focus) tabs[current].focus();
+    const list = tabs[0].parentElement, t = tabs[current];
+    if (list.scrollWidth > list.clientWidth) list.scrollTo({ left: t.offsetLeft - (list.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' });
+    schedule();
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (auto) timer = setTimeout(() => show(current + 1), DWELL);
+  }
+  function stopAuto() { auto = false; clearTimeout(timer); explorer.classList.add('is-paused'); }
+  tabs.forEach((t, i) => t.addEventListener('click', () => { stopAuto(); show(i); }));
+  explorer.querySelector('[role="tablist"]').addEventListener('keydown', e => {
+    const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (d) { e.preventDefault(); stopAuto(); show(current + d, true); }
+  });
+  if (reduce) explorer.classList.add('is-paused');
+  new IntersectionObserver(([en]) => {
+    if (en.isIntersecting) { if (!timer) show(current); }
+    else { clearTimeout(timer); timer = null; }
+  }, { threshold: .3 }).observe(explorer);
 
   /* ---------- Reveals ---------- */
   const io = new IntersectionObserver(entries => {

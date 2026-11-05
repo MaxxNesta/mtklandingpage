@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MTK — One ledger for the whole business</title>
-  <meta name="description" content="MTK is the ERP that runs finance, inventory, procurement, sales, HR and manufacturing on one live ledger.">
-  <meta name="theme-color" content="#0d100e">
+  <title>MTK | ERP on one ledger</title>
+  <meta name="description" content="MTK is an ERP for distributors, retailers and manufacturers. Sales, stock, purchasing, payroll and production post to one general ledger as they happen.">
+  <meta name="theme-color" content="#04100b">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,42 +14,39 @@
 </head>
 <body>
 
-  <!-- Live ticker -->
   <div class="ticker" aria-label="Live activity">
     <div class="ticker__label"><span class="pulse"></span>Live on MTK</div>
     <div class="ticker__track">
       <div class="ticker__row">
         <span>Purchase order PO‑8842 approved <b>Yangon DC</b></span>
-        <span>Payroll run completed <b>214 employees</b></span>
-        <span>Reorder triggered <b>SKU 10‑442</b></span>
-        <span>Invoice INV‑2041 auto‑reconciled <b>Finance</b></span>
+        <span>Payroll run posted <b>214 employees</b></span>
+        <span>Reorder drafted <b>SKU 10‑442</b></span>
+        <span>Invoice INV‑2041 matched to receipt <b>Finance</b></span>
         <span>Work order WO‑317 finished <b>Line 2</b></span>
-        <span>Month‑end close ready <b>3 days early</b></span>
+        <span>October books locked <b>Head office</b></span>
       </div>
       <div class="ticker__row" aria-hidden="true">
         <span>Purchase order PO‑8842 approved <b>Yangon DC</b></span>
-        <span>Payroll run completed <b>214 employees</b></span>
-        <span>Reorder triggered <b>SKU 10‑442</b></span>
-        <span>Invoice INV‑2041 auto‑reconciled <b>Finance</b></span>
+        <span>Payroll run posted <b>214 employees</b></span>
+        <span>Reorder drafted <b>SKU 10‑442</b></span>
+        <span>Invoice INV‑2041 matched to receipt <b>Finance</b></span>
         <span>Work order WO‑317 finished <b>Line 2</b></span>
-        <span>Month‑end close ready <b>3 days early</b></span>
+        <span>October books locked <b>Head office</b></span>
       </div>
     </div>
     <div class="ticker__lang">EN</div>
   </div>
 
-  <!-- Floating compact nav -->
   <div class="floatnav" id="floatnav">
     <a href="#top" class="floatnav__brand"><img src="assets/logo.svg" alt="" width="26" height="26"><span>MTK</span></a>
     <nav class="floatnav__links">
-      <a href="#modules">Modules</a><a href="#why">Why MTK</a><a href="#security">Security</a><a href="#faq">FAQ</a>
+      <a href="#modules">Modules</a><a href="#close">Month-end</a><a href="#security">Access</a><a href="#faq">FAQ</a>
     </nav>
     <a href="#demo" class="btn btn--yellow btn--sm">Book a demo</a>
   </div>
 
   <main id="top">
 
-    <!-- HERO -->
     <section class="hero">
       <header class="nav">
         <a href="#top" class="brand" aria-label="MTK home">
@@ -58,34 +55,36 @@
         </a>
         <nav class="nav__pill" aria-label="Primary">
           <a href="#modules">Modules</a><i></i>
-          <a href="#why">Why MTK</a><i></i>
-          <a href="#security">Security</a><i></i>
+          <a href="#close">Month-end</a><i></i>
+          <a href="#security">Access</a><i></i>
           <a href="#faq">FAQ</a>
         </nav>
-        <a href="#demo" class="btn btn--green nav__cta">Book a demo<span class="btn__dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <a href="#demo" class="btn nav__cta">Book a demo<span class="btn__dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
       </header>
 
       <div class="hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow"><span></span>ERP for modern operations</p>
+          <p class="eyebrow"><span></span>ERP for distributors, retailers and manufacturers</p>
           <h1 class="hero__title">
             <span class="line"><span>Run the whole</span></span>
             <span class="line"><span>business from</span></span>
             <span class="line"><span>one <em class="mark">ledger</em></span></span>
           </h1>
           <div class="hero__sub">
-            <p class="hero__lead">Clarity from the warehouse to the boardroom</p>
-            <p>MTK connects finance, inventory, procurement, sales, payroll and production on a single live ledger, so every number your team acts on is the same number.</p>
+            <p>Sales, stock, purchasing and payroll post to the same general ledger the moment they're recorded, so your accountant and your warehouse manager are reading the same numbers.</p>
           </div>
         </div>
 
         <div class="hero__visual">
           <canvas id="halftone" aria-label="MTK monogram rendered as interactive halftone dots" role="img"></canvas>
-          <div class="stats">
-            <div class="stat stat--accent"><strong>12</strong><span>Integrated modules</span></div>
-            <div class="stat"><strong>1</strong><span>Source of truth</span></div>
-            <div class="stat"><strong>Live</strong><span>Real-time sync</span></div>
-            <div class="stat stat--accent"><strong>RBAC</strong><span>Role-based access</span></div>
+          <div class="status">
+            <div class="status__h"><span class="pulse pulse--g"></span>Ledger status<span class="status__t">09:41</span></div>
+            <ul>
+              <li><span>Finance</span><b class="ok">Balanced</b></li>
+              <li><span>Inventory</span><b>3 reorders to approve</b></li>
+              <li><span>Sales</span><b>12 orders today</b></li>
+              <li><span>Payroll</span><b>Runs Fri 28 Nov</b></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -96,21 +95,20 @@
           <input id="h-name" type="text" placeholder="Name" autocomplete="name">
           <label class="sr-only" for="h-email">Work email</label>
           <input id="h-email" type="email" placeholder="Work email" autocomplete="email" required>
-          <button type="submit" class="btn btn--green"><span class="pillform__idle">Book a demo</span><span class="pillform__done">We'll be in touch</span><span class="btn__pip"></span></button>
+          <button type="submit" class="btn"><span class="pillform__idle">Book a demo</span><span class="pillform__done">Thanks, we'll email you</span><span class="btn__pip"></span></button>
         </form>
         <div class="trusted">
-          <span>Built for growing operators</span>
+          <span>30-minute walkthrough with our team</span>
           <div class="avatars"><b>RT</b><b>DS</b><b>MF</b></div>
         </div>
       </div>
     </section>
 
-    <!-- PRODUCT STAGE -->
     <section class="stage-wrap">
       <div class="stage" id="stage">
         <svg class="stage__shape" aria-hidden="true"><path id="stagePath"/></svg>
         <div class="stage__tab">
-          <span>Down to the last unit</span>
+          <span>The overview screen</span>
           <a href="#modules" class="btn btn--light"><span class="btn__ico"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span>Explore</a>
         </div>
 
@@ -160,148 +158,143 @@
       </ul>
     </section>
 
-    <!-- PROBLEM -->
     <section class="problem">
-      <p class="tag">[ The problem ]</p>
-      <p class="scrub" id="scrub">Your business runs on a dozen tools. Spreadsheets that don't talk to each other. Stock counts that disagree with the books. Numbers nobody trusts by Friday. MTK puts all of it on one ledger.</p>
+      <p class="scrub" id="scrub">A typical growing business keeps sales in one app, stock in a spreadsheet and the books in an accounting package, then spends the last week of every month making the three agree. MTK keeps all of it in one database, so the stock report and the balance sheet are built from the same records.</p>
     </section>
 
-    <!-- MODULES -->
     <section class="section" id="modules">
-      <div class="section__head reveal">
-        <p class="tag">[ Modules ]</p>
-        <h2>Every department.<br><span class="soft">One system underneath.</span></h2>
+      <div class="section__head section__head--row reveal">
+        <h2>Start with one module.<br><span class="soft">Add the rest when you're ready.</span></h2>
+        <p class="body">Each module writes to the same ledger, so switching on a second one later means no migration and no integration project.</p>
       </div>
 
-      <div class="bento">
-        <article class="card card--wide reveal">
-          <div class="card__txt">
-            <span class="card__n">01</span>
-            <h3>Finance &amp; Accounting</h3>
-            <p>General ledger, AP/AR, bank reconciliation and multi-currency, closing in days instead of weeks.</p>
+      <div class="explorer reveal" id="explorer">
+        <div class="explorer__tabs" role="tablist" aria-label="Modules">
+          <button role="tab" aria-selected="true" aria-controls="p-fin" id="t-fin"><span>01</span>Finance<i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-inv" id="t-inv" tabindex="-1"><span>02</span>Inventory<i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-pro" id="t-pro" tabindex="-1"><span>03</span>Procurement<i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-sal" id="t-sal" tabindex="-1"><span>04</span>Sales<i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-hr" id="t-hr" tabindex="-1"><span>05</span>HR &amp; Payroll<i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-mfg" id="t-mfg" tabindex="-1"><span>06</span>Manufacturing<i></i></button>
+        </div>
+
+        <div class="explorer__panels">
+          <div class="xp is-on" role="tabpanel" id="p-fin" aria-labelledby="t-fin">
+            <p class="xp__txt">General ledger, payables, receivables, bank reconciliation and multi-currency. Postings from every other module arrive here on their own, already coded to the right accounts.</p>
+            <div class="ledger">
+              <div class="ledger__row ledger__row--h"><span>Account</span><span>Debit</span><span>Credit</span></div>
+              <div class="ledger__row"><span>1100 · Cash</span><span>24,800</span><span>·</span></div>
+              <div class="ledger__row"><span>1200 · Receivables</span><span>·</span><span>24,800</span></div>
+              <div class="ledger__row"><span>5000 · COGS</span><span>9,420</span><span>·</span></div>
+              <div class="ledger__row"><span>1400 · Inventory</span><span>·</span><span>9,420</span></div>
+              <div class="ledger__row ledger__row--t"><span>Balanced</span><span>34,220</span><span>34,220</span></div>
+            </div>
           </div>
-          <div class="ledger">
-            <div class="ledger__row ledger__row--h"><span>Account</span><span>Debit</span><span>Credit</span></div>
-            <div class="ledger__row"><span>1100 · Cash</span><span>24,800</span><span>—</span></div>
-            <div class="ledger__row"><span>1200 · Receivables</span><span>—</span><span>24,800</span></div>
-            <div class="ledger__row"><span>5000 · COGS</span><span>9,420</span><span>—</span></div>
-            <div class="ledger__row"><span>1400 · Inventory</span><span>—</span><span>9,420</span></div>
-            <div class="ledger__row ledger__row--t"><span>Balanced</span><span>34,220</span><span>34,220</span></div>
+
+          <div class="xp" role="tabpanel" id="p-inv" aria-labelledby="t-inv" hidden>
+            <p class="xp__txt">Track stock by warehouse, bin, batch and serial number. When an item drops below its reorder point, MTK drafts a purchase order and waits for someone to approve it.</p>
+            <div class="bars"><i style="--h:62%"></i><i style="--h:84%"></i><i style="--h:40%"></i><i style="--h:22%" class="y"></i><i style="--h:55%"></i><i style="--h:90%"></i><i style="--h:66%"></i></div>
+            <p class="xp__cap"><b class="dot dot--y"></b>SKU 10‑442 is under its reorder point of 30 units</p>
           </div>
-        </article>
 
-        <article class="card reveal">
-          <span class="card__n">02</span>
-          <h3>Inventory</h3>
-          <p>Multi-warehouse stock, batches, serials and reorder points that act on their own.</p>
-          <div class="bars"><i style="--h:62%"></i><i style="--h:84%"></i><i style="--h:40%"></i><i style="--h:72%" class="y"></i><i style="--h:55%"></i><i style="--h:90%"></i><i style="--h:66%"></i></div>
-        </article>
-
-        <article class="card reveal">
-          <span class="card__n">03</span>
-          <h3>Procurement</h3>
-          <p>Requisition to payment with three-way matching and approval routing built in.</p>
-          <div class="flow"><span>Request</span><b></b><span>PO</span><b></b><span>GRN</span><b></b><span class="y">Pay</span></div>
-        </article>
-
-        <article class="card reveal">
-          <span class="card__n">04</span>
-          <h3>Sales &amp; CRM</h3>
-          <p>Quotes, orders, pricing rules and customer history that flow straight into invoicing.</p>
-          <div class="ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32"/><circle cx="40" cy="40" r="32" class="ring__v"/></svg><strong>74%</strong><span>quote win rate</span></div>
-        </article>
-
-        <article class="card reveal">
-          <span class="card__n">05</span>
-          <h3>HR &amp; Payroll</h3>
-          <p>Attendance, leave, payroll and statutory deductions posted to the books automatically.</p>
-          <div class="people"><b>AK</b><b>TH</b><b>MM</b><b>+211</b></div>
-        </article>
-
-        <article class="card card--full reveal">
-          <div class="card__txt">
-            <span class="card__n">06</span>
-            <h3>Manufacturing</h3>
-            <p>Bills of materials, work orders and costing that tie the shop floor back to finance.</p>
+          <div class="xp" role="tabpanel" id="p-pro" aria-labelledby="t-pro" hidden>
+            <p class="xp__txt">Requisitions turn into purchase orders once approved. A supplier invoice is only released for payment after it matches both the PO and the goods received note.</p>
+            <div class="flow"><span>Request</span><b></b><span>PO</span><b></b><span>Receipt</span><b></b><span class="y">Pay</span></div>
           </div>
-          <div class="progress"><span>WO‑317</span><div><i style="--p:82%"></i></div><span>WO‑318</span><div><i style="--p:46%"></i></div></div>
-        </article>
+
+          <div class="xp" role="tabpanel" id="p-sal" aria-labelledby="t-sal" hidden>
+            <p class="xp__txt">Quotes convert to orders and orders to invoices without anyone retyping a line. Price lists, discounts and credit limits are set per customer.</p>
+            <div class="ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32"/><circle cx="40" cy="40" r="32" class="ring__v"/></svg><strong>18 of 24</strong><span>quotes won this month</span></div>
+          </div>
+
+          <div class="xp" role="tabpanel" id="p-hr" aria-labelledby="t-hr" hidden>
+            <p class="xp__txt">Attendance and leave feed straight into payroll. Each pay run posts salaries, tax and social security to the ledger as a single journal you can trace line by line.</p>
+            <div class="people"><b>AK</b><b>TH</b><b>MM</b><b>+211</b></div>
+          </div>
+
+          <div class="xp" role="tabpanel" id="p-mfg" aria-labelledby="t-mfg" hidden>
+            <p class="xp__txt">Bills of materials, routings and work orders. Finished goods go into stock at what they actually cost to make, including labour and scrap.</p>
+            <div class="progress"><span>WO‑317</span><div><i style="--p:82%"></i></div><span>WO‑318</span><div><i style="--p:46%"></i></div></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- WHY / COMPARISON -->
-    <section class="section section--split" id="why">
+    <section class="section section--split" id="close">
       <div class="reveal">
-        <p class="tag">[ Why MTK ]</p>
-        <h2>Close the books<br>in <em class="serif">days</em>, not weeks.</h2>
-        <p class="body">When every transaction lands on the same ledger the moment it happens, reconciliation stops being a project. Month-end becomes a review, not a rescue.</p>
-        <a href="#demo" class="btn btn--yellow">See it on your data<span class="btn__dot btn__dot--dark"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <h2>A shorter <em class="serif">month-end</em> close</h2>
+        <p class="body">Invoices, receipts and payroll post to the ledger as they happen, which leaves very little to reconcile when the month ends. What's left is checking accruals and signing off.</p>
+        <a href="#demo" class="btn btn--yellow">See it with your own data<span class="btn__dot btn__dot--dark"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
       </div>
       <div class="compare reveal" id="compare">
-        <p class="compare__t">Typical month-end close</p>
+        <p class="compare__t">Days to close the books, typical</p>
         <div class="compare__row is-mtk"><span>MTK</span><div><i style="--w:16%"></i></div><b>~2 days</b></div>
         <div class="compare__row"><span>Legacy ERP</span><div><i style="--w:58%"></i></div><b>~8 days</b></div>
         <div class="compare__row"><span>Spreadsheets</span><div><i style="--w:100%"></i></div><b>~14 days</b></div>
-        <p class="compare__note">Illustrative. Your results depend on transaction volume and process.</p>
+        <p class="compare__note">Illustrative figures. Your close depends on transaction volume and how your team works.</p>
       </div>
     </section>
 
-    <!-- AUTOMATIONS -->
     <section class="section section--split section--rev">
       <div class="automation reveal">
-        <div class="auto__step"><span class="auto__k">When</span><span>Stock of <b>SKU 10‑442</b> falls below reorder point</span></div>
+        <div class="auto__step"><span class="auto__k">When</span><span>Stock of <b>SKU 10‑442</b> falls below 30 units</span></div>
         <div class="auto__line"></div>
-        <div class="auto__step"><span class="auto__k">Then</span>Draft PO to preferred supplier</div>
+        <div class="auto__step"><span class="auto__k">Then</span><span>Draft a PO to the preferred supplier</span></div>
         <div class="auto__line"></div>
-        <div class="auto__step"><span class="auto__k">If</span><span>Total &gt; $5,000, route to <b>Finance lead</b></span></div>
+        <div class="auto__step"><span class="auto__k">If</span><span>Total is over $5,000, send to the <b>finance lead</b></span></div>
         <div class="auto__line"></div>
-        <div class="auto__step auto__step--done"><span class="auto__k">Done</span>Sent to supplier · ledger updated</div>
+        <div class="auto__step auto__step--done"><span class="auto__k">Done</span><span>Approved by M. Thant at 10:02</span></div>
       </div>
       <div class="reveal">
-        <p class="tag">[ Automations ]</p>
-        <h2>Rules that run<br>themselves.</h2>
-        <p class="body">Build approval chains, reorders and reminders in plain language. MTK handles the busywork and leaves a full audit trail of every step it takes.</p>
-        <ul class="ticks"><li>No-code workflow builder</li><li>Approvals on web and mobile</li><li>Every action logged and reversible</li></ul>
+        <h2>Set up approvals and reorders once</h2>
+        <p class="body">Write a rule like the one on the left in the workflow builder. MTK checks it every time stock moves, and each step it takes is logged with the time and the person who approved it. Approvals work from a phone, and any automated step can be reversed.</p>
       </div>
     </section>
 
-    <!-- SECURITY -->
-    <section class="section" id="security">
-      <div class="section__head reveal">
-        <p class="tag">[ Security ]</p>
-        <h2>Built to be trusted<br><span class="soft">with the numbers that matter.</span></h2>
+    <section class="section section--split" id="security">
+      <div class="reveal">
+        <h2>Who can see what, and who changed it</h2>
+        <p class="body">Permissions are set per role, branch and module. Every edit, approval and posting is stored with the user and the timestamp. Data is encrypted in transit and at rest, and backed up daily.</p>
       </div>
-      <div class="pillars">
-        <div class="pillar reveal"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><h3>Encryption everywhere</h3><p>Data encrypted in transit and at rest, with daily backups you can restore on demand.</p></div>
-        <div class="pillar reveal"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h3>Role-based access</h3><p>Granular permissions by role, branch and module. People see exactly what they need.</p></div>
-        <div class="pillar reveal"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg><h3>Complete audit trail</h3><p>Every edit, approval and posting is time-stamped and attributed. Nothing disappears.</p></div>
+      <div class="access reveal">
+        <table class="matrix">
+          <thead><tr><th>Role</th><th>Ledger</th><th>Stock</th><th>POs</th><th>Payroll</th></tr></thead>
+          <tbody>
+            <tr><td>Owner</td><td><i class="e"></i></td><td><i class="e"></i></td><td><i class="e"></i></td><td><i class="e"></i></td></tr>
+            <tr><td>Accountant</td><td><i class="e"></i></td><td><i class="v"></i></td><td><i class="e"></i></td><td><i class="v"></i></td></tr>
+            <tr><td>Warehouse</td><td><i></i></td><td><i class="e"></i></td><td><i class="v"></i></td><td><i></i></td></tr>
+            <tr><td>Sales rep</td><td><i></i></td><td><i class="v"></i></td><td><i></i></td><td><i></i></td></tr>
+          </tbody>
+        </table>
+        <div class="matrix__key"><span><i class="e"></i>Edit</span><span><i class="v"></i>View</span><span><i></i>Hidden</span></div>
+        <div class="log">
+          <p><time>10:02</time>M. Thant approved PO‑8842</p>
+          <p><time>09:47</time>K. Lin changed credit limit for Shwe Mart, 5,000 → 8,000</p>
+        </div>
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="section section--split" id="faq">
       <div class="reveal">
-        <p class="tag">[ FAQ ]</p>
-        <h2>Questions,<br>answered.</h2>
+        <h2>Common questions</h2>
       </div>
       <div class="faq reveal">
-        <details open><summary>How long does it take to go live?</summary><p>Most teams run their first module within a few weeks. We migrate your opening balances, item master and customers, then add modules at your pace.</p></details>
-        <details><summary>Can we start with just one module?</summary><p>Yes. Start with finance or inventory and switch on the rest when you're ready. Everything shares the same ledger from day one.</p></details>
-        <details><summary>Does it work across multiple branches and currencies?</summary><p>MTK supports multiple companies, branches, warehouses and currencies, with consolidated reporting across all of them.</p></details>
-        <details><summary>Can MTK connect to the tools we already use?</summary><p>Banks, payment gateways, e-commerce stores and spreadsheets can sync through built-in connectors or the open API.</p></details>
-        <details><summary>Who owns our data?</summary><p>You do. Export everything at any time in standard formats, with no lock-in.</p></details>
+        <details open><summary>How long does it take to go live?</summary><p>Most teams are running their first module within a few weeks. We import your opening balances, item list and customers, and you add other modules whenever you like.</p></details>
+        <details><summary>Can we start with just one module?</summary><p>Yes. Many teams start with finance or inventory. Modules you add later use the same ledger, so there's nothing to move across.</p></details>
+        <details><summary>Does it handle multiple branches and currencies?</summary><p>MTK supports several companies, branches, warehouses and currencies in one account, with consolidated reports across them.</p></details>
+        <details><summary>Can MTK connect to the tools we already use?</summary><p>Banks, payment gateways and online stores connect through built-in connectors. Anything else can use the open API or a scheduled spreadsheet import.</p></details>
+        <details><summary>Can we get our data out?</summary><p>You can export every table at any time as CSV or Excel. If you leave, we hand over a full export and delete our copy.</p></details>
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta" id="demo">
       <img src="assets/logo.svg" alt="" class="cta__logo" width="72" height="72">
-      <h2>One system.<br><em class="serif">Zero</em> guesswork.</h2>
-      <p>See MTK running on a sample of your own data in a 30-minute walkthrough.</p>
-      <form class="pillform pillform--dark" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
+      <h2>Book a 30-minute <em class="serif">demo</em></h2>
+      <p>We'll load a sample of your products and customers into MTK and walk you through a normal week.</p>
+      <form class="pillform" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
         <label class="sr-only" for="c-email">Work email</label>
         <input id="c-email" type="email" placeholder="Work email" autocomplete="email" required>
-        <button type="submit" class="btn btn--yellow"><span class="pillform__idle">Book a demo</span><span class="pillform__done">We'll be in touch</span></button>
+        <button type="submit" class="btn"><span class="pillform__idle">Book a demo</span><span class="pillform__done">Thanks, we'll email you</span></button>
       </form>
     </section>
   </main>
@@ -309,7 +302,7 @@
   <footer class="footer">
     <div class="footer__top">
       <a href="#top" class="brand brand--light"><img src="assets/logo.svg" alt="" width="34" height="34"><span>MTK</span></a>
-      <nav><a href="#modules">Modules</a><a href="#why">Why MTK</a><a href="#security">Security</a><a href="#faq">FAQ</a><a href="#demo">Contact</a></nav>
+      <nav><a href="#modules">Modules</a><a href="#close">Month-end</a><a href="#security">Access</a><a href="#faq">FAQ</a><a href="#demo">Contact</a></nav>
     </div>
     <div class="footer__word" aria-hidden="true">MTK</div>
     <div class="footer__bot"><span>© <span id="yr"></span> MTK. All rights reserved.</span><span><a href="#">Privacy</a> · <a href="#">Terms</a></span></div>
