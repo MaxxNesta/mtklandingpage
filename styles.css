@@ -567,7 +567,7 @@ h2 .soft { color: var(--mint); }
 .footer__social svg { width: 22px; height: 22px; fill: none; stroke: #44564d; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s; }
 .footer__social a:hover svg { stroke: var(--forest-700); }
 .footer__status { display: flex; align-items: center; gap: 10px; margin-top: 56px; font-size: 15px; font-weight: 500; }
-.footer__status span { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #2f8f5b; box-shadow: 0 0 0 4px rgba(47, 143, 91, .16); }
+.footer__status > span:first-child { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #2f8f5b; box-shadow: 0 0 0 4px rgba(47, 143, 91, .16); }
 .footer__status svg { width: 12px; height: 12px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .footer__col { display: flex; flex-direction: column; gap: 20px; }
 .footer__col h4 { font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #566860; margin-bottom: 8px; }
@@ -1059,3 +1059,5 @@ html:lang(my) .status li span { white-space: nowrap; }
 .floatnav__links a, .nav__pill a { white-space: nowrap; }
 html:lang(my) .sum__item b, html:lang(my) .calc__top output { line-height: 1.5; }
 html:lang(my) .floatnav__links { gap: 16px; }
+
+.footer__status [data-i18n] { white-space: nowrap; }
