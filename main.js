@@ -219,14 +219,22 @@
     else { clearTimeout(timer); timer = null; }
   }, { threshold: .3 }).observe(explorer);
 
-  /* ---------- Pointer spotlight on lit panels ---------- */
-  document.querySelectorAll('.section--fx').forEach(sec => {
-    const fx = sec.querySelector('.fx');
-    sec.addEventListener('pointermove', e => {
-      const r = fx.getBoundingClientRect();
-      fx.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      fx.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    });
+  /* ---------- String art in panels ---------- */
+  document.querySelectorAll('svg[data-strings]').forEach((svg, n) => {
+    const W = 1600, H = 800, flip = n % 2;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    let out = '';
+    for (let k = 0; k < 16; k++) {
+      const y0 = H * (.05 + k * .055), y1 = H * (.95 - k * .05);
+      const c1x = W * (.3 + k * .01), c2x = W * (.62 - k * .008);
+      let d = `M-40 ${y0} C${c1x} ${H * .95} ${c2x} ${H * .08} ${W + 40} ${y1}`;
+      if (flip) d = `M-40 ${H - y0} C${c1x} ${H * .05} ${c2x} ${H * .92} ${W + 40} ${H - y1}`;
+      const cls = k % 5 === 2 ? 'p' : '';
+      out += `<path class="${cls}" d="${d}"/>`;
+      if (k === 2 || k === 9) out += `<path class="pulse${k === 9 ? ' y' : ''}" d="${d}"/>`;
+    }
+    svg.innerHTML = out;
   });
   const hhmm = () => new Date().toTimeString().slice(0, 5);
 
