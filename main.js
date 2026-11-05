@@ -219,6 +219,87 @@
     else { clearTimeout(timer); timer = null; }
   }, { threshold: .3 }).observe(explorer);
 
+  /* ---------- Pointer spotlight on lit panels ---------- */
+  document.querySelectorAll('.section--fx').forEach(sec => {
+    const fx = sec.querySelector('.fx');
+    sec.addEventListener('pointermove', e => {
+      const r = fx.getBoundingClientRect();
+      fx.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      fx.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+  const hhmm = () => new Date().toTimeString().slice(0, 5);
+
+  /* ---------- Month-end calendar ---------- */
+  const cal = document.getElementById('cal');
+  cal.innerHTML = Array.from({ length: 14 }, (_, i) => `<i>${i + 1}</i>`).join('');
+  const days = [...cal.children];
+  const segBtns = [...document.querySelectorAll('#closecal .seg button')];
+  const thumb = document.querySelector('#closecal .seg__thumb');
+  function setClose(idx) {
+    const n = +segBtns[idx].dataset.days;
+    segBtns.forEach((b, i) => b.setAttribute('aria-pressed', i === idx));
+    thumb.style.transform = `translateX(${idx * 100}%)`;
+    document.getElementById('calN').textContent = n;
+    days.forEach((d, i) => {
+      d.style.transitionDelay = reduce ? '0ms' : (i * 35) + 'ms';
+      d.classList.toggle('on', i < n);
+    });
+  }
+  segBtns.forEach((b, i) => b.addEventListener('click', () => setClose(i)));
+  setClose(0);
+
+  /* ---------- Automation playback ---------- */
+  const autoEl = document.getElementById('automation');
+  const steps = [...autoEl.querySelectorAll('.auto__step')];
+  const lines = [...autoEl.querySelectorAll('.auto__line')];
+  let runTimers = [];
+  function runRule() {
+    runTimers.forEach(clearTimeout); runTimers = [];
+    steps.forEach(s => s.classList.remove('is-active'));
+    lines.forEach(l => l.classList.remove('is-flow'));
+    const gap = reduce ? 0 : 750;
+    steps.forEach((s, i) => {
+      runTimers.push(setTimeout(() => {
+        if (i === steps.length - 1) document.getElementById('autoTime').textContent = hhmm();
+        s.classList.add('is-active');
+        if (lines[i]) { void lines[i].offsetWidth; lines[i].classList.add('is-flow'); }
+      }, 200 + i * gap));
+    });
+  }
+  document.getElementById('replay').addEventListener('click', runRule);
+  new IntersectionObserver(([en], ob) => { if (en.isIntersecting) { runRule(); ob.disconnect(); } }, { threshold: .4 }).observe(autoEl);
+
+  /* ---------- Interactive access matrix ---------- */
+  const LABEL = { e: 'Edit', v: 'View', '': 'Hidden' };
+  const NEXT = { e: 'v', v: '', '': 'e' };
+  const cols = [...document.querySelectorAll('#matrix thead th')].map(th => th.textContent);
+  const log = document.getElementById('log');
+  document.querySelectorAll('#matrix tbody td[data-v]').forEach(td => {
+    const role = td.parentElement.dataset.role, mod = cols[td.cellIndex];
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.innerHTML = '<i></i>';
+    const paint = () => {
+      const v = td.dataset.v;
+      btn.firstChild.className = v;
+      btn.setAttribute('aria-label', `${role}, ${mod}: ${LABEL[v]}`);
+    };
+    if (role === 'Owner') { btn.disabled = true; btn.title = 'Owners always have full access'; }
+    btn.addEventListener('click', () => {
+      td.dataset.v = NEXT[td.dataset.v];
+      paint();
+      btn.classList.add('pop'); setTimeout(() => btn.classList.remove('pop'), 250);
+      const p = document.createElement('p');
+      p.innerHTML = `<time>${hhmm()}</time>`;
+      p.append(`You set ${role} to ${LABEL[td.dataset.v]} on ${mod}`);
+      log.prepend(p);
+      while (log.children.length > 3) log.lastElementChild.remove();
+    });
+    paint();
+    td.append(btn);
+  });
+
   /* ---------- Reveals ---------- */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });

@@ -9,7 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -66,7 +66,6 @@
 
       <div class="hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow"><span></span>ERP for distributors and retailers</p>
           <h1 class="hero__title">
             <span class="line"><span>Run the whole</span></span>
             <span class="line"><span>business from</span></span>
@@ -325,11 +324,11 @@
             <div class="tab">
               <div class="tab__h"><strong>Stock count</strong><em>Mandalay · Bin A‑04</em></div>
               <div class="tab__scan"><i></i>Scan IMEI or barcode</div>
-              <p><span>Galaxy A55 128GB</span><b>24 / 24</b></p>
-              <p><span>Redmi Note 13</span><b class="warn">17 / 18</b></p>
+              <p><span>iPhone 16 Pro 256GB</span><b>24 / 24</b></p>
+              <p><span>iPhone 16 128GB</span><b class="warn">17 / 18</b></p>
               <p><span>iPhone 15 128GB</span><b>9 / 9</b></p>
-              <p><span>USB‑C charger 25W</span><b>140 / 140</b></p>
-              <p><span>Tempered glass A55</span><b>62 / 62</b></p>
+              <p><span>AirPods Pro 2</span><b>40 / 40</b></p>
+              <p><span>20W USB‑C adapter</span><b>62 / 62</b></p>
               <div class="tab__btn">Post count</div>
             </div>
           </div>
@@ -353,54 +352,66 @@
       </div>
     </section>
 
-    <section class="section section--split" id="close">
+    <section class="section section--split section--fx" id="close">
+      <div class="fx" aria-hidden="true"><i class="fx__grid"></i><i class="fx__aurora"></i><i class="fx__spot"></i></div>
       <div class="reveal">
-        <h2>A shorter <em class="serif">month-end</em> close</h2>
+        <span class="chip-tag"><i></i>Month-end</span>
+        <h2>A shorter month‑end close</h2>
         <p class="body">Invoices, receipts and depreciation post to the ledger as they happen, which leaves very little to reconcile when the month ends. What's left is checking accruals and signing off.</p>
         <a href="#demo" class="btn btn--yellow">See it with your own data<span class="btn__dot btn__dot--dark"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
       </div>
-      <div class="compare reveal" id="compare">
-        <p class="compare__t">Days to close the books, typical</p>
-        <div class="compare__row is-mtk"><span>MTK</span><div><i style="--w:16%"></i></div><b>~2 days</b></div>
-        <div class="compare__row"><span>Legacy ERP</span><div><i style="--w:58%"></i></div><b>~8 days</b></div>
-        <div class="compare__row"><span>Spreadsheets</span><div><i style="--w:100%"></i></div><b>~14 days</b></div>
-        <p class="compare__note">Illustrative figures. Your close depends on transaction volume and how your team works.</p>
+      <div class="closecal reveal" id="closecal">
+        <div class="seg" role="group" aria-label="Compare time to close the books">
+          <button type="button" aria-pressed="true" data-days="2">MTK</button>
+          <button type="button" aria-pressed="false" data-days="8">Legacy ERP</button>
+          <button type="button" aria-pressed="false" data-days="14">Spreadsheets</button>
+          <span class="seg__thumb"></span>
+        </div>
+        <div class="closecal__head"><span>Closing October, working days in November</span><b><span id="calN">2</span> days</b></div>
+        <div class="cal" id="cal"></div>
+        <p class="closecal__note">Illustrative figures. Your close depends on transaction volume and how your team works.</p>
       </div>
     </section>
 
-    <section class="section section--split section--rev">
-      <div class="automation reveal">
+    <section class="section section--split section--rev section--fx" id="auto">
+      <div class="fx" aria-hidden="true"><i class="fx__grid"></i><i class="fx__aurora"></i><i class="fx__spot"></i></div>
+      <div class="automation reveal" id="automation">
         <div class="auto__step"><span class="auto__k">When</span><span>Stock of <b>SKU 10‑442</b> falls below 30 units</span></div>
         <div class="auto__line"></div>
         <div class="auto__step"><span class="auto__k">Then</span><span>Draft a PO to the preferred supplier</span></div>
         <div class="auto__line"></div>
         <div class="auto__step"><span class="auto__k">If</span><span>Total is over $5,000, send to the <b>finance lead</b></span></div>
         <div class="auto__line"></div>
-        <div class="auto__step auto__step--done"><span class="auto__k">Done</span><span>Approved by M. Thant at 10:02</span></div>
+        <div class="auto__step auto__step--done"><span class="auto__k">Done</span><span>Approved by M. Thant at <time id="autoTime">10:02</time></span></div>
+        <button type="button" class="replay" id="replay"><svg viewBox="0 0 16 16"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.5h2.5"/></svg>Run the rule again</button>
       </div>
       <div class="reveal">
+        <span class="chip-tag"><i></i>Automations</span>
         <h2>Set up approvals and reorders once</h2>
         <p class="body">Write a rule like the one on the left in the workflow builder. MTK checks it every time stock moves, and each step it takes is logged with the time and the person who approved it. Approvals work from a phone, and any automated step can be reversed.</p>
       </div>
     </section>
 
-    <section class="section section--split" id="security">
+    <section class="section section--split section--fx" id="security">
+      <div class="fx" aria-hidden="true"><i class="fx__grid"></i><i class="fx__aurora"></i><i class="fx__spot"></i></div>
       <div class="reveal">
+        <span class="chip-tag"><i></i>Access</span>
         <h2>Who can see what, and who changed it</h2>
         <p class="body">Permissions are set per role, branch and module. Every edit, approval and posting is stored with the user and the timestamp. Data is encrypted in transit and at rest, and backed up daily.</p>
       </div>
       <div class="access reveal">
-        <table class="matrix">
+        <p class="access__hint">Try it: click a dot to change what a role can do.</p>
+        <table class="matrix" id="matrix">
           <thead><tr><th>Role</th><th>Ledger</th><th>Stock</th><th>POs</th><th>Assets</th></tr></thead>
           <tbody>
-            <tr><td>Owner</td><td><i class="e"></i></td><td><i class="e"></i></td><td><i class="e"></i></td><td><i class="e"></i></td></tr>
-            <tr><td>Accountant</td><td><i class="e"></i></td><td><i class="v"></i></td><td><i class="e"></i></td><td><i class="v"></i></td></tr>
-            <tr><td>Warehouse</td><td><i></i></td><td><i class="e"></i></td><td><i class="v"></i></td><td><i></i></td></tr>
-            <tr><td>Sales rep</td><td><i></i></td><td><i class="v"></i></td><td><i></i></td><td><i></i></td></tr>
+            <tr data-role="Owner"><td>Owner</td><td data-v="e"></td><td data-v="e"></td><td data-v="e"></td><td data-v="e"></td></tr>
+            <tr data-role="Accountant"><td>Accountant</td><td data-v="e"></td><td data-v="v"></td><td data-v="e"></td><td data-v="v"></td></tr>
+            <tr data-role="Warehouse"><td>Warehouse</td><td data-v=""></td><td data-v="e"></td><td data-v="v"></td><td data-v=""></td></tr>
+            <tr data-role="Sales rep"><td>Sales rep</td><td data-v=""></td><td data-v="v"></td><td data-v=""></td><td data-v=""></td></tr>
           </tbody>
         </table>
         <div class="matrix__key"><span><i class="e"></i>Edit</span><span><i class="v"></i>View</span><span><i></i>Hidden</span></div>
-        <div class="log">
+        <div class="log" id="log" aria-live="polite">
           <p><time>10:02</time>M. Thant approved PO‑8842</p>
           <p><time>09:47</time>K. Lin changed credit limit for Shwe Mart, 5,000 → 8,000</p>
         </div>
