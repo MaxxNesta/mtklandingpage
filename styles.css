@@ -16,7 +16,7 @@
   --yellow: #ffdb54;
   --yellow-deep: #f2c62c;
 
-  --sans: "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --sans: "Geist", "Noto Sans Myanmar", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", system-ui, sans-serif;
   --serif: var(--sans);
   --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
@@ -1018,3 +1018,44 @@ h2 { font-weight: 580; }
 .section--fx .body { color: #fff; }
 #security .fx__dots { right: auto; left: -2%; top: auto; bottom: -8%; -webkit-mask-image: radial-gradient(closest-side at 30% 70%, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 100%); mask-image: radial-gradient(closest-side at 30% 70%, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 100%); }
 .access .matrix i.v, .access .matrix__key i.v { background: #8fd8b0; opacity: 1; }
+
+/* ---------- Language switcher ---------- */
+.lang { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--line-strong); background: rgba(4, 16, 11, .45); flex-shrink: 0; }
+.lang button { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px 5px 6px; border: 0; border-radius: 999px; background: none; color: var(--cream); font-size: 12.5px; font-weight: 500; cursor: pointer; transition: background .2s, color .2s; }
+.lang button:hover { background: rgba(247, 245, 238, .1); }
+.lang button[aria-pressed="true"] { background: var(--cream); color: var(--forest-900); }
+.lang button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.lang img { width: 20px; height: 15px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0, 0, 0, .15); }
+.lang--flags button { padding: 5px 7px; } .lang--flags span { display: none; }
+.lang--light { border-color: rgba(11, 71, 55, .2); background: rgba(11, 71, 55, .06); }
+.lang--light button { color: var(--forest-900); }
+.lang--light button[aria-pressed="true"] { background: var(--forest-700); color: #fff; }
+.footer__bot { align-items: center; }
+.explorer__tabs button b, .calc__legend b, .trace__key b, .matrix__key b { font-weight: inherit; }
+@media (max-width: 760px) {
+  .ticker .lang span { display: none; }
+  .ticker .lang button { padding: 5px 7px; }
+}
+
+/* ---------- Myanmar & Chinese typography ---------- */
+html:lang(my) body { line-height: 1.85; }
+html:lang(my) h1, html:lang(my) h2, html:lang(my) h3, html:lang(my) .scrub, html:lang(my) .explorer__tabs button,
+html:lang(zh-Hans) h1, html:lang(zh-Hans) h2, html:lang(zh-Hans) h3, html:lang(zh-Hans) .scrub { letter-spacing: 0; }
+html:lang(my) .hero__title { font-size: clamp(34px, 4.6vw, 70px); line-height: 1.5; }
+html:lang(my) .hero__title .line { padding-bottom: .18em; }
+html:lang(my) h2 { font-size: clamp(26px, 3.2vw, 46px); line-height: 1.55; }
+html:lang(my) .section__head--row h2 { font-size: clamp(26px, 3.2vw, 46px); }
+html:lang(my) .scrub { font-size: clamp(22px, 2.8vw, 38px); line-height: 1.75; }
+html:lang(my) .cta h2 { font-size: clamp(32px, 4.6vw, 68px); }
+html:lang(my) .explorer__tabs button { font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; }
+html:lang(my) .xp__txt { line-height: 1.85; font-size: clamp(16px, 1.45vw, 19px); }
+html:lang(my) .nav__pill, html:lang(my) .floatnav__links { font-size: 13px; }
+html:lang(zh-Hans) .hero__title { line-height: 1.12; }
+html:lang(zh-Hans) h2 { line-height: 1.2; }
+html:lang(zh-Hans) .scrub { line-height: 1.4; }
+html:lang(my) .hero__title { font-size: clamp(30px, 3.9vw, 58px); }
+html:lang(my) .status { width: 310px; }
+html:lang(my) .status li span { white-space: nowrap; }
+.floatnav__links a, .nav__pill a { white-space: nowrap; }
+html:lang(my) .sum__item b, html:lang(my) .calc__top output { line-height: 1.5; }
+html:lang(my) .floatnav__links { gap: 16px; }

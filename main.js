@@ -137,10 +137,16 @@
   const app = document.getElementById('app');
   const floatnav = document.getElementById('floatnav');
   const scrub = document.getElementById('scrub');
-  const keys = new Set(['MTK']);
-  scrub.innerHTML = scrub.textContent.trim().split(/\s+/)
-    .map(w => `<span class="w${keys.has(w) ? ' is-key' : ''}">${w}</span>`).join(' ');
-  const words = [...scrub.querySelectorAll('.w')];
+  const { t } = window.I18N;
+  let words = [];
+  function buildScrub() {
+    const txt = scrub.textContent.trim();
+    const zh = window.I18N.lang === 'zh';
+    const parts = zh ? txt.match(/MTK|\s+|./gu).filter(s => s.trim()) : txt.split(/\s+/);
+    scrub.innerHTML = parts.map(w => `<span class="w${w === 'MTK' ? ' is-key' : ''}">${w}</span>`).join(zh ? '' : ' ');
+    words = [...scrub.querySelectorAll('.w')];
+  }
+  buildScrub();
 
   let ticking = false;
   function onScroll() {
@@ -240,22 +246,26 @@
 
   /* ---------- Time-saved calculator ---------- */
   const TASKS = [
-    { t: 'Supplier invoices', d: 'Created from the PO and receipt, so nobody retypes lines', share: .35, m: 6, a: .5 },
-    { t: 'Document checks', d: 'Invoice, PO and goods receipt matched automatically', share: .35, m: 4, a: .3 },
-    { t: 'Depreciation vouchers', d: 'Posted every month for each fixed asset', share: .10, m: 3, a: 0 },
-    { t: 'Landed cost vouchers', d: 'Freight and duty spread across every product on the shipment', share: .05, m: 25, a: 1.5 },
-    { t: 'Tracing a receipt', d: 'Source and follow-on documents one click away', share: .15, m: 8, a: .3 }
+    { k: 'inv', share: .35, m: 6, a: .5 },
+    { k: 'chk', share: .35, m: 4, a: .3 },
+    { k: 'dep', share: .10, m: 3, a: 0 },
+    { k: 'lc', share: .05, m: 25, a: 1.5 },
+    { k: 'tr', share: .15, m: 8, a: .3 }
   ];
-  const MAXM = Math.max(...TASKS.map(t => t.m));
+  const MAXM = Math.max(...TASKS.map(x => x.m));
   const rowsEl = document.getElementById('calcRows');
-  rowsEl.innerHTML = TASKS.map(t => `
+  let rowEls = [];
+  function renderRows() {
+    rowsEl.innerHTML = TASKS.map(x => `
     <div class="row">
-      <div class="row__t"><b>${t.t}</b><span>${t.d}</span></div>
-      <div class="row__n"><b>0</b><span>docs</span></div>
-      <div class="row__bars"><i class="m" style="width:${t.m / MAXM * 100}%"></i><i class="a" style="width:${Math.max(t.a / MAXM * 100, .8)}%"></i><span>${t.m} → ${t.a} min each</span></div>
-      <div class="row__s"><b>0 h</b><span>saved</span></div>
+      <div class="row__t"><b>${t(`task.${x.k}.t`)}</b><span>${t(`task.${x.k}.d`)}</span></div>
+      <div class="row__n"><b>0</b><span>${t('u.docs')}</span></div>
+      <div class="row__bars"><i class="m" style="width:${x.m / MAXM * 100}%"></i><i class="a" style="width:${Math.max(x.a / MAXM * 100, .8)}%"></i><span>${t('u.each', { m: x.m, a: x.a })}</span></div>
+      <div class="row__s"><b></b><span>${t('u.saved')}</span></div>
     </div>`).join('');
-  const rowEls = [...rowsEl.children];
+    rowEls = [...rowsEl.children];
+  }
+  renderRows();
   const range = document.getElementById('docs');
   const fmt = n => n.toLocaleString('en-US');
   const set = (id, v) => { document.getElementById(id).textContent = v; };
@@ -264,11 +274,11 @@
     range.style.setProperty('--fill', ((docs - range.min) / (range.max - range.min) * 100) + '%');
     set('docsOut', fmt(docs));
     let before = 0, after = 0;
-    TASKS.forEach((t, i) => {
-      const n = Math.round(docs * t.share);
-      before += n * t.m; after += n * t.a;
+    TASKS.forEach((x, i) => {
+      const n = Math.round(docs * x.share);
+      before += n * x.m; after += n * x.a;
       rowEls[i].querySelector('.row__n b').textContent = fmt(n);
-      rowEls[i].querySelector('.row__s b').textContent = (n * (t.m - t.a) / 60).toFixed(1) + ' h';
+      rowEls[i].querySelector('.row__s b').textContent = t('u.h', { n: (n * (x.m - x.a) / 60).toFixed(1) });
     });
     const saved = (before - after) / 60;
     set('sDocs', fmt(docs));
@@ -282,14 +292,14 @@
 
   /* ---------- Document trace map ---------- */
   const NODES = [
-    { id: 'po', c: 0, r: 0, k: 'Purchase order', n: 'PO‑8842' },
-    { id: 'lcb', c: 0, r: 1, k: 'Freight & duty bill', n: 'BILL‑310' },
-    { id: 'grn', c: 1, r: 0, k: 'Goods receipt', n: 'GRN‑551' },
-    { id: 'lcv', c: 1, r: 1, k: 'Landed cost voucher', n: 'JV‑3107' },
-    { id: 'sinv', c: 2, r: 0, k: 'Supplier invoice', n: 'INV‑S‑2041' },
-    { id: 'sale', c: 2, r: 1, k: 'Sales invoice · IMEI', n: 'INV‑2088' },
-    { id: 'pay', c: 3, r: 0, k: 'Supplier payment', n: 'PAY‑118' },
-    { id: 'rcpt', c: 3, r: 1, k: 'Customer receipt', n: 'RCPT‑903' }
+    { id: 'po', c: 0, r: 0, n: 'PO‑8842' },
+    { id: 'lcb', c: 0, r: 1, n: 'BILL‑310' },
+    { id: 'grn', c: 1, r: 0, n: 'GRN‑551' },
+    { id: 'lcv', c: 1, r: 1, n: 'JV‑3107' },
+    { id: 'sinv', c: 2, r: 0, n: 'INV‑S‑2041' },
+    { id: 'sale', c: 2, r: 1, n: 'INV‑2088' },
+    { id: 'pay', c: 3, r: 0, n: 'PAY‑118' },
+    { id: 'rcpt', c: 3, r: 1, n: 'RCPT‑903' }
   ];
   const EDGES = [['po', 'grn'], ['po', 'lcb'], ['lcb', 'lcv'], ['grn', 'lcv'], ['grn', 'sinv'], ['sinv', 'pay'], ['grn', 'sale'], ['sale', 'rcpt']];
   const map = document.getElementById('traceMap');
@@ -300,7 +310,7 @@
     b.type = 'button';
     b.className = 'tnode';
     b.style.gridColumn = nd.c + 1; b.style.gridRow = nd.r + 1;
-    b.innerHTML = `<span>${nd.k}</span><b>${nd.n}</b>`;
+    b.innerHTML = `<span></span><b>${nd.n}</b>`;
     b.addEventListener('click', () => select(nd.id));
     map.append(b);
     nodeEls[nd.id] = b;
@@ -340,8 +350,10 @@
       el.setAttribute('aria-pressed', nd.id === id);
     });
     const nd = NODES.find(x => x.id === id);
-    document.getElementById('traceRead').innerHTML =
-      `<b>${nd.n}</b> · ${up.size} source document${up.size === 1 ? '' : 's'} · ${down.size} follow-on document${down.size === 1 ? '' : 's'}`;
+    NODES.forEach(x => { nodeEls[x.id].firstChild.textContent = t(`n.${x.id}`); });
+    document.getElementById('traceRead').innerHTML = t('trace.read', {
+      n: `<b>${nd.n}</b>`, u: up.size, d: down.size, us: up.size === 1 ? '' : 's', ds: down.size === 1 ? '' : 's'
+    });
     drawLines();
   }
   new ResizeObserver(drawLines).observe(map);
@@ -369,33 +381,48 @@
   new IntersectionObserver(([en], ob) => { if (en.isIntersecting) { runRule(); ob.disconnect(); } }, { threshold: .4 }).observe(autoEl);
 
   /* ---------- Interactive access matrix ---------- */
-  const LABEL = { e: 'Edit', v: 'View', '': 'Hidden' };
+  const LABEL = v => t({ e: 'acc.e', v: 'acc.v', '': 'acc.h0' }[v]);
   const NEXT = { e: 'v', v: '', '': 'e' };
-  const cols = [...document.querySelectorAll('#matrix thead th')].map(th => th.textContent);
+  const ths = [...document.querySelectorAll('#matrix thead th')];
   const log = document.getElementById('log');
+  const painters = [];
   document.querySelectorAll('#matrix tbody td[data-v]').forEach(td => {
-    const role = td.parentElement.dataset.role, mod = cols[td.cellIndex];
+    const isOwner = td.parentElement.dataset.role === 'Owner';
+    const roleName = () => td.parentElement.cells[0].textContent;
+    const modName = () => ths[td.cellIndex].textContent;
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.innerHTML = '<i></i>';
     const paint = () => {
       const v = td.dataset.v;
       btn.firstChild.className = v;
-      btn.setAttribute('aria-label', `${role}, ${mod}: ${LABEL[v]}`);
+      btn.setAttribute('aria-label', `${roleName()}, ${modName()}: ${LABEL(v)}`);
+      if (isOwner) btn.title = t('acc.owner');
     };
-    if (role === 'Owner') { btn.disabled = true; btn.title = 'Owners always have full access'; }
+    if (isOwner) btn.disabled = true;
     btn.addEventListener('click', () => {
       td.dataset.v = NEXT[td.dataset.v];
       paint();
       btn.classList.add('pop'); setTimeout(() => btn.classList.remove('pop'), 250);
       const p = document.createElement('p');
       p.innerHTML = `<time>${hhmm()}</time>`;
-      p.append(`You set ${role} to ${LABEL[td.dataset.v]} on ${mod}`);
+      const s = document.createElement('span');
+      s.textContent = t('acc.log', { role: roleName(), label: LABEL(td.dataset.v), mod: modName() });
+      p.append(s);
       log.prepend(p);
       while (log.children.length > 3) log.lastElementChild.remove();
     });
     paint();
+    painters.push(paint);
     td.append(btn);
+  });
+
+  /* ---------- Re-render on language change ---------- */
+  document.addEventListener('langchange', () => {
+    buildScrub(); onScroll();
+    renderRows(); calc();
+    select(selected);
+    painters.forEach(p => p());
   });
 
   /* ---------- Reveals ---------- */

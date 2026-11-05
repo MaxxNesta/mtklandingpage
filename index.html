@@ -9,40 +9,49 @@
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <div class="ticker" aria-label="Live activity">
-    <div class="ticker__label"><span class="pulse"></span>Live on MTK</div>
+    <div class="ticker__label"><span class="pulse"></span><span data-i18n="tick.live">Live on MTK</span></div>
     <div class="ticker__track">
       <div class="ticker__row">
-        <span>Purchase order PO‑8842 approved <b>Yangon DC</b></span>
-        <span>IMEI 356938…8173 sold <b>Mandalay</b></span>
-        <span>Reorder drafted <b>SKU 10‑442</b></span>
-        <span>Invoice INV‑2041 matched to receipt <b>Finance</b></span>
-        <span>Depreciation posted <b>42 assets</b></span>
-        <span>October books locked <b>Head office</b></span>
+        <span data-i18n="tick.1">Purchase order PO‑8842 approved <b>Yangon DC</b></span>
+        <span data-i18n="tick.2">IMEI 356938…8173 sold <b>Mandalay</b></span>
+        <span data-i18n="tick.3">Reorder drafted <b>SKU 10‑442</b></span>
+        <span data-i18n="tick.4">Invoice INV‑2041 matched to receipt <b>Finance</b></span>
+        <span data-i18n="tick.5">Depreciation posted <b>42 assets</b></span>
+        <span data-i18n="tick.6">October books locked <b>Head office</b></span>
       </div>
       <div class="ticker__row" aria-hidden="true">
-        <span>Purchase order PO‑8842 approved <b>Yangon DC</b></span>
-        <span>IMEI 356938…8173 sold <b>Mandalay</b></span>
-        <span>Reorder drafted <b>SKU 10‑442</b></span>
-        <span>Invoice INV‑2041 matched to receipt <b>Finance</b></span>
-        <span>Depreciation posted <b>42 assets</b></span>
-        <span>October books locked <b>Head office</b></span>
+        <span data-i18n="tick.1">Purchase order PO‑8842 approved <b>Yangon DC</b></span>
+        <span data-i18n="tick.2">IMEI 356938…8173 sold <b>Mandalay</b></span>
+        <span data-i18n="tick.3">Reorder drafted <b>SKU 10‑442</b></span>
+        <span data-i18n="tick.4">Invoice INV‑2041 matched to receipt <b>Finance</b></span>
+        <span data-i18n="tick.5">Depreciation posted <b>42 assets</b></span>
+        <span data-i18n="tick.6">October books locked <b>Head office</b></span>
       </div>
     </div>
-    <div class="ticker__lang">EN</div>
+    <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
+        <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
+        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
+      </div>
   </div>
 
   <div class="floatnav" id="floatnav">
     <a href="#top" class="floatnav__brand"><img src="assets/logo.svg" alt="" width="26" height="26"><span>MTK</span></a>
     <nav class="floatnav__links">
-      <a href="#modules">Modules</a><a href="#close">Time saved</a><a href="#security">Access</a><a href="#faq">FAQ</a>
+      <a href="#modules" data-i18n="nav.modules">Modules</a><a href="#close" data-i18n="nav.time">Time saved</a><a href="#security" data-i18n="nav.access">Access</a><a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
-    <a href="#demo" class="btn btn--yellow btn--sm">Book a demo</a>
+    <div class="lang lang--flags" role="group" aria-label="Language">
+        <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
+        <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
+        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
+      </div>
+    <a href="#demo" class="btn btn--yellow btn--sm" data-i18n="cta.book">Book a demo</a>
   </div>
 
   <main id="top">
@@ -56,35 +65,35 @@
           <span>MTK</span>
         </a>
         <nav class="nav__pill" aria-label="Primary">
-          <a href="#modules">Modules</a><i></i>
-          <a href="#close">Time saved</a><i></i>
-          <a href="#security">Access</a><i></i>
-          <a href="#faq">FAQ</a>
+          <a href="#modules" data-i18n="nav.modules">Modules</a><i></i>
+          <a href="#close" data-i18n="nav.time">Time saved</a><i></i>
+          <a href="#security" data-i18n="nav.access">Access</a><i></i>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
         </nav>
-        <a href="#demo" class="btn nav__cta">Book a demo<span class="btn__dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <a href="#demo" class="btn nav__cta"><span data-i18n="cta.book">Book a demo</span><span class="btn__dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
       </header>
 
       <div class="hero__grid">
         <div class="hero__copy">
-          <h1 class="hero__title">
+          <h1 class="hero__title" data-i18n="hero.title">
             <span class="line"><span>Run the whole</span></span>
             <span class="line"><span>business from</span></span>
             <span class="line"><span>one <em class="mark">ledger</em></span></span>
           </h1>
           <div class="hero__sub">
-            <p>Sales, stock, purchasing and fixed assets post to the same general ledger the moment they're recorded, so your accountant and your warehouse manager are reading the same numbers.</p>
+            <p data-i18n="hero.sub">Sales, stock, purchasing and fixed assets post to the same general ledger the moment they're recorded, so your accountant and your warehouse manager are reading the same numbers.</p>
           </div>
         </div>
 
         <div class="hero__visual">
           <canvas id="halftone" aria-label="MTK monogram rendered as interactive halftone dots" role="img"></canvas>
           <div class="status">
-            <div class="status__h"><span class="pulse pulse--g"></span>Ledger status<span class="status__t">09:41</span></div>
+            <div class="status__h"><span class="pulse pulse--g"></span><span data-i18n="status.h">Ledger status</span><span class="status__t">09:41</span></div>
             <ul>
-              <li><span>Finance</span><b class="ok">Balanced</b></li>
-              <li><span>Inventory</span><b>3 reorders to approve</b></li>
-              <li><span>Cash cycle</span><b>39 days</b></li>
-              <li><span>Fixed assets</span><b>Depreciation posted</b></li>
+              <li><span data-i18n="status.fin">Finance</span><b class="ok" data-i18n="status.ok">Balanced</b></li>
+              <li><span data-i18n="status.inv">Inventory</span><b data-i18n="status.inv.v">3 reorders to approve</b></li>
+              <li><span data-i18n="status.ccc">Cash cycle</span><b data-i18n="status.ccc.v">39 days</b></li>
+              <li><span data-i18n="status.fa">Fixed assets</span><b data-i18n="status.fa.v">Depreciation posted</b></li>
             </ul>
           </div>
         </div>
@@ -93,13 +102,13 @@
       <div class="hero__foot">
         <form class="pillform" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
           <label class="sr-only" for="h-name">Name</label>
-          <input id="h-name" type="text" placeholder="Name" autocomplete="name">
+          <input id="h-name" type="text" placeholder="Name" data-i18n-ph="ph.name" autocomplete="name">
           <label class="sr-only" for="h-email">Work email</label>
-          <input id="h-email" type="email" placeholder="Work email" autocomplete="email" required>
-          <button type="submit" class="btn"><span class="pillform__idle">Book a demo</span><span class="pillform__done">Thanks, we'll email you</span><span class="btn__pip"></span></button>
+          <input id="h-email" type="email" placeholder="Work email" data-i18n-ph="ph.email" autocomplete="email" required>
+          <button type="submit" class="btn"><span class="pillform__idle" data-i18n="cta.book">Book a demo</span><span class="pillform__done" data-i18n="form.done">Thanks, we'll email you</span><span class="btn__pip"></span></button>
         </form>
         <div class="trusted">
-          <span>30-minute walkthrough with our team</span>
+          <span data-i18n="trusted">30-minute walkthrough with our team</span>
           <div class="avatars"><b>RT</b><b>DS</b><b>MF</b></div>
         </div>
       </div>
@@ -109,8 +118,8 @@
       <div class="stage" id="stage">
         <svg class="stage__shape" aria-hidden="true"><defs><radialGradient id="stageFill" cx="12%" cy="0%" r="110%"><stop offset="0" stop-color="#2a8a68"/><stop offset=".45" stop-color="#0f5240"/><stop offset="1" stop-color="#08362a"/></radialGradient><linearGradient id="stageEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path id="stagePath"/><path id="stageEdgePath" fill="none" stroke="url(#stageEdge)" stroke-width="1.2"/></svg>
         <div class="stage__tab">
-          <span>The overview screen</span>
-          <a href="#modules" class="btn btn--light"><span class="btn__ico"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span>Explore</a>
+          <span data-i18n="stage.tab">The overview screen</span>
+          <a href="#modules" class="btn btn--light"><span class="btn__ico"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span><span data-i18n="stage.explore">Explore</span></a>
         </div>
 
         <div class="app" id="app">
@@ -121,7 +130,7 @@
               <a class="is-on">Overview</a><a>Finance</a><a>Inventory</a><a>Procurement</a><a>Fixed Assets</a><a>IMEI</a><a>Reports</a>
             </aside>
             <div class="app__main">
-              <div class="app__head"><h3>Good morning, Aung</h3><span class="chip chip--green">All ledgers balanced</span></div>
+              <div class="app__head"><h3>Good morning, MTK</h3><span class="chip chip--green">All ledgers balanced</span></div>
               <div class="kpis">
                 <div><span>Revenue MTD</span><strong>$482.6k</strong><em class="up">+12.4%</em></div>
                 <div><span>Cash on hand</span><strong>$1.21M</strong><em class="up">+3.1%</em></div>
@@ -155,37 +164,37 @@
       </div>
 
       <ul class="industries" aria-label="Industries">
-        <li>Retail</li><li>Distribution</li><li>Mobile &amp; electronics</li><li>Food &amp; Beverage</li><li>Construction</li><li>Services</li>
+        <li data-i18n="ind.1">Retail</li><li data-i18n="ind.2">Distribution</li><li data-i18n="ind.3">Mobile &amp; electronics</li><li data-i18n="ind.4">Food &amp; Beverage</li><li data-i18n="ind.5">Construction</li><li data-i18n="ind.6">Services</li>
       </ul>
     </section>
 
     <section class="problem">
-      <p class="scrub" id="scrub">A typical growing business keeps sales in one app, stock in a spreadsheet and the books in an accounting package, then spends the last week of every month making the three agree. MTK keeps all of it in one database, so the stock report and the balance sheet are built from the same records.</p>
+      <p class="scrub" id="scrub" data-i18n="problem">A typical growing business keeps sales in one app, stock in a spreadsheet and the books in an accounting package, then spends the last week of every month making the three agree. MTK keeps all of it in one database, so the stock report and the balance sheet are built from the same records.</p>
     </section>
 
     <section class="section" id="modules">
       <div class="section__head section__head--row reveal">
-        <h2>Start with one module.<br><span class="soft">Add the rest when you're ready.</span></h2>
-        <p class="body">Each module writes to the same ledger, so switching on a second one later means no migration and no integration project.</p>
+        <h2 data-i18n="modules.h">Start with one module.<br><span class="soft">Add the rest when you're ready.</span></h2>
+        <p class="body" data-i18n="modules.p">Each module writes to the same ledger, so switching on a second one later means no migration and no integration project.</p>
       </div>
 
       <div class="explorer reveal" id="explorer">
         <div class="explorer__tabs" role="tablist" aria-label="Modules">
-          <button role="tab" aria-selected="true" aria-controls="p-fin" id="t-fin"><span>01</span>Finance<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-fs" id="t-fs" tabindex="-1"><span>02</span>Financial statements<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-ccc" id="t-ccc" tabindex="-1"><span>03</span>Ratios &amp; cash cycle<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-inv" id="t-inv" tabindex="-1"><span>04</span>Inventory<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-lc" id="t-lc" tabindex="-1"><span>05</span>Landed cost<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-pro" id="t-pro" tabindex="-1"><span>06</span>Procurement<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-fa" id="t-fa" tabindex="-1"><span>07</span>Fixed assets<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-imei" id="t-imei" tabindex="-1"><span>08</span>IMEI tracking<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-doc" id="t-doc" tabindex="-1"><span>09</span>Documents<i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-rep" id="t-rep" tabindex="-1"><span>10</span>Reports &amp; charts<i></i></button>
+          <button role="tab" aria-selected="true" aria-controls="p-fin" id="t-fin"><span>01</span><b data-i18n="tab.fin">Finance</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-fs" id="t-fs" tabindex="-1"><span>02</span><b data-i18n="tab.fs">Financial statements</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-ccc" id="t-ccc" tabindex="-1"><span>03</span><b data-i18n="tab.ccc">Ratios &amp; cash cycle</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-inv" id="t-inv" tabindex="-1"><span>04</span><b data-i18n="tab.inv">Inventory</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-lc" id="t-lc" tabindex="-1"><span>05</span><b data-i18n="tab.lc">Landed cost</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-pro" id="t-pro" tabindex="-1"><span>06</span><b data-i18n="tab.pro">Procurement</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-fa" id="t-fa" tabindex="-1"><span>07</span><b data-i18n="tab.fa">Fixed assets</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-imei" id="t-imei" tabindex="-1"><span>08</span><b data-i18n="tab.imei">IMEI tracking</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-doc" id="t-doc" tabindex="-1"><span>09</span><b data-i18n="tab.doc">Documents</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-rep" id="t-rep" tabindex="-1"><span>10</span><b data-i18n="tab.rep">Reports &amp; charts</b><i></i></button>
         </div>
 
         <div class="explorer__panels">
           <div class="xp is-on" role="tabpanel" id="p-fin" aria-labelledby="t-fin">
-            <p class="xp__txt">General ledger, payables, receivables, bank reconciliation and multi-currency. Postings from every other module arrive here on their own, already coded to the right accounts.</p>
+            <p class="xp__txt" data-i18n="x.fin">General ledger, payables, receivables, bank reconciliation and multi-currency. Postings from every other module arrive here on their own, already coded to the right accounts.</p>
             <div class="ledger">
               <div class="ledger__row ledger__row--h"><span>Account</span><span>Debit</span><span>Credit</span></div>
               <div class="ledger__row"><span>1100 · Cash</span><span>24,800</span><span>·</span></div>
@@ -197,7 +206,7 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-fs" aria-labelledby="t-fs" hidden>
-            <p class="xp__txt">Profit and loss, balance sheet and cash flow statement, produced from the ledger for any date range, one branch or all of them consolidated. Compare against last year or budget, and click any line to see the entries behind it.</p>
+            <p class="xp__txt" data-i18n="x.fs">Profit and loss, balance sheet and cash flow statement, produced from the ledger for any date range, one branch or all of them consolidated. Compare against last year or budget, and click any line to see the entries behind it.</p>
             <div class="stmt">
               <div class="stmt__row stmt__row--h"><span>Profit &amp; loss, Jan–Oct</span><span>2026</span><span>2025</span></div>
               <div class="stmt__row"><span>Revenue</span><span>1,482,600</span><span>1,301,900</span></div>
@@ -209,7 +218,7 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-ccc" aria-labelledby="t-ccc" hidden>
-            <p class="xp__txt">Days inventory, days receivable and days payable are calculated from live balances and combined into your cash conversion cycle. Current ratio, quick ratio, gross margin and stock turns sit beside it, with a monthly trend for each.</p>
+            <p class="xp__txt" data-i18n="x.ccc">Days inventory, days receivable and days payable are calculated from live balances and combined into your cash conversion cycle. Current ratio, quick ratio, gross margin and stock turns sit beside it, with a monthly trend for each.</p>
             <div class="ccc">
               <div class="ccc__eq">
                 <div><b>46</b><span>Days inventory</span></div><i>+</i>
@@ -222,13 +231,13 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-inv" aria-labelledby="t-inv" hidden>
-            <p class="xp__txt">Track stock by warehouse, bin, batch and serial number. When an item drops below its reorder point, MTK drafts a purchase order and waits for someone to approve it.</p>
+            <p class="xp__txt" data-i18n="x.inv">Track stock by warehouse, bin, batch and serial number. When an item drops below its reorder point, MTK drafts a purchase order and waits for someone to approve it.</p>
             <div class="bars"><i style="--h:62%"></i><i style="--h:84%"></i><i style="--h:40%"></i><i style="--h:22%" class="y"></i><i style="--h:55%"></i><i style="--h:90%"></i><i style="--h:66%"></i></div>
             <p class="xp__cap"><b class="dot dot--y"></b>SKU 10‑442 is under its reorder point of 30 units</p>
           </div>
 
           <div class="xp" role="tabpanel" id="p-lc" aria-labelledby="t-lc" hidden>
-            <p class="xp__txt">Spread freight, import duty, insurance and clearing charges across the items on a shipment, by value, weight, volume or quantity. Stock is then carried at what it cost to get onto your shelf, and margins are worked out from that figure.</p>
+            <p class="xp__txt" data-i18n="x.lc">Spread freight, import duty, insurance and clearing charges across the items on a shipment, by value, weight, volume or quantity. Stock is then carried at what it cost to get onto your shelf, and margins are worked out from that figure.</p>
             <div class="landed">
               <div class="landed__h"><span>Shipment SH‑0193 · 400 units</span><b>Landed $31.00 / unit</b></div>
               <div class="landed__bar"><i style="--w:80.6%">Supplier price</i><i style="--w:9.7%" class="d">Duty</i><i style="--w:7.3%" class="f">Freight</i><i style="--w:2.4%" class="c"></i></div>
@@ -237,12 +246,12 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-pro" aria-labelledby="t-pro" hidden>
-            <p class="xp__txt">Requisitions turn into purchase orders once approved. A supplier invoice is only released for payment after it matches both the PO and the goods received note.</p>
-            <div class="flow"><span>Request</span><b></b><span>PO</span><b></b><span>Receipt</span><b></b><span class="y">Pay</span></div>
+            <p class="xp__txt" data-i18n="x.pro">Purchase orders are routed for approval before they go to the supplier. A supplier invoice is only released for payment after it matches both the PO and the goods received note.</p>
+            <div class="flow"><span>PO</span><b></b><span>Receipt</span><b></b><span>Invoice</span><b></b><span class="y">Pay</span></div>
           </div>
 
           <div class="xp" role="tabpanel" id="p-fa" aria-labelledby="t-fa" hidden>
-            <p class="xp__txt">Register each asset with its cost, location and the person responsible for it. MTK posts depreciation to the ledger every month, straight-line or declining balance, and records the gain or loss when you sell or write one off.</p>
+            <p class="xp__txt" data-i18n="x.fa">Register each asset with its cost, location and the person responsible for it. MTK posts depreciation to the ledger every month, straight-line or declining balance, and records the gain or loss when you sell or write one off.</p>
             <div class="assets">
               <div class="assets__row assets__row--h"><span>Asset</span><span>Cost</span><span>Book value</span></div>
               <div class="assets__row"><span>Delivery van · YGN‑4471</span><span>28,000</span><span><i style="--p:70%"></i>19,600</span></div>
@@ -252,7 +261,7 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-imei" aria-labelledby="t-imei" hidden>
-            <p class="xp__txt">Scan the IMEI of every handset when it arrives, and MTK follows that unit through branch transfers, sales and warranty returns. Search one number to see where a phone came from and who bought it.</p>
+            <p class="xp__txt" data-i18n="x.imei">Scan the IMEI of every handset when it arrives, and MTK follows that unit through branch transfers, sales and warranty returns. Search one number to see where a phone came from and who bought it.</p>
             <div class="imei">
               <div class="imei__search"><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="6"/><path d="M14 14l4 4"/></svg><span>356938 10 442817 3</span></div>
               <ol class="imei__trail">
@@ -264,7 +273,7 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-doc" aria-labelledby="t-doc" hidden>
-            <p class="xp__txt">Drag invoices, receipts, contracts and photos onto any record. The file stays with the transaction, so an auditor can open the supplier's invoice straight from the journal entry.</p>
+            <p class="xp__txt" data-i18n="x.doc">Drag invoices, receipts, contracts and photos onto any record. The file stays with the transaction, so an auditor can open the supplier's invoice straight from the journal entry.</p>
             <div class="drop">
               <div class="drop__zone"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>Drop files on PO‑8842</div>
               <div class="drop__file"><b>PDF</b><span>supplier-invoice-8842.pdf</span><em>240 KB</em></div>
@@ -273,7 +282,7 @@
           </div>
 
           <div class="xp" role="tabpanel" id="p-rep" aria-labelledby="t-rep" hidden>
-            <p class="xp__txt">Sales by branch, stock ageing, margins and cash position, drawn as charts you can filter by period, branch or product. Figures update as transactions post, and every report exports to Excel or PDF.</p>
+            <p class="xp__txt" data-i18n="x.rep">Sales by branch, stock ageing, margins and cash position, drawn as charts you can filter by period, branch or product. Figures update as transactions post, and every report exports to Excel or PDF.</p>
             <div class="rep">
               <div class="rep__h"><span>Gross margin by branch</span><div class="rep__seg"><b>Month</b><span>Quarter</span><span>Year</span></div></div>
               <div class="rep__chart">
@@ -291,8 +300,8 @@
 
     <section class="section devices-sec" id="devices">
       <div class="section__head section__head--row reveal">
-        <h2>The same account on a laptop, a tablet or a phone</h2>
-        <p class="body">Accountants work in the full desktop layout. Warehouse staff count stock and scan IMEIs on a tablet, and managers approve purchase orders from their phones.</p>
+        <h2 data-i18n="dev.h">The same account on a laptop, a tablet or a phone</h2>
+        <p class="body" data-i18n="dev.p">Accountants work in the full desktop layout. Warehouse staff count stock and scan IMEIs on a tablet, and managers approve purchase orders from their phones.</p>
       </div>
 
       <div class="devices reveal" role="img" aria-label="MTK on a MacBook showing financial reports, an iPad showing a stock count, and an iPhone showing a purchase order approval">
@@ -356,35 +365,35 @@
       <div class="fx" aria-hidden="true"><i class="fx__dots"></i><svg class="fx__strings" data-strings></svg></div>
       <div class="section__head section__head--row reveal">
         <div>
-          <span class="chip-tag"><i></i>Time saved</span>
-          <h2>Less retyping, checking and chasing paper</h2>
+          <span class="chip-tag"><i></i><span data-i18n="close.chip">Time saved</span></span>
+          <h2 data-i18n="close.h">Less retyping, checking and chasing paper</h2>
         </div>
-        <p class="body">Most month-end work in a growing business is copying numbers from one document to the next. MTK writes the vouchers and links the documents itself, so your team reviews instead of re-entering. Move the slider to estimate the hours at your volume.</p>
+        <p class="body" data-i18n="close.p">Most month-end work in a growing business is copying numbers from one document to the next. MTK writes the vouchers and links the documents itself, so your team reviews instead of re-entering. Move the slider to estimate the hours at your volume.</p>
       </div>
 
       <div class="eff reveal">
         <div class="calc">
           <div class="calc__top">
-            <label for="docs">Documents per month</label>
+            <label for="docs" data-i18n="calc.label">Documents per month</label>
             <output id="docsOut" for="docs">800</output>
           </div>
           <input type="range" id="docs" min="100" max="3000" step="50" value="800">
           <div class="calc__rows" id="calcRows"></div>
-          <div class="calc__legend"><span><i class="m"></i>By hand</span><span><i class="a"></i>With MTK</span></div>
+          <div class="calc__legend"><span><i class="m"></i><b data-i18n="calc.hand">By hand</b></span><span><i class="a"></i><b data-i18n="calc.mtk">With MTK</b></span></div>
         </div>
         <div class="sum">
-          <div class="sum__item"><span>Documents handled</span><b id="sDocs">800</b><em>per month</em></div>
-          <div class="sum__item"><span>Average time per document</span><b><span id="sBefore">6.3</span> → <span id="sAfter" class="blue">0.4</span> min</b></div>
-          <div class="sum__item sum__item--big"><span>Time saved</span><b><span id="sHours">78</span> hours</b><em>about <span id="sDays">10</span> working days a month</em></div>
-          <p class="sum__note">Estimates based on typical manual handling times. Your numbers depend on your documents and how your team works today.</p>
+          <div class="sum__item"><span data-i18n="sum.docs">Documents handled</span><b id="sDocs">800</b><em data-i18n="sum.per">per month</em></div>
+          <div class="sum__item"><span data-i18n="sum.avg">Average time per document</span><b><span id="sBefore">6.3</span> → <span id="sAfter" class="blue">0.4</span> <span data-i18n="sum.min">min</span></b></div>
+          <div class="sum__item sum__item--big"><span data-i18n="sum.saved">Time saved</span><b><span id="sHours">78</span> <span data-i18n="sum.hours">hours</span></b><em data-i18n="sum.days">about <span id="sDays">10</span> working days a month</em></div>
+          <p class="sum__note" data-i18n="sum.note">Estimates based on typical manual handling times. Your numbers depend on your documents and how your team works today.</p>
         </div>
       </div>
 
       <div class="trace reveal">
         <div class="trace__head">
           <div>
-            <h3>Trace any document</h3>
-            <p>Click a document to see where it came from and everything that followed it.</p>
+            <h3 data-i18n="trace.h">Trace any document</h3>
+            <p data-i18n="trace.p">Click a document to see where it came from and everything that followed it.</p>
           </div>
           <p class="trace__read" id="traceRead" aria-live="polite"></p>
         </div>
@@ -393,65 +402,65 @@
             <svg class="trace__lines" id="traceLines" aria-hidden="true"></svg>
           </div>
         </div>
-        <div class="trace__key"><span><i class="up"></i>Source</span><span><i class="sel"></i>Selected</span><span><i class="down"></i>Follow-on</span></div>
+        <div class="trace__key"><span><i class="up"></i><b data-i18n="trace.src">Source</b></span><span><i class="sel"></i><b data-i18n="trace.sel">Selected</b></span><span><i class="down"></i><b data-i18n="trace.fol">Follow-on</b></span></div>
       </div>
     </section>
 
     <section class="section section--split section--rev section--fx" id="auto">
       <div class="fx" aria-hidden="true"><i class="fx__dots"></i><svg class="fx__strings" data-strings></svg></div>
       <div class="automation reveal" id="automation">
-        <div class="auto__step"><span class="auto__k">When</span><span>Stock of <b>SKU 10‑442</b> falls below 30 units</span></div>
+        <div class="auto__step"><span class="auto__k" data-i18n="auto.when">When</span><span data-i18n="auto.s1">Stock of <b>SKU 10‑442</b> falls below 30 units</span></div>
         <div class="auto__line"></div>
-        <div class="auto__step"><span class="auto__k">Then</span><span>Draft a PO to the preferred supplier</span></div>
+        <div class="auto__step"><span class="auto__k" data-i18n="auto.then">Then</span><span data-i18n="auto.s2">Draft a PO to the preferred supplier</span></div>
         <div class="auto__line"></div>
-        <div class="auto__step"><span class="auto__k">If</span><span>Total is over $5,000, send to the <b>finance lead</b></span></div>
+        <div class="auto__step"><span class="auto__k" data-i18n="auto.if">If</span><span data-i18n="auto.s3">Total is over $5,000, send to the <b>finance lead</b></span></div>
         <div class="auto__line"></div>
-        <div class="auto__step auto__step--done"><span class="auto__k">Done</span><span>Approved by M. Thant at <time id="autoTime">10:02</time></span></div>
-        <button type="button" class="replay" id="replay"><svg viewBox="0 0 16 16"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.5h2.5"/></svg>Run the rule again</button>
+        <div class="auto__step auto__step--done"><span class="auto__k" data-i18n="auto.done">Done</span><span data-i18n="auto.s4">Approved by M. Thant at <time id="autoTime">10:02</time></span></div>
+        <button type="button" class="replay" id="replay"><svg viewBox="0 0 16 16"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.5h2.5"/></svg><span data-i18n="auto.replay">Run the rule again</span></button>
       </div>
       <div class="reveal">
-        <span class="chip-tag"><i></i>Automations</span>
-        <h2>Set up approvals and reorders once</h2>
-        <p class="body">Write a rule like the one on the left in the workflow builder. MTK checks it every time stock moves, and each step it takes is logged with the time and the person who approved it. Approvals work from a phone, and any automated step can be reversed.</p>
+        <span class="chip-tag"><i></i><span data-i18n="auto.chip">Automations</span></span>
+        <h2 data-i18n="auto.h">Set up approvals and reorders once</h2>
+        <p class="body" data-i18n="auto.p">Write a rule like the one on the left in the workflow builder. MTK checks it every time stock moves, and each step it takes is logged with the time and the person who approved it. Approvals work from a phone, and any automated step can be reversed.</p>
       </div>
     </section>
 
     <section class="section section--split section--fx" id="security">
       <div class="fx" aria-hidden="true"><i class="fx__dots"></i><svg class="fx__strings" data-strings></svg></div>
       <div class="reveal">
-        <span class="chip-tag"><i></i>Access</span>
-        <h2>Who can see what, and who changed it</h2>
-        <p class="body">Permissions are set per role, branch and module. Every edit, approval and posting is stored with the user and the timestamp. Data is encrypted in transit and at rest, and backed up daily.</p>
+        <span class="chip-tag"><i></i><span data-i18n="acc.chip">Access</span></span>
+        <h2 data-i18n="acc.h">Who can see what, and who changed it</h2>
+        <p class="body" data-i18n="acc.p">Permissions are set per role, branch and module. Every edit, approval and posting is stored with the user and the timestamp. Data is encrypted in transit and at rest, and backed up daily.</p>
       </div>
       <div class="access reveal">
-        <p class="access__hint">Try it: click a dot to change what a role can do.</p>
+        <p class="access__hint" data-i18n="acc.hint">Try it: click a dot to change what a role can do.</p>
         <table class="matrix" id="matrix">
-          <thead><tr><th>Role</th><th>Ledger</th><th>Stock</th><th>POs</th><th>Assets</th></tr></thead>
+          <thead><tr><th data-i18n="mx.role">Role</th><th data-i18n="mx.ledger">Ledger</th><th data-i18n="mx.stock">Stock</th><th data-i18n="mx.pos">POs</th><th data-i18n="mx.assets">Assets</th></tr></thead>
           <tbody>
-            <tr data-role="Owner"><td>Owner</td><td data-v="e"></td><td data-v="e"></td><td data-v="e"></td><td data-v="e"></td></tr>
-            <tr data-role="Accountant"><td>Accountant</td><td data-v="e"></td><td data-v="v"></td><td data-v="e"></td><td data-v="v"></td></tr>
-            <tr data-role="Warehouse"><td>Warehouse</td><td data-v=""></td><td data-v="e"></td><td data-v="v"></td><td data-v=""></td></tr>
-            <tr data-role="Sales rep"><td>Sales rep</td><td data-v=""></td><td data-v="v"></td><td data-v=""></td><td data-v=""></td></tr>
+            <tr data-role="Owner"><td data-i18n="role.owner">Owner</td><td data-v="e"></td><td data-v="e"></td><td data-v="e"></td><td data-v="e"></td></tr>
+            <tr data-role="Accountant"><td data-i18n="role.acct">Accountant</td><td data-v="e"></td><td data-v="v"></td><td data-v="e"></td><td data-v="v"></td></tr>
+            <tr data-role="Warehouse"><td data-i18n="role.wh">Warehouse</td><td data-v=""></td><td data-v="e"></td><td data-v="v"></td><td data-v=""></td></tr>
+            <tr data-role="Sales rep"><td data-i18n="role.sales">Sales rep</td><td data-v=""></td><td data-v="v"></td><td data-v=""></td><td data-v=""></td></tr>
           </tbody>
         </table>
-        <div class="matrix__key"><span><i class="e"></i>Edit</span><span><i class="v"></i>View</span><span><i></i>Hidden</span></div>
+        <div class="matrix__key"><span><i class="e"></i><b data-i18n="acc.e">Edit</b></span><span><i class="v"></i><b data-i18n="acc.v">View</b></span><span><i></i><b data-i18n="acc.h0">Hidden</b></span></div>
         <div class="log" id="log" aria-live="polite">
-          <p><time>10:02</time>M. Thant approved PO‑8842</p>
-          <p><time>09:47</time>K. Lin changed credit limit for Shwe Mart, 5,000 → 8,000</p>
+          <p><time>10:02</time><span data-i18n="log.1">M. Thant approved PO‑8842</span></p>
+          <p><time>09:47</time><span data-i18n="log.2">K. Lin changed credit limit for Shwe Mart, 5,000 → 8,000</span></p>
         </div>
       </div>
     </section>
 
     <section class="section section--split" id="faq">
       <div class="reveal">
-        <h2>Common questions</h2>
+        <h2 data-i18n="faq.h">Common questions</h2>
       </div>
       <div class="faq reveal">
-        <details open><summary>How long does it take to go live?</summary><p>Most teams are running their first module within a few weeks. We import your opening balances, item list and customers, and you add other modules whenever you like.</p></details>
-        <details><summary>Can we start with just one module?</summary><p>Yes. Many teams start with finance or inventory. Modules you add later use the same ledger, so there's nothing to move across.</p></details>
-        <details><summary>Does it handle multiple branches and currencies?</summary><p>MTK supports several companies, branches, warehouses and currencies in one account, with consolidated reports across them.</p></details>
-        <details><summary>Can MTK connect to the tools we already use?</summary><p>Banks, payment gateways and online stores connect through built-in connectors. Anything else can use the open API or a scheduled spreadsheet import.</p></details>
-        <details><summary>Can we get our data out?</summary><p>You can export every table at any time as CSV or Excel. If you leave, we hand over a full export and delete our copy.</p></details>
+        <details open><summary data-i18n="faq.q1">How long does it take to go live?</summary><p data-i18n="faq.a1">Most teams are running their first module within a few weeks. We import your opening balances, item list and customers, and you add other modules whenever you like.</p></details>
+        <details><summary data-i18n="faq.q2">Can we start with just one module?</summary><p data-i18n="faq.a2">Yes. Many teams start with finance or inventory. Modules you add later use the same ledger, so there's nothing to move across.</p></details>
+        <details><summary data-i18n="faq.q3">Does it handle multiple branches and currencies?</summary><p data-i18n="faq.a3">MTK supports several companies, branches, warehouses and currencies in one account, with consolidated reports across them.</p></details>
+        <details><summary data-i18n="faq.q4">Can MTK connect to the tools we already use?</summary><p data-i18n="faq.a4">Banks, payment gateways and online stores connect through built-in connectors. Anything else can use the open API or a scheduled spreadsheet import.</p></details>
+        <details><summary data-i18n="faq.q5">Can we get our data out?</summary><p data-i18n="faq.a5">You can export every table at any time as CSV or Excel. If you leave, we hand over a full export and delete our copy.</p></details>
       </div>
     </section>
 
@@ -459,12 +468,12 @@
       <div class="glow glow--cta" aria-hidden="true"><i></i><i></i><i></i></div>
       <svg class="waves" data-waves="7" aria-hidden="true"></svg>
       <img src="assets/logo.svg" alt="" class="cta__logo" width="72" height="72">
-      <h2>Book a 30-minute <em class="serif">demo</em></h2>
-      <p>We'll load a sample of your products and customers into MTK and walk you through a normal week.</p>
+      <h2 data-i18n="cta.h">Book a 30-minute <em class="serif">demo</em></h2>
+      <p data-i18n="cta.p">We'll load a sample of your products and customers into MTK and walk you through a normal week.</p>
       <form class="pillform" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
         <label class="sr-only" for="c-email">Work email</label>
-        <input id="c-email" type="email" placeholder="Work email" autocomplete="email" required>
-        <button type="submit" class="btn"><span class="pillform__idle">Book a demo</span><span class="pillform__done">Thanks, we'll email you</span></button>
+        <input id="c-email" type="email" placeholder="Work email" data-i18n-ph="ph.email" autocomplete="email" required>
+        <button type="submit" class="btn"><span class="pillform__idle" data-i18n="cta.book">Book a demo</span><span class="pillform__done" data-i18n="form.done">Thanks, we'll email you</span></button>
       </form>
     </section>
   </main>
@@ -474,20 +483,25 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <a href="#top" class="footer__logo"><img src="assets/logo.svg" alt="" width="34" height="34"><span>MTK</span></a>
-          <p>ERP for distributors and retailers. Stock, IMEI-tracked handsets, fixed assets and the books, kept on one ledger.</p>
+          <p data-i18n="f.desc">ERP for distributors and retailers. Stock, IMEI-tracked handsets, fixed assets and the books, kept on one ledger.</p>
           <div class="footer__social">
             <a href="#" aria-label="MTK on Facebook"><svg viewBox="0 0 24 24"><path d="M15 3h-2a4 4 0 0 0-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2z"/></svg></a>
             <a href="#" aria-label="MTK on LinkedIn"><svg viewBox="0 0 24 24"><path d="M6 9v10M6 5.5v.01M10 19v-6a3 3 0 0 1 6 0v6M10 9v10"/></svg></a>
           </div>
-          <p class="footer__status"><span><svg viewBox="0 0 12 12"><path d="M3 6.2l2 2L9 4"/></svg></span>All systems running</p>
+          <p class="footer__status"><span><svg viewBox="0 0 12 12"><path d="M3 6.2l2 2L9 4"/></svg></span><span data-i18n="f.status">All systems running</span></p>
         </div>
-        <nav class="footer__col" aria-label="Product"><h4>Product</h4><a href="#modules">Modules</a><a href="#devices">Devices</a><a href="#close">Time saved</a><a href="#faq">FAQ</a></nav>
-        <nav class="footer__col" aria-label="Company"><h4>Company</h4><a href="#">About</a><a href="#demo">Contact</a></nav>
-        <nav class="footer__col" aria-label="Legal"><h4>Legal</h4><a href="#">Privacy policy</a><a href="#">Terms of service</a></nav>
+        <nav class="footer__col" aria-label="Product"><h4 data-i18n="f.product">Product</h4><a href="#modules" data-i18n="nav.modules">Modules</a><a href="#devices" data-i18n="f.devices">Devices</a><a href="#close" data-i18n="nav.time">Time saved</a><a href="#faq" data-i18n="nav.faq">FAQ</a></nav>
+        <nav class="footer__col" aria-label="Company"><h4 data-i18n="f.company">Company</h4><a href="#" data-i18n="f.about">About</a><a href="#demo" data-i18n="f.contact">Contact</a></nav>
+        <nav class="footer__col" aria-label="Legal"><h4 data-i18n="f.legal">Legal</h4><a href="#" data-i18n="f.privacy">Privacy policy</a><a href="#" data-i18n="f.terms">Terms of service</a></nav>
       </div>
       <div class="footer__bot">
         <span>© <span id="yr"></span> MTK.</span>
-        <span class="footer__acts"><a href="#">Log in</a><a href="#demo" class="footer__go">Book a demo <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></span>
+        <div class="lang lang--light" role="group" aria-label="Language">
+        <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
+        <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
+        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
+      </div>
+        <span class="footer__acts"><a href="#" data-i18n="f.login">Log in</a><a href="#demo" class="footer__go"><span data-i18n="cta.book">Book a demo</span> <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></span>
       </div>
       <div class="footer__art" aria-hidden="true">
         <svg viewBox="0 0 1600 440" preserveAspectRatio="xMidYMax slice">
@@ -545,6 +559,9 @@
     </div>
   </footer>
 
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script src="i18n.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
