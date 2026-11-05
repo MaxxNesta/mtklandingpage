@@ -238,24 +238,111 @@
   });
   const hhmm = () => new Date().toTimeString().slice(0, 5);
 
-  /* ---------- Month-end calendar ---------- */
-  const cal = document.getElementById('cal');
-  cal.innerHTML = Array.from({ length: 14 }, (_, i) => `<i>${i + 1}</i>`).join('');
-  const days = [...cal.children];
-  const segBtns = [...document.querySelectorAll('#closecal .seg button')];
-  const thumb = document.querySelector('#closecal .seg__thumb');
-  function setClose(idx) {
-    const n = +segBtns[idx].dataset.days;
-    segBtns.forEach((b, i) => b.setAttribute('aria-pressed', i === idx));
-    thumb.style.transform = `translateX(${idx * 100}%)`;
-    document.getElementById('calN').textContent = n;
-    days.forEach((d, i) => {
-      d.style.transitionDelay = reduce ? '0ms' : (i * 35) + 'ms';
-      d.classList.toggle('on', i < n);
+  /* ---------- Time-saved calculator ---------- */
+  const TASKS = [
+    { t: 'Supplier invoices', d: 'Created from the PO and receipt, so nobody retypes lines', share: .35, m: 6, a: .5 },
+    { t: 'Document checks', d: 'Invoice, PO and goods receipt matched automatically', share: .35, m: 4, a: .3 },
+    { t: 'Depreciation vouchers', d: 'Posted every month for each fixed asset', share: .10, m: 3, a: 0 },
+    { t: 'Landed cost vouchers', d: 'Freight and duty spread across every product on the shipment', share: .05, m: 25, a: 1.5 },
+    { t: 'Tracing a receipt', d: 'Source and follow-on documents one click away', share: .15, m: 8, a: .3 }
+  ];
+  const MAXM = Math.max(...TASKS.map(t => t.m));
+  const rowsEl = document.getElementById('calcRows');
+  rowsEl.innerHTML = TASKS.map(t => `
+    <div class="row">
+      <div class="row__t"><b>${t.t}</b><span>${t.d}</span></div>
+      <div class="row__n"><b>0</b><span>docs</span></div>
+      <div class="row__bars"><i class="m" style="width:${t.m / MAXM * 100}%"></i><i class="a" style="width:${Math.max(t.a / MAXM * 100, .8)}%"></i><span>${t.m} → ${t.a} min each</span></div>
+      <div class="row__s"><b>0 h</b><span>saved</span></div>
+    </div>`).join('');
+  const rowEls = [...rowsEl.children];
+  const range = document.getElementById('docs');
+  const fmt = n => n.toLocaleString('en-US');
+  const set = (id, v) => { document.getElementById(id).textContent = v; };
+  function calc() {
+    const docs = +range.value;
+    range.style.setProperty('--fill', ((docs - range.min) / (range.max - range.min) * 100) + '%');
+    set('docsOut', fmt(docs));
+    let before = 0, after = 0;
+    TASKS.forEach((t, i) => {
+      const n = Math.round(docs * t.share);
+      before += n * t.m; after += n * t.a;
+      rowEls[i].querySelector('.row__n b').textContent = fmt(n);
+      rowEls[i].querySelector('.row__s b').textContent = (n * (t.m - t.a) / 60).toFixed(1) + ' h';
     });
+    const saved = (before - after) / 60;
+    set('sDocs', fmt(docs));
+    set('sBefore', (before / docs).toFixed(1));
+    set('sAfter', (after / docs).toFixed(1));
+    set('sHours', fmt(Math.round(saved)));
+    set('sDays', fmt(Math.round(saved / 8)));
   }
-  segBtns.forEach((b, i) => b.addEventListener('click', () => setClose(i)));
-  setClose(0);
+  range.addEventListener('input', calc);
+  calc();
+
+  /* ---------- Document trace map ---------- */
+  const NODES = [
+    { id: 'req', c: 0, r: 0, k: 'Purchase request', n: 'REQ‑77' },
+    { id: 'po', c: 1, r: 0, k: 'Purchase order', n: 'PO‑8842' },
+    { id: 'lcb', c: 1, r: 1, k: 'Freight & duty bill', n: 'BILL‑310' },
+    { id: 'grn', c: 2, r: 0, k: 'Goods receipt', n: 'GRN‑551' },
+    { id: 'lcv', c: 2, r: 1, k: 'Landed cost voucher', n: 'JV‑3107' },
+    { id: 'sinv', c: 3, r: 0, k: 'Supplier invoice', n: 'INV‑S‑2041' },
+    { id: 'sale', c: 3, r: 1, k: 'Sales invoice · IMEI', n: 'INV‑2088' },
+    { id: 'pay', c: 4, r: 0, k: 'Supplier payment', n: 'PAY‑118' },
+    { id: 'rcpt', c: 4, r: 1, k: 'Customer receipt', n: 'RCPT‑903' }
+  ];
+  const EDGES = [['req', 'po'], ['po', 'grn'], ['po', 'lcb'], ['lcb', 'lcv'], ['grn', 'lcv'], ['grn', 'sinv'], ['sinv', 'pay'], ['grn', 'sale'], ['sale', 'rcpt']];
+  const map = document.getElementById('traceMap');
+  const traceSvg = document.getElementById('traceLines');
+  const nodeEls = {};
+  NODES.forEach(nd => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tnode';
+    b.style.gridColumn = nd.c + 1; b.style.gridRow = nd.r + 1;
+    b.innerHTML = `<span>${nd.k}</span><b>${nd.n}</b>`;
+    b.addEventListener('click', () => select(nd.id));
+    map.append(b);
+    nodeEls[nd.id] = b;
+  });
+  const walk = (id, dir, acc = new Set()) => {
+    EDGES.forEach(([f, t]) => {
+      const [from, to] = dir === 'up' ? [t, f] : [f, t];
+      if (from === id && !acc.has(to)) { acc.add(to); walk(to, dir, acc); }
+    });
+    return acc;
+  };
+  let selected = 'grn';
+  function drawLines() {
+    const mr = map.getBoundingClientRect();
+    traceSvg.setAttribute('viewBox', `0 0 ${mr.width} ${mr.height}`);
+    const up = walk(selected, 'up'), down = walk(selected, 'down');
+    traceSvg.innerHTML = EDGES.map(([f, t]) => {
+      const a = nodeEls[f].getBoundingClientRect(), b = nodeEls[t].getBoundingClientRect();
+      const x1 = a.right - mr.left, y1 = a.top + a.height / 2 - mr.top;
+      const x2 = b.left - mr.left, y2 = b.top + b.height / 2 - mr.top;
+      const dx = (x2 - x1) * .5;
+      const cls = down.has(t) && (down.has(f) || f === selected) ? 'down'
+        : up.has(f) && (up.has(t) || t === selected) ? 'up' : '';
+      return `<path class="${cls}" d="M${x1} ${y1} C${x1 + dx} ${y1} ${x2 - dx} ${y2} ${x2} ${y2}"/>`;
+    }).join('');
+  }
+  function select(id) {
+    selected = id;
+    const up = walk(id, 'up'), down = walk(id, 'down');
+    NODES.forEach(nd => {
+      const el = nodeEls[nd.id];
+      el.className = 'tnode' + (nd.id === id ? ' is-sel' : up.has(nd.id) ? ' is-up' : down.has(nd.id) ? ' is-down' : ' is-dim');
+      el.setAttribute('aria-pressed', nd.id === id);
+    });
+    const nd = NODES.find(x => x.id === id);
+    document.getElementById('traceRead').innerHTML =
+      `<b>${nd.n}</b> · ${up.size} source document${up.size === 1 ? '' : 's'} · ${down.size} follow-on document${down.size === 1 ? '' : 's'}`;
+    drawLines();
+  }
+  new ResizeObserver(drawLines).observe(map);
+  select('grn');
 
   /* ---------- Automation playback ---------- */
   const autoEl = document.getElementById('automation');

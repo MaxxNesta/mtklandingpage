@@ -40,7 +40,7 @@
   <div class="floatnav" id="floatnav">
     <a href="#top" class="floatnav__brand"><img src="assets/logo.svg" alt="" width="26" height="26"><span>MTK</span></a>
     <nav class="floatnav__links">
-      <a href="#modules">Modules</a><a href="#close">Month-end</a><a href="#security">Access</a><a href="#faq">FAQ</a>
+      <a href="#modules">Modules</a><a href="#close">Time saved</a><a href="#security">Access</a><a href="#faq">FAQ</a>
     </nav>
     <a href="#demo" class="btn btn--yellow btn--sm">Book a demo</a>
   </div>
@@ -57,7 +57,7 @@
         </a>
         <nav class="nav__pill" aria-label="Primary">
           <a href="#modules">Modules</a><i></i>
-          <a href="#close">Month-end</a><i></i>
+          <a href="#close">Time saved</a><i></i>
           <a href="#security">Access</a><i></i>
           <a href="#faq">FAQ</a>
         </nav>
@@ -352,24 +352,48 @@
       </div>
     </section>
 
-    <section class="section section--split section--fx" id="close">
+    <section class="section section--fx" id="close">
       <div class="fx" aria-hidden="true"><i class="fx__dots"></i><svg class="fx__strings" data-strings></svg></div>
-      <div class="reveal">
-        <span class="chip-tag"><i></i>Month-end</span>
-        <h2>A shorter month‑end close</h2>
-        <p class="body">Invoices, receipts and depreciation post to the ledger as they happen, which leaves very little to reconcile when the month ends. What's left is checking accruals and signing off.</p>
-        <a href="#demo" class="btn btn--yellow">See it with your own data<span class="btn__dot btn__dot--dark"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-      </div>
-      <div class="closecal reveal" id="closecal">
-        <div class="seg" role="group" aria-label="Compare time to close the books">
-          <button type="button" aria-pressed="true" data-days="2">MTK</button>
-          <button type="button" aria-pressed="false" data-days="8">Legacy ERP</button>
-          <button type="button" aria-pressed="false" data-days="14">Spreadsheets</button>
-          <span class="seg__thumb"></span>
+      <div class="section__head section__head--row reveal">
+        <div>
+          <span class="chip-tag"><i></i>Time saved</span>
+          <h2>Less retyping, checking and chasing paper</h2>
         </div>
-        <div class="closecal__head"><span>Closing October, working days in November</span><b><span id="calN">2</span> days</b></div>
-        <div class="cal" id="cal"></div>
-        <p class="closecal__note">Illustrative figures. Your close depends on transaction volume and how your team works.</p>
+        <p class="body">Most month-end work in a growing business is copying numbers from one document to the next. MTK writes the vouchers and links the documents itself, so your team reviews instead of re-entering. Move the slider to estimate the hours at your volume.</p>
+      </div>
+
+      <div class="eff reveal">
+        <div class="calc glass">
+          <div class="calc__top">
+            <label for="docs">Documents per month</label>
+            <output id="docsOut" for="docs">800</output>
+          </div>
+          <input type="range" id="docs" min="100" max="3000" step="50" value="800">
+          <div class="calc__rows" id="calcRows"></div>
+          <div class="calc__legend"><span><i class="m"></i>By hand</span><span><i class="a"></i>With MTK</span></div>
+        </div>
+        <div class="sum glass">
+          <div class="sum__item"><span>Documents handled</span><b id="sDocs">800</b><em>per month</em></div>
+          <div class="sum__item"><span>Average time per document</span><b><span id="sBefore">6.3</span> → <span id="sAfter" class="blue">0.4</span> min</b></div>
+          <div class="sum__item sum__item--big"><span>Time saved</span><b><span id="sHours">78</span> hours</b><em>about <span id="sDays">10</span> working days a month</em></div>
+          <p class="sum__note">Estimates based on typical manual handling times. Your numbers depend on your documents and how your team works today.</p>
+        </div>
+      </div>
+
+      <div class="trace glass reveal">
+        <div class="trace__head">
+          <div>
+            <h3>Trace any document</h3>
+            <p>Click a document to see where it came from and everything that followed it.</p>
+          </div>
+          <p class="trace__read" id="traceRead" aria-live="polite"></p>
+        </div>
+        <div class="trace__scroll">
+          <div class="trace__map" id="traceMap">
+            <svg class="trace__lines" id="traceLines" aria-hidden="true"></svg>
+          </div>
+        </div>
+        <div class="trace__key"><span><i class="up"></i>Source</span><span><i class="sel"></i>Selected</span><span><i class="down"></i>Follow-on</span></div>
       </div>
     </section>
 
@@ -457,7 +481,7 @@
           </div>
           <p class="footer__status"><span><svg viewBox="0 0 12 12"><path d="M3 6.2l2 2L9 4"/></svg></span>All systems running</p>
         </div>
-        <nav class="footer__col" aria-label="Product"><h4>Product</h4><a href="#modules">Modules</a><a href="#devices">Devices</a><a href="#close">Month-end</a><a href="#faq">FAQ</a></nav>
+        <nav class="footer__col" aria-label="Product"><h4>Product</h4><a href="#modules">Modules</a><a href="#devices">Devices</a><a href="#close">Time saved</a><a href="#faq">FAQ</a></nav>
         <nav class="footer__col" aria-label="Company"><h4>Company</h4><a href="#">About</a><a href="#demo">Contact</a></nav>
         <nav class="footer__col" aria-label="Legal"><h4>Legal</h4><a href="#">Privacy policy</a><a href="#">Terms of service</a></nav>
       </div>
