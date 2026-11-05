@@ -285,7 +285,7 @@
     set('sBefore', (before / docs).toFixed(1));
     set('sAfter', (after / docs).toFixed(1));
     set('sHours', fmt(Math.round(saved)));
-    set('sDays', fmt(Math.round(saved / 8)));
+    set('sDays', (saved / 176).toFixed(1));
   }
   range.addEventListener('input', calc);
   calc();
