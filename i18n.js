@@ -1,13 +1,15 @@
 (() => {
   // HTML copy keyed by data-i18n. English is read from the page itself.
   const D = {
-    'tick.live': { my: 'MTK တွင် ယခု', zh: 'MTK 实时动态' },
-    'tick.1': { my: 'အဝယ်အော်ဒါ PO‑8842 အတည်ပြုပြီး <b>ရန်ကုန် DC</b>', zh: '采购订单 PO‑8842 已批准 <b>仰光配送中心</b>' },
-    'tick.2': { my: 'IMEI 356938…8173 ရောင်းချပြီး <b>မန္တလေး</b>', zh: 'IMEI 356938…8173 已售出 <b>曼德勒</b>' },
-    'tick.3': { my: 'ပြန်မှာယူမှု မူကြမ်းရေးပြီး <b>SKU 10‑442</b>', zh: '已起草补货单 <b>SKU 10‑442</b>' },
-    'tick.4': { my: 'ငွေတောင်းခံလွှာ INV‑2041 ကို လက်ခံဖြတ်ပိုင်းနှင့် တိုက်ဆိုင်ပြီး <b>ငွေစာရင်း</b>', zh: '发票 INV‑2041 已与收货单匹配 <b>财务</b>' },
-    'tick.5': { my: 'တန်ဖိုးလျော့ စာရင်းသွင်းပြီး <b>ပိုင်ဆိုင်မှု 42 ခု</b>', zh: '折旧已过账 <b>42 项资产</b>' },
-    'tick.6': { my: 'အောက်တိုဘာလ စာရင်းပိတ်ပြီး <b>ရုံးချုပ်</b>', zh: '十月账簿已锁定 <b>总部</b>' },
+    'tick.live': { my: 'MTK ထဲတွင်', zh: 'MTK 功能' },
+    'tick.1': { my: 'ငွေရေးကြေးရေး ရှင်းတမ်း <b>အရှုံးအမြတ်၊ လက်ကျန်ရှင်းတမ်း၊ ငွေသားစီးဆင်းမှု</b>', zh: '财务报表 <b>利润表、资产负债表、现金流量表</b>' },
+    'tick.2': { my: 'အချိုးများ <b>ငွေလည်ပတ်ချိန်</b>', zh: '财务比率 <b>现金转换周期</b>' },
+    'tick.3': { my: 'ဆိုက်ရောက်ကုန်ကျစရိတ် <b>ပစ္စည်းအလိုက် သယ်ယူခနှင့် အကောက်ခွန်</b>', zh: '到岸成本 <b>运费和关税分摊到每件商品</b>' },
+    'tick.4': { my: 'ပုံသေပိုင်ဆိုင်မှု <b>လစဉ် တန်ဖိုးလျော့</b>', zh: '固定资产 <b>每月折旧</b>' },
+    'tick.5': { my: 'IMEI ခြေရာခံခြင်း <b>ဖုန်းတစ်လုံးချင်း</b>', zh: 'IMEI 追踪 <b>每一部手机</b>' },
+    'tick.6': { my: 'ဖိုင်တင်ခြင်း <b>မှတ်တမ်းတိုင်းတွင်</b>', zh: '文件上传 <b>每张单据均可附件</b>' },
+    'tick.7': { my: 'အစီရင်ခံစာနှင့် ဇယား <b>ဌာနခွဲနှင့် ကာလအလိုက်</b>', zh: '报表与图表 <b>按分店和期间</b>' },
+    'ai.label': { my: 'MTK အကြောင်း AI ကို မေးကြည့်ပါ', zh: '向 AI 了解 MTK' },
 
     'nav.modules': { my: 'မော်ဂျူးများ', zh: '功能模块' },
     'nav.time': { my: 'ချွေတာချိန်', zh: '节省时间' },
@@ -248,6 +250,7 @@
       'n.sinv': 'Supplier invoice', 'n.sale': 'Sales invoice · IMEI', 'n.pay': 'Supplier payment', 'n.rcpt': 'Customer receipt',
       'trace.read': '{n} · {u} source document{us} · {d} follow-on document{ds}',
       'acc.e': 'Edit', 'acc.v': 'View', 'acc.h0': 'Hidden',
+      'ai.prompt': 'What is MTK (Master The Key)? Use its website https://www.mtk-masterthekey.com, its Facebook page https://www.facebook.com/masterthekey.mtk and its TikTok https://www.tiktok.com/@master_the_key to explain what the MTK ERP does and which services it offers to businesses.', 'ai.copied': 'Question copied. If the chat opens empty, paste it in.',
       'acc.log': 'You set {role} to {label} on {mod}', 'acc.owner': 'Owners always have full access'
     },
     my: {
@@ -262,6 +265,7 @@
       'n.sinv': 'ပေးသွင်းသူ ငွေတောင်းခံလွှာ', 'n.sale': 'အရောင်း ငွေတောင်းခံလွှာ · IMEI', 'n.pay': 'ပေးသွင်းသူထံ ငွေပေးချေမှု', 'n.rcpt': 'ဖောက်သည်ထံမှ ငွေလက်ခံ',
       'trace.read': '{n} · မူရင်း {u} ခု · နောက်ဆက်တွဲ {d} ခု',
       'acc.e': 'ပြင်ဆင်', 'acc.v': 'ကြည့်ရှု', 'acc.h0': 'ဖုံးကွယ်',
+      'ai.prompt': 'MTK (Master The Key) ဆိုတာ ဘာလဲ။ ၎င်း၏ website https://www.mtk-masterthekey.com ၊ Facebook စာမျက်နှာ https://www.facebook.com/masterthekey.mtk နှင့် TikTok https://www.tiktok.com/@master_the_key တို့ကို ကြည့်ပြီး MTK ERP က ဘာလုပ်ပေးသလဲ၊ လုပ်ငန်းများအတွက် မည်သည့်ဝန်ဆောင်မှုများ ပေးသလဲဆိုတာကို မြန်မာလို ရှင်းပြပါ။', 'ai.copied': 'မေးခွန်းကို copy ကူးပြီးပါပြီ။ chat ဗလာဖြင့် ပွင့်လာပါက paste လုပ်ပါ။',
       'acc.log': '{role} ကို {mod} တွင် {label} ဟု သတ်မှတ်လိုက်သည်', 'acc.owner': 'ပိုင်ရှင်သည် အမြဲ အပြည့်အဝ ဝင်ရောက်ခွင့်ရှိသည်'
     },
     zh: {
@@ -276,6 +280,7 @@
       'n.sinv': '供应商发票', 'n.sale': '销售发票 · IMEI', 'n.pay': '供应商付款', 'n.rcpt': '客户收款',
       'trace.read': '{n} · {u} 张来源单据 · {d} 张后续单据',
       'acc.e': '编辑', 'acc.v': '查看', 'acc.h0': '隐藏',
+      'ai.prompt': 'MTK（Master The Key）是什么？请参考它的网站 https://www.mtk-masterthekey.com 、Facebook 主页 https://www.facebook.com/masterthekey.mtk 和 TikTok https://www.tiktok.com/@master_the_key ，用中文介绍 MTK ERP 的功能以及它为企业提供的服务。', 'ai.copied': '问题已复制。如果对话框是空的，直接粘贴即可。',
       'acc.log': '你将{role}的「{mod}」权限设为{label}', 'acc.owner': '老板始终拥有全部权限'
     }
   };

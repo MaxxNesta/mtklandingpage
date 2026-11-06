@@ -422,12 +422,35 @@
     td.append(btn);
   });
 
+  /* ---------- Ask an AI about MTK ---------- */
+  const AI_URL = {
+    chatgpt: q => `https://chatgpt.com/?q=${q}`,
+    claude: q => `https://claude.ai/new?q=${q}`,
+    gemini: q => `https://gemini.google.com/app?q=${q}`,
+    grok: q => `https://grok.com/?q=${q}`
+  };
+  const aiBtns = [...document.querySelectorAll('.askai__btn')];
+  const aiToast = document.getElementById('aiToast');
+  function setAiLinks() {
+    const q = encodeURIComponent(t('ai.prompt'));
+    aiBtns.forEach(b => { b.href = AI_URL[b.dataset.ai](q); });
+  }
+  aiBtns.forEach(b => b.addEventListener('click', () => {
+    if (navigator.clipboard) navigator.clipboard.writeText(t('ai.prompt')).catch(() => {});
+    aiToast.textContent = t('ai.copied');
+    aiToast.classList.add('is-on');
+    clearTimeout(aiToast._t);
+    aiToast._t = setTimeout(() => aiToast.classList.remove('is-on'), 5000);
+  }));
+  setAiLinks();
+
   /* ---------- Re-render on language change ---------- */
   document.addEventListener('langchange', () => {
     buildScrub(); onScroll();
     renderRows(); calc();
     select(selected);
     painters.forEach(p => p());
+    setAiLinks();
   });
 
   /* ---------- Reveals ---------- */

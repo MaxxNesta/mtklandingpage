@@ -1085,3 +1085,18 @@ html:lang(my) .sum__item--big > b { font-size: clamp(28px, 2.8vw, 40px); }
 .footer__social svg.fill { width: 20px; height: 20px; fill: currentColor; stroke: none; }
 .footer__social svg.fill .cut { fill: #f4f2ea; }
 .footer__social a:hover svg.fill .cut { fill: var(--forest-700); }
+
+/* Ask an AI */
+.askai { position: relative; margin-top: 40px; }
+.askai__label { margin: 0 auto 14px !important; font-size: 14px !important; font-weight: 600; color: #fff !important; }
+.askai__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.askai__btn { display: inline-flex; align-items: center; gap: 9px; padding: 10px 18px 10px 14px; border-radius: 999px; background: rgba(247, 245, 238, .1); border: 1px solid rgba(247, 245, 238, .28); color: #fff; font-size: 14px; font-weight: 600; transition: background .2s, transform .3s var(--ease), border-color .2s; }
+.askai__btn:hover { background: #fff; color: #0b1a14; border-color: #fff; transform: translateY(-2px); }
+.askai__btn svg { width: 18px; height: 18px; fill: currentColor; }
+.askai__btn--claude:hover svg { fill: #d97757; }
+.askai__btn--gemini:hover svg { fill: #4f7cf7; }
+.askai__btn:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+.askai__toast { min-height: 20px; margin: 14px auto 0 !important; font-size: 13px !important; color: var(--mint) !important; opacity: 0; transition: opacity .3s; }
+.askai__toast.is-on { opacity: 1; }
+.ticker__row b { color: #fff; }
+.ticker .pulse { animation: none; }
