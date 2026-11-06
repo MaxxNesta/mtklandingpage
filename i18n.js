@@ -239,7 +239,7 @@
   // Strings used by main.js for content it renders itself.
   const STR = {
     en: {
-      title: 'MTK ERP | Accounting, Inventory & IMEI Tracking for Myanmar Businesses',
+      title: 'MTK ERP | Finance and Accounting, Inventory System for Myanmar Businesses',
       'task.inv.t': 'Supplier invoices', 'task.inv.d': 'Created from the PO and receipt, so nobody retypes lines',
       'task.chk.t': 'Document checks', 'task.chk.d': 'Invoice, PO and goods receipt matched automatically',
       'task.dep.t': 'Depreciation vouchers', 'task.dep.d': 'Posted every month for each fixed asset',
@@ -254,7 +254,7 @@
       'acc.log': 'You set {role} to {label} on {mod}', 'acc.owner': 'Owners always have full access'
     },
     my: {
-      title: 'MTK ERP | မြန်မာ့လုပ်ငန်းများအတွက် စာရင်းကိုင်၊ ကုန်လက်ကျန်နှင့် IMEI စနစ်',
+      title: 'MTK ERP | မြန်မာ့လုပ်ငန်းများအတွက် ငွေစာရင်း၊ စာရင်းကိုင်နှင့် ကုန်လက်ကျန် စနစ်',
       'task.inv.t': 'ပေးသွင်းသူ ငွေတောင်းခံလွှာ', 'task.inv.d': 'PO နှင့် လက်ခံဖြတ်ပိုင်းမှ ဖန်တီးသဖြင့် မည်သူမျှ ပြန်ရိုက်စရာ မလို',
       'task.chk.t': 'စာရွက်စာတမ်း စစ်ဆေးခြင်း', 'task.chk.d': 'ငွေတောင်းခံလွှာ၊ PO နှင့် ကုန်လက်ခံဖြတ်ပိုင်း အလိုအလျောက် တိုက်ဆိုင်',
       'task.dep.t': 'တန်ဖိုးလျော့ voucher များ', 'task.dep.d': 'ပုံသေပိုင်ဆိုင်မှုတိုင်းအတွက် လစဉ် စာရင်းသွင်း',
@@ -269,7 +269,7 @@
       'acc.log': '{role} ကို {mod} တွင် {label} ဟု သတ်မှတ်လိုက်သည်', 'acc.owner': 'ပိုင်ရှင်သည် အမြဲ အပြည့်အဝ ဝင်ရောက်ခွင့်ရှိသည်'
     },
     zh: {
-      title: 'MTK ERP | 缅甸企业的财务、库存与 IMEI 管理系统',
+      title: 'MTK ERP | 缅甸企业的财务会计与库存管理系统',
       'task.inv.t': '供应商发票', 'task.inv.d': '由采购订单和收货单生成，无需重复录入',
       'task.chk.t': '单据核对', 'task.chk.d': '发票、采购订单和收货单自动匹配',
       'task.dep.t': '折旧凭证', 'task.dep.d': '每月为每项固定资产自动过账',
