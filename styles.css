@@ -1079,3 +1079,9 @@ html:lang(my) .sum__item--big > b { font-size: clamp(28px, 2.8vw, 40px); }
 .chip-tag i { width: 7px; height: 7px; background: #0b1a3a; }
 .automation .auto__step { opacity: .72; }
 .automation .auto__k { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .06em; background: rgba(247, 245, 238, .2); }
+
+.footer__social a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: var(--forest-700); background: rgba(11, 71, 55, .08); transition: background .2s, color .2s, transform .3s var(--ease); }
+.footer__social a:hover { background: var(--forest-700); color: #fff; transform: translateY(-2px); }
+.footer__social svg.fill { width: 20px; height: 20px; fill: currentColor; stroke: none; }
+.footer__social svg.fill .cut { fill: #f4f2ea; }
+.footer__social a:hover svg.fill .cut { fill: var(--forest-700); }
