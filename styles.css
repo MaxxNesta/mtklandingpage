@@ -279,7 +279,7 @@ em.mark::before {
 .app__side a.is-on { background: rgba(185, 226, 201, .08); color: var(--cream); }
 .app__main { padding: 22px 24px 28px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .app__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.app__head h3 { font-weight: 500; font-size: 20px; letter-spacing: -.01em; }
+.app__head .app__hello { font-weight: 500; font-size: 20px; letter-spacing: -.01em; }
 .chip { font-size: 12px; padding: 5px 11px; border-radius: 999px; }
 .chip--green { background: rgba(127, 184, 154, .14); color: var(--mint); }
 .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
