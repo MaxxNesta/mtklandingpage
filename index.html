@@ -305,25 +305,36 @@
     <section class="section" id="modules">
       <div class="section__head section__head--row reveal">
         <h2 data-i18n="modules.h">Every module shares the same records.<br><span class="soft">Finance, stock and purchasing in one system.</span></h2>
-        <p class="body" data-i18n="modules.p">MTK comes as one system with all ten modules included. A goods receipt updates stock, the ledger and landed cost at the same moment, because every module reads and writes the same data.</p>
+        <p class="body" data-i18n="modules.p">MTK comes as one system with all eleven modules included. A goods receipt updates stock, the ledger and landed cost at the same moment, because every module reads and writes the same data.</p>
       </div>
 
       <div class="explorer reveal" id="explorer">
         <div class="explorer__tabs" role="tablist" aria-label="Modules">
-          <button role="tab" aria-selected="true" aria-controls="p-fin" id="t-fin"><span>01</span><b data-i18n="tab.fin">Finance</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-fs" id="t-fs" tabindex="-1"><span>02</span><b data-i18n="tab.fs">Financial statements</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-ccc" id="t-ccc" tabindex="-1"><span>03</span><b data-i18n="tab.ccc">Ratios &amp; cash cycle</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-inv" id="t-inv" tabindex="-1"><span>04</span><b data-i18n="tab.inv">Inventory</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-lc" id="t-lc" tabindex="-1"><span>05</span><b data-i18n="tab.lc">Landed cost</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-pro" id="t-pro" tabindex="-1"><span>06</span><b data-i18n="tab.pro">Procurement</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-fa" id="t-fa" tabindex="-1"><span>07</span><b data-i18n="tab.fa">Fixed assets</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-imei" id="t-imei" tabindex="-1"><span>08</span><b data-i18n="tab.imei">IMEI tracking</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-doc" id="t-doc" tabindex="-1"><span>09</span><b data-i18n="tab.doc">Documents</b><i></i></button>
-          <button role="tab" aria-selected="false" aria-controls="p-rep" id="t-rep" tabindex="-1"><span>10</span><b data-i18n="tab.rep">Reports &amp; charts</b><i></i></button>
+          <button role="tab" aria-selected="true" aria-controls="p-sal" id="t-sal"><span>01</span><b data-i18n="tab.sal">Sales</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-pro" id="t-pro" tabindex="-1"><span>02</span><b data-i18n="tab.pro">Purchases</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-fin" id="t-fin" tabindex="-1"><span>03</span><b data-i18n="tab.fin">Finance</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-fs" id="t-fs" tabindex="-1"><span>04</span><b data-i18n="tab.fs">Financial statements</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-ccc" id="t-ccc" tabindex="-1"><span>05</span><b data-i18n="tab.ccc">Ratios &amp; cash cycle</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-inv" id="t-inv" tabindex="-1"><span>06</span><b data-i18n="tab.inv">Inventory</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-lc" id="t-lc" tabindex="-1"><span>07</span><b data-i18n="tab.lc">Landed cost</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-fa" id="t-fa" tabindex="-1"><span>08</span><b data-i18n="tab.fa">Fixed assets</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-imei" id="t-imei" tabindex="-1"><span>09</span><b data-i18n="tab.imei">IMEI tracking</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-doc" id="t-doc" tabindex="-1"><span>10</span><b data-i18n="tab.doc">Documents</b><i></i></button>
+          <button role="tab" aria-selected="false" aria-controls="p-rep" id="t-rep" tabindex="-1"><span>11</span><b data-i18n="tab.rep">Reports &amp; charts</b><i></i></button>
         </div>
 
         <div class="explorer__panels">
-          <div class="xp is-on" role="tabpanel" id="p-fin" aria-labelledby="t-fin">
+          <div class="xp is-on" role="tabpanel" id="p-sal" aria-labelledby="t-sal">
+            <p class="xp__txt" data-i18n="x.sal">Quotations turn into sales orders, delivery notes and invoices without retyping, with each customer's price list, discounts and credit limit checked along the way. Every invoice posts revenue, cost of sales and the stock movement at once.</p>
+            <div class="flow"><span>Quote</span><b></b><span>Order</span><b></b><span>Delivery</span><b></b><span class="y">Invoice</span></div>
+          </div>
+
+          <div class="xp" role="tabpanel" id="p-pro" aria-labelledby="t-pro" hidden>
+            <p class="xp__txt" data-i18n="x.pro">Purchase orders are routed for approval before they go to the supplier. A supplier invoice is only released for payment after it matches both the PO and the goods received note.</p>
+            <div class="flow"><span>PO</span><b></b><span>Receipt</span><b></b><span>Invoice</span><b></b><span class="y">Pay</span></div>
+          </div>
+
+          <div class="xp" role="tabpanel" id="p-fin" aria-labelledby="t-fin" hidden>
             <p class="xp__txt" data-i18n="x.fin">General ledger, payables, receivables, bank reconciliation and multi-currency. Postings from every other module arrive here on their own, already coded to the right accounts.</p>
             <div class="ledger">
               <div class="ledger__row ledger__row--h"><span>Account</span><span>Debit</span><span>Credit</span></div>
@@ -373,11 +384,6 @@
               <div class="landed__bar"><i style="--w:80.6%">Supplier price</i><i style="--w:9.7%" class="d">Duty</i><i style="--w:7.3%" class="f">Freight</i><i style="--w:2.4%" class="c"></i></div>
               <div class="landed__key"><span>Supplier price <b>$10,000</b></span><span>Duty <b>$1,200</b></span><span>Freight <b>$900</b></span><span>Clearing <b>$300</b></span></div>
             </div>
-          </div>
-
-          <div class="xp" role="tabpanel" id="p-pro" aria-labelledby="t-pro" hidden>
-            <p class="xp__txt" data-i18n="x.pro">Purchase orders are routed for approval before they go to the supplier. A supplier invoice is only released for payment after it matches both the PO and the goods received note.</p>
-            <div class="flow"><span>PO</span><b></b><span>Receipt</span><b></b><span>Invoice</span><b></b><span class="y">Pay</span></div>
           </div>
 
           <div class="xp" role="tabpanel" id="p-fa" aria-labelledby="t-fa" hidden>
