@@ -55,25 +55,45 @@
   const canopyLayers = buildCanopy(document.getElementById('canopy'), 11, { gap: .46 });
   buildCanopy(document.getElementById('canopy2'), 29, { gap: .5 });
 
-  /* ---------- Twinkling stars in the upper sky ---------- */
-  const sc = document.getElementById('stars');
+  /* ---------- Flowing contour lines across the sky ---------- */
+  const sc = document.getElementById('flow');
   const sctx = sc.getContext('2d');
-  let stars = [], sw = 0, sh = 0, sOn = true;
+  let sw = 0, sh = 0, sOn = true;
+  const LINES = 26;
   function sizeStars() {
     const dpr = Math.min(devicePixelRatio || 1, 2);
     sw = sc.clientWidth; sh = sc.clientHeight;
     sc.width = sw * dpr; sc.height = sh * dpr; sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const r = rng(7);
-    stars = Array.from({ length: Math.round(sw * sh / 9000) }, () => ({ x: r() * sw, y: r() * sh, r: .4 + r() * 1.1, p: r() * 6.28, s: .6 + r() * 1.6 }));
   }
-  function drawStars(t) {
+  function drawStars(now) {
+    const t = reduce ? 0 : now / 1000;
     sctx.clearRect(0, 0, sw, sh);
-    for (const s of stars) {
-      const fade = 1 - s.y / sh;   // fewer stars toward the horizon glow
-      const a = fade * (reduce ? .6 : .35 + .35 * Math.sin(t / 1000 * s.s + s.p));
-      sctx.fillStyle = `rgba(255,240,230,${a.toFixed(3)})`;
-      sctx.beginPath(); sctx.arc(s.x, s.y, s.r, 0, 6.283); sctx.fill();
+    const fade = sctx.createLinearGradient(0, 0, sw, 0);
+    fade.addColorStop(0, 'rgba(255,255,255,0)');
+    fade.addColorStop(.25, 'rgba(255,236,224,.9)');
+    fade.addColorStop(.75, 'rgba(255,236,224,.9)');
+    fade.addColorStop(1, 'rgba(255,255,255,0)');
+    sctx.strokeStyle = fade;
+    sctx.lineWidth = 1;
+    const step = Math.max(14, sw / 90);
+    for (let k = 0; k < LINES; k++) {
+      const f = k / (LINES - 1);
+      const base = sh * (.16 + f * .7);
+      const amp = sh * (.035 + .05 * Math.sin(f * 3.1));
+      sctx.globalAlpha = .1 + .26 * Math.sin(f * Math.PI);
+      sctx.beginPath();
+      for (let x = -step; x <= sw + step; x += step) {
+        const u = x / sw;
+        // two travelling waves plus a slow swell that bends the lines toward the centre
+        const y = base
+          + Math.sin(u * 6.2 + t * .35 + f * 2.4) * amp
+          + Math.sin(u * 13.5 - t * .22 + f * 5.1) * amp * .28
+          - Math.cos((u - .5) * Math.PI) * sh * .06 * Math.sin(t * .15 + f * 1.7);
+        x === -step ? sctx.moveTo(x, y) : sctx.lineTo(x, y);
+      }
+      sctx.stroke();
     }
+    sctx.globalAlpha = 1;
     if (sOn && !reduce) requestAnimationFrame(drawStars);
   }
   sizeStars(); requestAnimationFrame(drawStars);

@@ -102,7 +102,7 @@ button, input { font: inherit; color: inherit; }
   background: radial-gradient(closest-side, rgba(255, 214, 170, .75), rgba(250, 170, 130, .32) 45%, transparent 75%); filter: blur(10px);
   animation: sunrise 2.8s var(--ease) both; }
 @keyframes sunrise { from { opacity: 0; transform: translate(-50%, 12%); } }
-.sky__stars { position: absolute; left: 0; top: 0; width: 100%; height: 55%; }
+.sky__flow { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: soft-light; }
 
 .hero__copy { position: relative; max-width: 1080px; margin: 0 auto; }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 10px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #fff;
@@ -888,3 +888,30 @@ html:lang(zh-Hans) .scrub { line-height: 1.4; }
 .footer__go { color: var(--volt); }
 .conn__hub { box-shadow: 0 0 0 2px var(--volt), 0 0 0 8px rgba(212, 255, 58, .14), 0 20px 40px -12px rgba(0, 0, 0, .55); }
 @media (prefers-reduced-motion: reduce) { .btn--volt::after, .btn--ring::before { animation: none; } }
+
+/* ---------- Clean animated sky: drifting colour fields, dot grid, flowing lines ---------- */
+.sky { background: linear-gradient(180deg, #1c1e2c 0%, #2c2c40 30%, #4d465e 55%, #8b6676 78%, #d6977f 100%); overflow: hidden; }
+.sky::after { display: none; }
+.mesh { position: absolute; inset: -10%; filter: blur(70px) saturate(115%); }
+.mesh i { position: absolute; border-radius: 50%; mix-blend-mode: screen; opacity: .75; will-change: transform; }
+.mesh i:nth-child(1) { width: 55vw; height: 55vw; left: -12%; top: -18%; background: radial-gradient(circle, #3f4a8a 0%, transparent 65%); animation: drift1 26s ease-in-out infinite alternate; }
+.mesh i:nth-child(2) { width: 50vw; height: 50vw; right: -14%; top: -6%; background: radial-gradient(circle, #7a4f86 0%, transparent 65%); animation: drift2 31s ease-in-out infinite alternate; }
+.mesh i:nth-child(3) { width: 62vw; height: 46vw; left: 18%; bottom: -12%; background: radial-gradient(closest-side, #f2a07f 0%, transparent 70%); animation: drift3 24s ease-in-out infinite alternate; }
+.mesh i:nth-child(4) { width: 34vw; height: 34vw; left: 4%; top: 38%; background: radial-gradient(circle, #c0707e 0%, transparent 65%); opacity: .55; animation: drift4 29s ease-in-out infinite alternate; }
+.mesh i:nth-child(5) { width: 30vw; height: 30vw; right: 6%; top: 44%; background: radial-gradient(circle, #e8b08f 0%, transparent 65%); opacity: .5; animation: drift1 34s -9s ease-in-out infinite alternate-reverse; }
+@keyframes drift1 { to { transform: translate(14vw, 10vh) scale(1.15); } }
+@keyframes drift2 { to { transform: translate(-16vw, 14vh) scale(.9); } }
+@keyframes drift3 { to { transform: translate(-10vw, -8vh) scale(1.2); } }
+@keyframes drift4 { to { transform: translate(18vw, -12vh) scale(1.1); } }
+.sky__sun { mix-blend-mode: screen; opacity: .8; }
+.sky__grid {
+  position: absolute; inset: 0; opacity: .5; mix-blend-mode: overlay;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, .55) 1px, transparent 1.3px);
+  background-size: 26px 26px; animation: gridpan 40s linear infinite;
+  -webkit-mask-image: radial-gradient(70% 55% at 50% 38%, #000 0%, rgba(0, 0, 0, .35) 55%, transparent 85%);
+          mask-image: radial-gradient(70% 55% at 50% 38%, #000 0%, rgba(0, 0, 0, .35) 55%, transparent 85%);
+}
+@keyframes gridpan { to { background-position: 26px 52px; } }
+.sky--cta { background: linear-gradient(180deg, #181a28 0%, #2b2b40 30%, #50485f 55%, #976d7a 78%, #e3a084 100%); }
+.hero__copy { padding-top: 12px; }
+@media (prefers-reduced-motion: reduce) { .mesh i, .sky__grid { animation: none; } }
