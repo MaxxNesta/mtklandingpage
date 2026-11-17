@@ -3,139 +3,155 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  /* ---------- Halftone monogram ---------- */
-  // Inlined so the canvas stays readable (untainted) even when opened from file://
-  const LOGO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 25 255 250"><defs><mask id="m"><rect width="320" height="300" fill="white"/><polygon points="208.79,190.50 201.00,195.00 193.21,190.50 193.21,181.50 201.00,177.00 208.79,181.50" fill="black"/></mask></defs><g fill="#0b4737"><path d="M49 45H71L147 121 127 141 77 91V254H49Z"/><path d="M93 129 121 157 244 45H267V254H239V91L140 177 219 254H179L121 198V254H93Z"/></g><g fill="#ffdb54"><g mask="url(#m)"><circle cx="201" cy="186" r="15"/><polygon points="201.00,160.00 204.06,167.79 212.41,168.29 205.95,173.61 208.05,181.71 201.00,177.20 193.95,181.71 196.05,173.61 189.59,168.29 197.94,167.79"/><polygon points="223.52,173.00 218.30,179.54 222.04,187.03 214.21,184.09 208.24,189.96 208.62,181.60 201.19,177.75 209.26,175.52 210.63,167.26 215.24,174.25"/><polygon points="223.52,199.00 215.24,197.75 210.63,204.74 209.26,196.48 201.19,194.25 208.62,190.40 208.24,182.04 214.21,187.91 222.04,184.97 218.30,192.46"/><polygon points="201.00,212.00 197.94,204.21 189.59,203.71 196.05,198.39 193.95,190.29 201.00,194.80 208.05,190.29 205.95,198.39 212.41,203.71 204.06,204.21"/><polygon points="178.48,199.00 183.70,192.46 179.96,184.97 187.79,187.91 193.76,182.04 193.38,190.40 200.81,194.25 192.74,196.48 191.37,204.74 186.76,197.75"/><polygon points="178.48,173.00 186.76,174.25 191.37,167.26 192.74,175.52 200.81,177.75 193.38,181.60 193.76,189.96 187.79,184.09 179.96,187.03 183.70,179.54"/></g><polygon points="201.00,149.00 202.75,152.97 207.06,152.50 204.50,156.00 207.06,159.50 202.75,159.03 201.00,163.00 199.25,159.03 194.94,159.50 197.50,156.00 194.94,152.50 199.25,152.97"/><polygon points="226.98,164.00 228.73,167.97 233.04,167.50 230.48,171.00 233.04,174.50 228.73,174.03 226.98,178.00 225.23,174.03 220.92,174.50 223.48,171.00 220.92,167.50 225.23,167.97"/><polygon points="226.98,194.00 228.73,197.97 233.04,197.50 230.48,201.00 233.04,204.50 228.73,204.03 226.98,208.00 225.23,204.03 220.92,204.50 223.48,201.00 220.92,197.50 225.23,197.97"/><polygon points="201.00,209.00 202.75,212.97 207.06,212.50 204.50,216.00 207.06,219.50 202.75,219.03 201.00,223.00 199.25,219.03 194.94,219.50 197.50,216.00 194.94,212.50 199.25,212.97"/><polygon points="175.02,194.00 176.77,197.97 181.08,197.50 178.52,201.00 181.08,204.50 176.77,204.03 175.02,208.00 173.27,204.03 168.96,204.50 171.52,201.00 168.96,197.50 173.27,197.97"/><polygon points="175.02,164.00 176.77,167.97 181.08,167.50 178.52,171.00 181.08,174.50 176.77,174.03 175.02,178.00 173.27,174.03 168.96,174.50 171.52,171.00 168.96,167.50 173.27,167.97"/><polygon points="201.00,180.50 202.38,184.10 206.23,184.30 203.23,186.73 204.23,190.45 201.00,188.35 197.77,190.45 198.77,186.73 195.77,184.30 199.62,184.10"/></g></svg>`;
+  /* ---------- Seeded random so the treeline is the same on every load ---------- */
+  const rng = seed => () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
 
-  const cv = document.getElementById('halftone');
-  const ctx = cv.getContext('2d');
-  const hero = document.querySelector('.hero');
-  const img = new Image();
-  let dots = [], W = 0, H = 0, dpr = 1, start = 0, running = false, visible = true;
-  const mouse = { x: -1e4, y: -1e4 };
-
-  function build() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = cv.clientWidth; H = cv.clientHeight;
-    if (!W || !H) return;
-    cv.width = W * dpr; cv.height = H * dpr;
-
-    const small = W < 560;
-    const step = small ? 7 : 9;
-    const S = Math.min(W * (small ? .78 : .6), H * .78);
-    const lx = small ? (W - S) / 2 : W * .04;
-    const ly = small ? 30 : (H - S) / 2 - H * .02;
-
-    const off = document.createElement('canvas');
-    off.width = W; off.height = H;
-    const o = off.getContext('2d', { willReadFrequently: true });
-    o.drawImage(img, lx, ly, S, S * (250 / 255));
-    let data;
-    try { data = o.getImageData(0, 0, W, H).data; } catch (e) { data = null; }
-
-    const cx = lx + S / 2, cy = ly + S / 2;
-    dots = [];
-    for (let y = step / 2; y < H; y += step) {
-      for (let x = step / 2; x < W; x += step) {
-        const i = ((y | 0) * W + (x | 0)) * 4;
-        const a = data ? data[i + 3] : 0;
-        const d = Math.hypot(x - cx, y - cy);
-        if (a > 30) {
-          const yellow = data[i] > 170;
-          const shade = .62 + .38 * Math.random();
-          dots.push({ x, y, ox: 0, oy: 0, r: step * .47 * (a / 255) * shade, c: yellow ? 1 : 0, d });
-        } else {
-          const fall = 1 - clamp(d / (S * .9));
-          if (fall > 0 && Math.random() < fall * .9) {
-            dots.push({ x, y, ox: 0, oy: 0, r: step * (.08 + .12 * fall * Math.random()), c: 2, d });
-          }
+  /* ---------- Dusk treeline (SVG) ---------- */
+  const TONES = [
+    ['#6a5068', '#7d5f74', '#94707f'],                        // far, hazy
+    ['#8a4d5c', '#a95f69', '#c97a7c', '#e39b8f', '#f3bba6'],  // mid, sun-lit blossom
+    ['#3a1d2a', '#5e2f3f', '#8a4655', '#b9686b', '#e6998a'],  // near
+    ['#140a10', '#2c1520', '#55293a', '#93505a', '#d8897f', '#eeb19c']  // foreground, lit from above
+  ];
+  function buildCanopy(svg, seed, opts = {}) {
+    const W = 1600, H = 500, r = rng(seed);
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const gap = opts.gap ?? .3;  // empty share of the width kept clear in the middle
+    let out = `<defs><linearGradient id="cf${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#050506" stop-opacity="0"/><stop offset=".85" stop-color="#050506" stop-opacity=".7"/><stop offset="1" stop-color="#050506"/></linearGradient>`
+      + `<filter id="leaf${seed}" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="${seed}" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9"/></filter></defs>`;
+    TONES.forEach((tones, li) => {
+      const base = H - 30 - (3 - li) * 40;   // farther layers sit higher
+      const size = 6 + li * 3;
+      let g = '';
+      const clusters = 10 + li * 4;
+      for (let c = 0; c < clusters; c++) {
+        // keep trees toward the edges so the middle of the dashboard stays visible
+        const t = r(), side = r() < .5 ? 0 : 1;
+        let x = side ? W * (.5 + gap / 2 + t * (.5 - gap / 2)) : W * (t * (.5 - gap / 2));
+        const edge = Math.min(x, W - x) / (W / 2);           // 0 at the edges, 1 in the centre
+        const lift = (1 - edge) ** 1.4 * (110 + li * 34);
+        const spread = size * (4 + r() * 2.2);
+        const cy = base - lift * (.65 + r() * .35) - spread * .3;
+        const n = 70 + (r() * 40 | 0);
+        const puffs = [];
+        for (let k = 0; k < n; k++) {
+          const a = r() * Math.PI * 2, dd = Math.sqrt(r()) * spread;
+          const px = x + Math.cos(a) * dd * 1.25, py = cy + Math.sin(a) * dd * .75;
+          const pr = size * (.8 + r() * .8);
+          // sun from above and in front: higher puffs catch more light
+          const v = 1.12 - (py - (cy - spread * .75)) / (spread * 1.25) + (r() - .5) * .3;
+          const tone = tones[Math.round(clamp(v) * (tones.length - 1))];
+          puffs.push([py, `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${pr.toFixed(1)}" fill="${tone}"/>`]);
         }
+        puffs.sort((a, b) => b[0] - a[0]).forEach(([, c2]) => { g += c2; });
       }
-    }
-    if (!data) {
-      // Fallback: draw the logo itself if pixel reads are blocked
-      dots = [];
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, W, H);
-      ctx.drawImage(img, lx, ly, S, S * (250 / 255));
-    }
+      if (li === 3) g += `<path d="M0 ${base + 6} C${W * .25} ${base - 6} ${W * .4} ${base + 14} ${W / 2} ${base + 8} S${W * .8} ${base - 4} ${W} ${base + 4} V${H} H0Z" fill="${tones[0]}"/>`;
+      out += `<g class="layer" data-depth="${(li + 1) * .25}"><g filter="url(#leaf${seed})">${g}</g></g>`;
+    });
+    out += `<rect width="${W}" height="${H}" fill="url(#cf${seed})"/>`;
+    svg.innerHTML = out;
+    return [...svg.querySelectorAll('.layer')];
   }
+  const canopyLayers = buildCanopy(document.getElementById('canopy'), 11, { gap: .46 });
+  buildCanopy(document.getElementById('canopy2'), 29, { gap: .5 });
 
-  const COLORS = ['rgba(255,255,255,.9)', '#f3c1a4', 'rgba(255,255,255,.22)'];
-  function frame(t) {
-    if (!start) start = t;
-    const el = t - start;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    const R = W < 560 ? 70 : 110;
-    const paths = [new Path2D(), new Path2D(), new Path2D()];
-    for (const p of dots) {
-      let tx = 0, ty = 0;
-      const dx = p.x - mouse.x, dy = p.y - mouse.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < R && dist > .01) {
-        const f = (1 - dist / R) ** 2 * 30;
-        tx = dx / dist * f; ty = dy / dist * f;
-      }
-      p.ox += (tx - p.ox) * .12;
-      p.oy += (ty - p.oy) * .12;
-      const intro = reduce ? 1 : clamp((el - p.d * 2.2) / 700);
-      const wave = reduce ? 1 : 1 + .14 * Math.sin(el / 650 - (p.x + p.y) / 70);
-      const r = p.r * intro * wave;
-      if (r < .2) continue;
-      const x = p.x + p.ox, y = p.y + p.oy;
-      paths[p.c].moveTo(x + r, y);
-      paths[p.c].arc(x, y, r, 0, Math.PI * 2);
+  /* ---------- Twinkling stars in the upper sky ---------- */
+  const sc = document.getElementById('stars');
+  const sctx = sc.getContext('2d');
+  let stars = [], sw = 0, sh = 0, sOn = true;
+  function sizeStars() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    sw = sc.clientWidth; sh = sc.clientHeight;
+    sc.width = sw * dpr; sc.height = sh * dpr; sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const r = rng(7);
+    stars = Array.from({ length: Math.round(sw * sh / 9000) }, () => ({ x: r() * sw, y: r() * sh, r: .4 + r() * 1.1, p: r() * 6.28, s: .6 + r() * 1.6 }));
+  }
+  function drawStars(t) {
+    sctx.clearRect(0, 0, sw, sh);
+    for (const s of stars) {
+      const fade = 1 - s.y / sh;   // fewer stars toward the horizon glow
+      const a = fade * (reduce ? .6 : .35 + .35 * Math.sin(t / 1000 * s.s + s.p));
+      sctx.fillStyle = `rgba(255,240,230,${a.toFixed(3)})`;
+      sctx.beginPath(); sctx.arc(s.x, s.y, s.r, 0, 6.283); sctx.fill();
     }
-    for (let c = 2; c >= 0; c--) { ctx.fillStyle = COLORS[c]; ctx.fill(paths[c]); }
-    if (running && visible) requestAnimationFrame(frame); else running = false;
+    if (sOn && !reduce) requestAnimationFrame(drawStars);
   }
-  function kick() { if (!running && dots.length) { running = true; requestAnimationFrame(frame); } }
+  sizeStars(); requestAnimationFrame(drawStars);
 
-  img.onload = () => { build(); kick(); };
-  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO);
-
-  hero.addEventListener('pointermove', e => {
-    const r = cv.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-  });
-  hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -1e4; });
-  new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) kick(); }).observe(cv);
-  let rz;
-  addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (img.complete) { build(); kick(); } }, 150); });
-
-  /* ---------- Notched stage shape ---------- */
-  const stage = document.getElementById('stage');
-  const stagePath = document.getElementById('stagePath');
-  function roundedPoly(pts, R) {
-    let d = '';
-    const n = pts.length;
-    for (let i = 0; i < n; i++) {
-      const p = pts[(i - 1 + n) % n], v = pts[i], q = pts[(i + 1) % n];
-      const l1 = Math.hypot(p[0] - v[0], p[1] - v[1]), l2 = Math.hypot(q[0] - v[0], q[1] - v[1]);
-      const r = Math.min(R, l1 / 2, l2 / 2);
-      const a = [v[0] + (p[0] - v[0]) / l1 * r, v[1] + (p[1] - v[1]) / l1 * r];
-      const b = [v[0] + (q[0] - v[0]) / l2 * r, v[1] + (q[1] - v[1]) / l2 * r];
-      d += (i ? 'L' : 'M') + a[0] + ' ' + a[1] + 'Q' + v[0] + ' ' + v[1] + ' ' + b[0] + ' ' + b[1];
-    }
-    return d + 'Z';
+  /* ---------- Dashboard: cash chart, gauge, count-ups ---------- */
+  const dash = document.getElementById('dash');
+  const hero = document.getElementById('hero');
+  const ACT = [62, 70, 58, 74, 68, 81, 77];        // Jan–Jul actual, % of plot height
+  const FC = [72, 79, 70, 84, 88];                  // Aug–Dec forecast
+  const BAL = [48, 52, 49, 55, 58, 61, 60, 63, 66, 64, 69, 72];
+  document.querySelector('.chart__bars').innerHTML = [...ACT, ...FC].map((h, i) =>
+    `<i class="${i >= ACT.length ? 'f' : ''}" style="--h:${h}%;--i:${i}"></i>`).join('');
+  const step = 100 / 12;
+  const pts = BAL.map((b, i) => [(1.6 + (i + .5) * (100 - 3.2) / 12) * 1.2, 100 - b]);
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], mx = (x0 + x1) / 2;
+    d += ` C${mx} ${y0} ${mx} ${y1} ${x1} ${y1}`;
   }
-  function shapeStage() {
-    const w = stage.clientWidth, h = stage.clientHeight;
-    const mobile = w < 700;
-    const t = mobile ? 74 : 96, tw = mobile ? 150 : Math.min(380, w * .34);
-    const pts = [[0, t], [w - tw, t], [w - tw, 0], [w, 0], [w, h]];
-    if (!mobile) { const lw = 56, lb = 180; pts.push([lw, h], [lw, h - lb], [0, h - lb]); }
-    else pts.push([0, h]);
-    const d = roundedPoly(pts, mobile ? 22 : 32);
-    stagePath.setAttribute('d', d);
-    document.getElementById('stageEdgePath').setAttribute('d', d);
+  document.getElementById('balLine').setAttribute('d', d);
+  document.querySelector('.chart__today').style.setProperty('--x', (1.6 + 6.5 * (100 - 3.2) / 12) + '%');
+  void step;
+
+  const gauge = document.getElementById('gaugeVal');
+  const GL = gauge.getTotalLength();
+  const countUp = el => {
+    const end = +el.dataset.count, pre = el.dataset.prefix || '';
+    const t0 = performance.now(), dur = reduce ? 1 : 1600;
+    const tick = now => {
+      const p = clamp((now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + Math.round(end * e).toLocaleString('en-US');
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  let dashIn = false;
+  function playDash() {
+    if (dashIn) return; dashIn = true;
+    dash.classList.add('is-in');
+    gauge.style.strokeDasharray = `${GL * 39 / 60} ${GL}`;
+    dash.querySelectorAll('[data-count]').forEach(countUp);
   }
-  new ResizeObserver(shapeStage).observe(stage);
+  setTimeout(playDash, reduce ? 0 : 1300);
+
+  /* ---------- Industry marquee: duplicate the row for a seamless loop ---------- */
+  const row = document.querySelector('.strip__row');
+  const clone = row.cloneNode(true); clone.setAttribute('aria-hidden', 'true');
+  row.after(clone);
+
+  /* ---------- Feature card spotlight ---------- */
+  document.querySelectorAll('.fcard').forEach(c => c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+
+  /* ---------- How it works: live posting feed ---------- */
+  const FEED = [
+    ['Sales invoice INV‑2089', '+$1,240', 'pos', 64], ['Stock transfer TR‑77', '24 u', '', 40],
+    ['Customer receipt RCPT‑904', '+$3,800', 'pos', 82], ['Depreciation JV‑3108', '−$420', 'neg', 30],
+    ['Goods receipt GRN‑552', '+120 u', '', 56], ['Supplier invoice INV‑S‑2042', '−$2,150', 'neg', 46]
+  ];
+  const feedRows = document.getElementById('feedRows');
+  let fi = 0, feedTimer = null;
+  function feedTick() {
+    const [n, v, c, w] = FEED[fi++ % FEED.length];
+    const p = document.createElement('p');
+    p.innerHTML = `<span>${n}</span><b class="${c}">${v}</b><i style="--w:${w}%"></i>`;
+    feedRows.prepend(p);
+    while (feedRows.children.length > 3) feedRows.lastElementChild.remove();
+  }
+  if (!reduce) new IntersectionObserver(([en]) => {
+    clearInterval(feedTimer);
+    if (en.isIntersecting) feedTimer = setInterval(feedTick, 2200);
+  }).observe(feedRows);
 
   /* ---------- Scroll-driven bits ---------- */
-  const app = document.getElementById('app');
-  const floatnav = document.getElementById('floatnav');
+  const nav = document.getElementById('nav');
   const scrub = document.getElementById('scrub');
   const { t } = window.I18N;
   let words = [];
@@ -151,14 +167,20 @@
   let ticking = false;
   function onScroll() {
     ticking = false;
-    const vh = innerHeight;
-    floatnav.classList.toggle('is-on', scrollY > hero.offsetHeight - 80);
+    const vh = innerHeight, y = scrollY;
+    nav.classList.toggle('is-scrolled', y > 24);
 
-    const sr = stage.getBoundingClientRect();
-    const p = reduce ? 1 : clamp(1 - (sr.top - vh * .12) / (vh * .7));
-    app.style.setProperty('--tilt', (18 * (1 - p)).toFixed(2) + 'deg');
-    app.style.setProperty('--lift', (40 * (1 - p)).toFixed(1) + 'px');
-    if (sr.top < vh * .55) app.classList.add('is-in');
+    // dashboard flattens as it scrolls into view
+    const dr = dash.getBoundingClientRect();
+    const p = reduce ? 1 : clamp(1 - (dr.top - vh * .18) / (vh * .55));
+    dash.style.setProperty('--tilt', (14 * (1 - p)).toFixed(2) + 'deg');
+    if (dr.top < vh * .7) playDash();
+
+    // treeline parallax + stars pause once the hero is gone
+    if (y < hero.offsetHeight) {
+      canopyLayers.forEach(l => { l.style.transform = `translateY(${(-y * +l.dataset.depth * .18).toFixed(1)}px)`; });
+      if (!sOn) { sOn = true; requestAnimationFrame(drawStars); }
+    } else sOn = false;
 
     const r = scrub.getBoundingClientRect();
     const sp = clamp((vh * .85 - r.top) / (r.height + vh * .35));
@@ -167,24 +189,8 @@
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
-
-  /* ---------- Contour waves ---------- */
-  document.querySelectorAll('svg[data-waves]').forEach(svg => {
-    const n = +svg.dataset.waves, W = 1600, H = 900;
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-    svg.setAttribute('preserveAspectRatio', 'none');
-    let out = '';
-    for (let k = 0; k < n; k++) {
-      const base = H * (.38 + k * .065), amp = 40 + k * 9, ph = k * .55;
-      let d = `M-100 ${base}`;
-      for (let x = -100; x <= W + 100; x += 50) {
-        const y = base + Math.sin(x / 260 + ph) * amp + Math.sin(x / 113 + ph * 2) * amp * .25;
-        d += ` L${x} ${y.toFixed(1)}`;
-      }
-      out += `<path d="${d}" style="--i:${k}"/>`;
-    }
-    svg.innerHTML = out;
-  });
+  let rz;
+  addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(sizeStars, 150); });
 
   /* ---------- Module explorer ---------- */
   const explorer = document.getElementById('explorer');

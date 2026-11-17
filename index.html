@@ -7,8 +7,8 @@
   <meta name="description" content="MTK is an ERP for distributors and retailers in Myanmar. Accounting, inventory, IMEI tracking, landed cost, fixed assets and financial statements in one system.">
   <link rel="canonical" href="https://www.mtk-masterthekey.com/">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#2b2f3d">
-  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <meta name="theme-color" content="#262838">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
   <meta property="og:type" content="website">
@@ -142,165 +142,230 @@
 </head>
 <body>
 
-  <div class="ticker" aria-label="MTK modules">
-    <div class="ticker__label"><span class="pulse"></span><span data-i18n="tick.live">Inside MTK</span></div>
-    <div class="ticker__track">
-      <div class="ticker__row">
-        <span data-i18n="tick.1">Financial statements <b>P&amp;L, balance sheet, cash flow</b></span>
-        <span data-i18n="tick.2">Ratios <b>cash conversion cycle</b></span>
-        <span data-i18n="tick.3">Landed cost <b>freight and duty per product</b></span>
-        <span data-i18n="tick.4">Fixed assets <b>monthly depreciation</b></span>
-        <span data-i18n="tick.5">IMEI tracking <b>every handset</b></span>
-        <span data-i18n="tick.6">File uploads <b>on every record</b></span>
-        <span data-i18n="tick.7">Reports &amp; charts <b>by branch and period</b></span>
-      </div>
-      <div class="ticker__row" aria-hidden="true">
-        <span data-i18n="tick.1">Financial statements <b>P&amp;L, balance sheet, cash flow</b></span>
-        <span data-i18n="tick.2">Ratios <b>cash conversion cycle</b></span>
-        <span data-i18n="tick.3">Landed cost <b>freight and duty per product</b></span>
-        <span data-i18n="tick.4">Fixed assets <b>monthly depreciation</b></span>
-        <span data-i18n="tick.5">IMEI tracking <b>every handset</b></span>
-        <span data-i18n="tick.6">File uploads <b>on every record</b></span>
-        <span data-i18n="tick.7">Reports &amp; charts <b>by branch and period</b></span>
+  <header class="nav" id="nav">
+    <div class="nav__in">
+      <a href="#top" class="brand" aria-label="MTK home">
+        <span class="brand__tile"><img src="assets/logo.svg" alt="" width="22" height="22"></span>
+        <span>MTK</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#features" data-i18n="nav.modules">Modules</a>
+        <a href="#how" data-i18n="how.chip">How it works</a>
+        <a href="#close" data-i18n="nav.time">Time saved</a>
+        <a href="#security" data-i18n="nav.access">Access</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="nav__end">
+        <div class="lang lang--flags" role="group" aria-label="Language">
+          <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
+          <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
+          <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
+        </div>
+        <a href="#" class="btn btn--white btn--sm nav__login" data-i18n="f.login">Log in</a>
+        <a href="#demo" class="btn btn--ink btn--sm" data-i18n="cta.book">Book a demo</a>
       </div>
     </div>
-    <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
-        <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
-        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
-      </div>
-  </div>
-
-  <div class="floatnav" id="floatnav">
-    <a href="#top" class="floatnav__brand"><img src="assets/logo.svg" alt="" width="26" height="26"><span>MTK</span></a>
-    <nav class="floatnav__links">
-      <a href="#modules" data-i18n="nav.modules">Modules</a><a href="#close" data-i18n="nav.time">Time saved</a><a href="#security" data-i18n="nav.access">Access</a><a href="#faq" data-i18n="nav.faq">FAQ</a>
-    </nav>
-    <div class="lang lang--flags" role="group" aria-label="Language">
-        <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
-        <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
-        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
-      </div>
-    <a href="#demo" class="btn btn--yellow btn--sm" data-i18n="cta.book">Book a demo</a>
-  </div>
+  </header>
 
   <main id="top">
 
-    <section class="hero">
-      <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
-      <svg class="waves" data-waves="9" aria-hidden="true"></svg>
-      <header class="nav">
-        <a href="#top" class="brand" aria-label="MTK home">
-          <img src="assets/logo.svg" alt="" width="40" height="40">
-          <span>MTK</span>
-        </a>
-        <nav class="nav__pill" aria-label="Primary">
-          <a href="#modules" data-i18n="nav.modules">Modules</a><i></i>
-          <a href="#close" data-i18n="nav.time">Time saved</a><i></i>
-          <a href="#security" data-i18n="nav.access">Access</a><i></i>
-          <a href="#faq" data-i18n="nav.faq">FAQ</a>
-        </nav>
-        <a href="#demo" class="btn nav__cta"><span data-i18n="cta.book">Book a demo</span><span class="btn__dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-      </header>
+    <section class="hero" id="hero">
+      <div class="sky" aria-hidden="true">
+        <i class="sky__sun"></i>
+        <canvas class="sky__stars" id="stars"></canvas>
+      </div>
 
-      <div class="hero__grid">
-        <div class="hero__copy">
-          <h1 class="hero__title" data-i18n="hero.title">
-            <span class="line"><span>Run the whole</span></span>
-            <span class="line"><span>business from</span></span>
-            <span class="line"><span>one <em class="mark">system</em></span></span>
-          </h1>
-          <div class="hero__sub">
-            <p data-i18n="hero.sub">Sales, stock, purchasing and fixed assets post to the same general ledger the moment they're recorded, so your accountant and your warehouse manager are reading the same numbers.</p>
-          </div>
-        </div>
-
-        <div class="hero__visual">
-          <canvas id="halftone" aria-label="MTK monogram rendered as interactive halftone dots" role="img"></canvas>
-          <div class="status">
-            <div class="status__h"><span class="pulse pulse--g"></span><span data-i18n="status.h">Ledger status</span><span class="status__t">09:41</span></div>
-            <ul>
-              <li><span data-i18n="status.fin">Finance</span><b class="ok" data-i18n="status.ok">Balanced</b></li>
-              <li><span data-i18n="status.inv">Inventory</span><b data-i18n="status.inv.v">3 reorders to approve</b></li>
-              <li><span data-i18n="status.ccc">Cash cycle</span><b data-i18n="status.ccc.v">39 days</b></li>
-              <li><span data-i18n="status.fa">Fixed assets</span><b data-i18n="status.fa.v">Depreciation posted</b></li>
-            </ul>
-          </div>
+      <div class="hero__copy">
+        <p class="eyebrow"><span class="eyebrow__dot"></span><span data-i18n="hero.eyebrow">ERP for distributors and retailers in Myanmar</span></p>
+        <h1 class="hero__title" data-i18n="hero.title"><span class="line"><span>Run the whole business</span></span><span class="line"><span>from one <em class="mark">system</em></span></span></h1>
+        <p class="hero__sub" data-i18n="hero.sub">Sales, stock, purchasing and fixed assets post to the same general ledger the moment they're recorded, so your accountant and your warehouse manager are reading the same numbers.</p>
+        <div class="hero__ctas">
+          <a href="#demo" class="btn btn--white btn--lg" data-i18n="cta.book">Book a demo</a>
+          <a href="#features" class="btn btn--glass btn--lg"><span data-i18n="hero.cta2">Explore modules</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
         </div>
       </div>
 
-      <div class="hero__foot">
-        <form class="pillform" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
-          <label class="sr-only" for="h-name">Name</label>
-          <input id="h-name" type="text" placeholder="Name" data-i18n-ph="ph.name" autocomplete="name">
-          <label class="sr-only" for="h-email">Work email</label>
-          <input id="h-email" type="email" placeholder="Work email" data-i18n-ph="ph.email" autocomplete="email" required>
-          <button type="submit" class="btn"><span class="pillform__idle" data-i18n="cta.book">Book a demo</span><span class="pillform__done" data-i18n="form.done">Thanks, we'll email you</span><span class="btn__pip"></span></button>
-        </form>
-        <div class="trusted">
-          <span data-i18n="trusted">30-minute walkthrough with our team</span>
-          <div class="avatars"><b>RT</b><b>DS</b><b>MF</b></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="stage-wrap">
-      <div class="stage" id="stage">
-        <svg class="stage__shape" aria-hidden="true"><defs><radialGradient id="stageFill" cx="12%" cy="0%" r="110%"><stop offset="0" stop-color="#d79a86"/><stop offset=".45" stop-color="#6c5f74"/><stop offset="1" stop-color="#25263a"/></radialGradient><linearGradient id="stageEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path id="stagePath"/><path id="stageEdgePath" fill="none" stroke="url(#stageEdge)" stroke-width="1.2"/></svg>
-        <div class="stage__tab">
-          <span data-i18n="stage.tab">The overview screen</span>
-          <a href="#modules" class="btn btn--light"><span class="btn__ico"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span><span data-i18n="stage.explore">Explore</span></a>
-        </div>
-
-        <div class="app" id="app">
-          <div class="app__bar"><i></i><i></i><i></i><span>mtk.app / overview</span></div>
-          <div class="app__body">
-            <aside class="app__side">
-              <div class="app__logo"><img src="assets/logo.svg" alt="" width="22" height="22">MTK</div>
-              <a class="is-on">Overview</a><a>Finance</a><a>Inventory</a><a>Procurement</a><a>Fixed Assets</a><a>IMEI</a><a>Reports</a>
-            </aside>
-            <div class="app__main">
-              <div class="app__head"><p class="app__hello">Good morning, MTK</p><span class="chip chip--green">All ledgers balanced</span></div>
-              <div class="kpis">
-                <div><span>Revenue MTD</span><strong>$482.6k</strong><em class="up">+12.4%</em></div>
-                <div><span>Cash on hand</span><strong>$1.21M</strong><em class="up">+3.1%</em></div>
-                <div><span>Open POs</span><strong>38</strong><em>6 awaiting</em></div>
-                <div><span>Stock turns</span><strong>7.8×</strong><em class="up">+0.6</em></div>
+      <div class="dash-wrap" id="dashWrap">
+        <div class="dash" id="dash" role="img" aria-label="MTK overview dashboard showing cash on hand, cash conversion cycle, branch sales, ledger alerts and upcoming payments">
+          <aside class="dash__side">
+            <div class="ws"><span class="ws__logo"><img src="assets/logo-white.svg" alt=""></span><b>MTK</b><svg viewBox="0 0 12 12"><path d="M4 4.5 6 2.5l2 2M4 7.5l2 2 2-2"/></svg></div>
+            <a><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>Search<kbd>/</kbd></a>
+            <a><svg viewBox="0 0 16 16"><path d="M4 2.5h6l2.5 2.5v8.5h-8.5z"/><path d="M6 8h4M6 10.5h4"/></svg>Reports</a>
+            <a><svg viewBox="0 0 16 16"><path d="M3 12.5 6.5 9l2.5 2.5L13 6"/></svg>Approvals<em>3</em></a>
+            <hr>
+            <a class="on"><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><rect x="9" y="9" width="4.5" height="4.5" rx="1"/></svg>Dashboard</a>
+            <a><svg viewBox="0 0 16 16"><path d="M3 13V8M6.5 13V4M10 13V7M13.5 13V10"/></svg>Sales</a>
+            <a><svg viewBox="0 0 16 16"><path d="M2.5 4.5h11l-1.2 6.5H3.7z"/><circle cx="5.5" cy="13.2" r=".9"/><circle cx="10.5" cy="13.2" r=".9"/></svg>Purchases</a>
+            <a><svg viewBox="0 0 16 16"><path d="M8 2 13.5 5v6L8 14 2.5 11V5z"/><path d="M2.5 5 8 8l5.5-3M8 8v6"/></svg>Inventory</a>
+            <a><svg viewBox="0 0 16 16"><path d="M2.5 6.5 8 3l5.5 3.5M3.5 7v5M6.5 7v5M9.5 7v5M12.5 7v5M2.5 13h11"/></svg>Finance</a>
+            <a><svg viewBox="0 0 16 16"><rect x="4" y="2" width="8" height="12" rx="1.6"/><path d="M7 11.5h2"/></svg>IMEI</a>
+            <hr>
+            <a class="dir"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h4l1.2 1.4h5.8v6.6h-11z"/></svg>Month-end close<i>›</i></a>
+            <a class="dir"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h4l1.2 1.4h5.8v6.6h-11z"/></svg>Branches<i>›</i></a>
+          </aside>
+          <div class="dash__main">
+            <div class="dash__top">
+              <b><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><rect x="9" y="9" width="4.5" height="4.5" rx="1"/></svg>Overview</b>
+              <div class="dash__acts"><span class="pill"><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg>Jan 2026 – Dec 2026</span><span class="pill"><svg viewBox="0 0 16 16"><path d="M8 2.5v8M5 7.5l3 3 3-3M3 13.5h10"/></svg>Export</span><span class="pill pill--ink">+ New invoice</span></div>
+            </div>
+            <div class="dash__tabs"><div class="seg"><b>Overview</b><span>Sales</span><span>Stock</span><span>Cash</span></div><em><i></i>All ledgers balanced · synced 2 min ago</em></div>
+            <div class="dash__grid">
+              <div class="card card--cash">
+                <div class="card__h"><span>Cash on hand</span><span class="legend"><i class="a"></i>Actual<i class="f"></i>Forecast<i class="l"></i>Balance</span></div>
+                <div class="cash"><strong data-count="1214800" data-prefix="$">$1,214,800</strong><span class="chip">+3.1% vs last month</span></div>
+                <div class="chart" id="cashChart">
+                  <div class="chart__y"><span>$1.5M</span><span>$1M</span><span>$500K</span><span>0</span></div>
+                  <div class="chart__plot">
+                    <div class="chart__bars"></div>
+                    <svg class="chart__line" viewBox="0 0 120 100" preserveAspectRatio="none"><path id="balLine" d=""/></svg>
+                    <span class="chart__today" style="--x:54.2%"><b>Today</b></span>
+                  </div>
+                  <div class="chart__x"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div>
+                </div>
               </div>
-              <div class="app__row">
-                <div class="panel panel--chart">
-                  <div class="panel__h"><span>Cash flow</span><span class="muted">Last 12 weeks</span></div>
-                  <svg viewBox="0 0 400 140" preserveAspectRatio="none" class="chart">
-                    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18181b" stop-opacity=".22"/><stop offset="1" stop-color="#18181b" stop-opacity="0"/></linearGradient></defs>
-                    <path class="chart__area" d="M0 110 C30 100 50 104 80 92 S130 70 160 78 S210 60 240 52 S300 58 330 36 S380 22 400 18 V140 H0Z" fill="url(#g)"/>
-                    <path class="chart__line" d="M0 110 C30 100 50 104 80 92 S130 70 160 78 S210 60 240 52 S300 58 330 36 S380 22 400 18"/>
-                    <path class="chart__line chart__line--2" d="M0 120 C40 118 70 112 100 114 S160 104 200 100 S260 96 300 88 S360 80 400 76"/>
-                  </svg>
+              <div class="card card--gauge">
+                <div class="card__h"><span>Cash cycle</span><span class="ico"><svg viewBox="0 0 16 16"><circle cx="8" cy="4" r="1"/><circle cx="8" cy="8" r="1"/><circle cx="8" cy="12" r="1"/></svg></span></div>
+                <div class="gauge">
+                  <svg viewBox="0 0 200 120"><path class="gauge__track" d="M20 110 A80 80 0 0 1 180 110"/><path class="gauge__hatch" d="M20 110 A80 80 0 0 1 180 110"/><path class="gauge__val" id="gaugeVal" d="M20 110 A80 80 0 0 1 180 110"/></svg>
+                  <div class="gauge__n"><strong><span data-count="39">39</span> days</strong><em>Target 30 days by Q4</em></div>
                 </div>
-                <div class="panel panel--list">
-                  <div class="panel__h"><span>Activity</span><span class="muted">Today</span></div>
-                  <ul>
-                    <li><b class="dot dot--y"></b>PO‑8842 approved<span>09:41</span></li>
-                    <li><b class="dot dot--g"></b>INV‑2041 reconciled<span>09:12</span></li>
-                    <li><b class="dot dot--g"></b>Depreciation posted<span>08:55</span></li>
-                    <li><b class="dot dot--y"></b>Reorder SKU 10‑442<span>08:30</span></li>
-                  </ul>
-                </div>
+                <p class="kv"><span>Days inventory</span><b>46</b></p>
+                <p class="kv"><span>Days receivable</span><b>31</b></p>
+                <p class="kv"><span>Days payable</span><b>38</b></p>
+              </div>
+              <div class="card card--list">
+                <div class="card__h"><span>Branch sales</span><em>4 branches</em></div>
+                <div class="br"><p><span>Yangon · MMK</span><b>$482.6K</b></p><i style="--w:92%"></i></div>
+                <div class="br"><p><span>Mandalay · MMK</span><b>$291.4K</b></p><i style="--w:56%"></i></div>
+                <div class="br"><p><span>Online · USD</span><b>$188.0K</b></p><i style="--w:36%"></i></div>
+                <div class="br"><p><span>Naypyitaw · MMK</span><b>$96.3K</b></p><i style="--w:19%"></i></div>
+              </div>
+              <div class="card card--alerts">
+                <div class="card__h"><span>Ledger alerts</span><span class="ico"><svg viewBox="0 0 16 16"><path d="M8 1.5 9.3 6.7 14.5 8 9.3 9.3 8 14.5 6.7 9.3 1.5 8 6.7 6.7z"/></svg></span></div>
+                <div class="alert"><b>3 items below reorder point</b><span>Draft POs are waiting for approval.</span></div>
+                <div class="alert"><b>INV‑S‑2041 matched to PO and GRN</b><span>Released for payment on Friday.</span></div>
+                <div class="alert__btns"><span class="pill pill--ink">Review all</span><span>Dismiss</span></div>
+              </div>
+              <div class="card card--due">
+                <div class="card__h"><span>Next 14 days</span><em>View all</em></div>
+                <p class="due"><span class="date"><b>28</b>Jun</span><span>Payroll</span><b class="neg">−$84K</b></p>
+                <p class="due"><span class="date"><b>01</b>Jul</span><span>Shwe Supply Co.</span><b class="neg">−$6.2K</b></p>
+                <p class="due"><span class="date"><b>05</b>Jul</span><span>Customer receipts</span><b class="pos">+$120K</b></p>
+                <p class="due"><span class="date"><b>08</b>Jul</span><span>Import duty</span><b class="neg">−$12K</b></p>
               </div>
             </div>
           </div>
-          <div class="toast" id="toast"><span class="toast__ico"><svg viewBox="0 0 20 20" width="18" height="18"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>Invoice matched</strong><span>INV‑2041 ↔ PO‑8842 ↔ GRN‑551</span></div></div>
         </div>
       </div>
 
-      <ul class="industries" aria-label="Industries">
-        <li data-i18n="ind.1">Retail</li><li data-i18n="ind.2">Distribution</li><li data-i18n="ind.3">Mobile &amp; electronics</li><li data-i18n="ind.4">Food &amp; Beverage</li><li data-i18n="ind.5">Construction</li><li data-i18n="ind.6">Services</li>
-      </ul>
+      <svg class="canopy" id="canopy" aria-hidden="true" preserveAspectRatio="xMidYMax slice"></svg>
+    </section>
+
+    <section class="strip" aria-label="Industries">
+      <p class="strip__label" data-i18n="strip.label">Built for</p>
+      <div class="strip__track">
+        <ul class="strip__row">
+          <li><svg viewBox="0 0 24 24"><path d="M4 9.5 5.5 4h13L20 9.5M4 9.5h16M4 9.5v10h16v-10M9 19.5v-5h6v5"/></svg><span data-i18n="ind.1">Retail</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11zM13.5 10h4l3 3.5v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span data-i18n="ind.2">Distribution</span></li>
+          <li><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><span data-i18n="ind.3">Mobile &amp; electronics</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M6 3v7a2 2 0 0 0 4 0V3M8 10v11M16 21V3c-2 1.5-3 4-3 7h3"/></svg><span data-i18n="ind.4">Food &amp; Beverage</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M3 20.5h18M5 20.5v-9l7-5 7 5v9M9.5 20.5v-5h5v5"/></svg><span data-i18n="ind.5">Construction</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 9l5.6.5-4.3 3.8 1.3 5.7L12 16l-5 3 1.3-5.7L4 9.5 9.6 9z"/></svg><span data-i18n="ind.6">Services</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section features" id="features">
+      <div class="section__head section__head--center reveal">
+        <h2 data-i18n="feat.h">Every number that shapes your month-end, in one place.</h2>
+        <p class="lede" data-i18n="feat.p">Stop stitching sales exports, stock sheets and accounting files together. MTK posts every transaction to one ledger, then shows you where cash and stock are heading.</p>
+      </div>
+      <div class="fgrid">
+        <article class="fcard reveal">
+          <div class="fcard__viz viz-ledger" aria-hidden="true"><p><span>4000 · Revenue</span><b>24,800</b></p><p><span>5000 · COGS</span><b>9,420</b></p><p><span>1400 · Inventory</span><b>(9,420)</b></p><p class="t"><span>Balanced</span><b>✓</b></p></div>
+          <span class="fcard__ico"><svg viewBox="0 0 24 24"><path d="M4 17 9.5 11.5l3.5 3.5L20 8"/><path d="M15 8h5v5"/></svg></span>
+          <h3 data-i18n="feat.1.t">Live general ledger</h3>
+          <p data-i18n="feat.1.d">Sales, purchases and stock movements post the moment they're saved, already coded to the right accounts.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="fcard__viz viz-stock" aria-hidden="true"><i style="--h:62%"></i><i style="--h:84%"></i><i style="--h:40%"></i><i class="low" style="--h:18%"></i><i style="--h:55%"></i><i style="--h:72%"></i><span class="viz-stock__line"></span></div>
+          <span class="fcard__ico"><svg viewBox="0 0 24 24"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg></span>
+          <h3 data-i18n="feat.2.t">Stock you can trust</h3>
+          <p data-i18n="feat.2.d">Warehouse, bin, batch and IMEI-level tracking, with reorder points that draft purchase orders for you.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="fcard__viz viz-landed" aria-hidden="true"><div class="viz-landed__bar"><i style="--w:72%"></i><i style="--w:14%"></i><i style="--w:9%"></i><i style="--w:5%"></i></div><p><span>Landed / unit</span><b>$31.00</b></p></div>
+          <span class="fcard__ico"><svg viewBox="0 0 24 24"><path d="M3 15.5h18l-2.5 4.5h-13zM6 15.5V10h12v5.5M9 10V6h6v4"/></svg></span>
+          <h3 data-i18n="feat.3.t">True landed cost</h3>
+          <p data-i18n="feat.3.d">Freight, duty and clearing spread across each shipment, so margins are worked out from what stock really cost.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="fcard__viz viz-stmt" aria-hidden="true"><svg viewBox="0 0 200 70" preserveAspectRatio="none"><path class="a" d="M0 60 C30 55 45 58 70 46 S120 30 140 34 S180 14 200 10"/><path class="b" d="M0 64 C40 62 70 58 100 56 S160 46 200 40"/></svg><span>Net profit <b>+34.9%</b></span></div>
+          <span class="fcard__ico"><svg viewBox="0 0 24 24"><path d="M12 3.5 13.8 9 19.5 10.2 13.8 12 12 17.5 10.2 12 4.5 10.2 10.2 9z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span>
+          <h3 data-i18n="feat.4.t">Statements on demand</h3>
+          <p data-i18n="feat.4.d">P&amp;L, balance sheet, cash flow and cash conversion cycle for any branch or period, in a click.</p>
+        </article>
+      </div>
     </section>
 
     <section class="problem">
       <p class="scrub" id="scrub" data-i18n="problem">A typical growing business keeps sales in one app, stock in a spreadsheet and the books in an accounting package, then spends the last week of every month making the three agree. MTK keeps all of it in one database, so the stock report and the balance sheet are built from the same records.</p>
     </section>
+
+    <section class="section how" id="how">
+      <div class="section__head section__head--row reveal">
+        <div>
+          <span class="chip-tag"><i></i><span data-i18n="how.chip">How it works</span></span>
+          <h2 data-i18n="how.h">From scattered files to one ledger in three steps.</h2>
+        </div>
+        <p class="body" data-i18n="how.p">MTK takes over from the spreadsheets and apps your team already uses, links every document, and turns the month-end close into a review.</p>
+      </div>
+      <div class="steps">
+        <article class="step reveal">
+          <div class="step__art" aria-hidden="true">
+            <div class="mini-sky"></div>
+            <div class="conn">
+              <div class="conn__src"><span><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="11" height="11" rx="1.5"/><path d="M2.5 6.5h11M2.5 10h11M6.5 2.5v11"/></svg>Spreadsheets</span><span><svg viewBox="0 0 16 16"><path d="M4 2.5h6l2.5 2.5v8.5h-8.5z"/><path d="M6 8h4M6 10.5h4"/></svg>Old ledger</span><span><svg viewBox="0 0 16 16"><rect x="2.5" y="4" width="11" height="8" rx="1.5"/><path d="M2.5 7h11"/></svg>POS</span></div>
+              <svg class="conn__wires" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 17 C40 17 45 50 100 50"/><path d="M0 50 L100 50"/><path d="M0 83 C40 83 45 50 100 50"/></svg>
+              <div class="conn__hub"><img src="assets/logo.svg" alt=""></div>
+            </div>
+          </div>
+          <span class="step__n">01</span>
+          <h3 data-i18n="how.1.t">Bring your data across</h3>
+          <p data-i18n="how.1.d">We import opening balances, items, customers and suppliers from your spreadsheets and old software. No retyping.</p>
+        </article>
+        <article class="step reveal">
+          <div class="step__art" aria-hidden="true">
+            <div class="mini-sky"></div>
+            <div class="feed">
+              <div class="feed__h"><span>Posting to ledger</span><em><i></i>Live</em></div>
+              <div class="feed__rows" id="feedRows">
+                <p><span>Sales invoice INV‑2088</span><b class="pos">+$910</b><i style="--w:70%"></i></p>
+                <p><span>Goods receipt GRN‑551</span><b>+400 u</b><i style="--w:52%"></i></p>
+                <p><span>Supplier payment PAY‑118</span><b class="neg">−$6,240</b><i style="--w:38%"></i></p>
+              </div>
+            </div>
+          </div>
+          <span class="step__n">02</span>
+          <h3 data-i18n="how.2.t">Run the day in one system</h3>
+          <p data-i18n="how.2.d">Orders, receipts, invoices and payments post to the ledger as they happen, so stock and cash are always current.</p>
+        </article>
+        <article class="step reveal">
+          <div class="step__art" aria-hidden="true">
+            <div class="mini-sky"></div>
+            <div class="note">
+              <div class="note__h"><span class="note__ico"><img src="assets/logo.svg" alt=""></span><b>October is ready to close</b><em><i></i>just now</em></div>
+              <span class="note__ln"></span><span class="note__ln note__ln--s"></span>
+              <div class="note__btns"><span class="note__ok"><svg viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg>Close period</span><span class="note__alt">Review</span></div>
+            </div>
+          </div>
+          <span class="step__n">03</span>
+          <h3 data-i18n="how.3.t">Close the month with confidence</h3>
+          <p data-i18n="how.3.d">Statements are ready when the month ends. Review the exceptions MTK flags, approve, and close.</p>
+        </article>
+      </div>
+    </section>
+
 
     <section class="section" id="modules">
       <div class="section__head section__head--row reveal">
@@ -609,16 +674,17 @@
     </section>
 
     <section class="cta" id="demo">
-      <div class="glow glow--cta" aria-hidden="true"><i></i><i></i><i></i></div>
-      <svg class="waves" data-waves="7" aria-hidden="true"></svg>
-      <img src="assets/logo.svg" alt="" class="cta__logo" width="72" height="72">
-      <h2 data-i18n="cta.h">Book a 30-minute <em class="serif">demo</em></h2>
-      <p data-i18n="cta.p">We'll load a sample of your products and customers into MTK and walk you through a normal week.</p>
-      <form class="pillform" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
-        <label class="sr-only" for="c-email">Work email</label>
-        <input id="c-email" type="email" placeholder="Work email" data-i18n-ph="ph.email" autocomplete="email" required>
-        <button type="submit" class="btn"><span class="pillform__idle" data-i18n="cta.book">Book a demo</span><span class="pillform__done" data-i18n="form.done">Thanks, we'll email you</span></button>
-      </form>
+      <div class="sky sky--cta" aria-hidden="true"><i class="sky__sun"></i></div>
+      <svg class="canopy canopy--cta" id="canopy2" aria-hidden="true" preserveAspectRatio="xMidYMax slice"></svg>
+      <div class="cta__in">
+        <span class="cta__logo"><img src="assets/logo.svg" alt="" width="44" height="44"></span>
+        <h2 data-i18n="cta.h">Book a 30-minute <em class="serif">demo</em></h2>
+        <p data-i18n="cta.p">We'll load a sample of your products and customers into MTK and walk you through a normal week.</p>
+        <form class="pillform" onsubmit="event.preventDefault(); this.classList.add('is-sent');">
+          <label class="sr-only" for="c-email">Work email</label>
+          <input id="c-email" type="email" placeholder="Work email" data-i18n-ph="ph.email" autocomplete="email" required>
+          <button type="submit" class="btn btn--white"><span class="pillform__idle" data-i18n="cta.book">Book a demo</span><span class="pillform__done" data-i18n="form.done">Thanks, we'll email you</span></button>
+        </form>
     <div class="askai">
         <p class="askai__label" data-i18n="ai.label">Ask an AI about MTK</p>
         <div class="askai__row">
@@ -629,88 +695,35 @@
         </div>
         <p class="askai__toast" id="aiToast" role="status" aria-live="polite"></p>
       </div>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="footer__card">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="#top" class="footer__logo"><img src="assets/logo.svg" alt="" width="34" height="34"><span>MTK</span></a>
-          <p data-i18n="f.desc">ERP for distributors and retailers. Stock, IMEI-tracked handsets, fixed assets and the books, kept on one ledger.</p>
-          <div class="footer__social">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="brand"><span class="brand__tile"><img src="assets/logo.svg" alt="" width="22" height="22"></span><span>MTK</span></a>
+        <p data-i18n="f.desc">ERP for distributors and retailers. Stock, IMEI-tracked handsets, fixed assets and the books, kept on one ledger.</p>
+        <div class="footer__social">
             <a href="https://www.facebook.com/masterthekey.mtk/about/" target="_blank" rel="noopener" aria-label="MTK on Facebook"><svg viewBox="0 0 24 24" class="fill"><circle cx="12" cy="12" r="11"/><path class="cut" d="M13.4 21.9v-7.4h2.5l.4-3h-2.9V9.6c0-.9.3-1.5 1.5-1.5h1.5V5.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.5v7.2z"/></svg></a>
             <a href="https://www.tiktok.com/@master_the_key" target="_blank" rel="noopener" aria-label="MTK on TikTok"><svg viewBox="0 0 24 24" class="fill"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
-          </div>
-          <p class="footer__status"><span><svg viewBox="0 0 12 12"><path d="M3 6.2l2 2L9 4"/></svg></span><span data-i18n="f.status">All systems running</span></p>
         </div>
-        <nav class="footer__col" aria-label="Product"><h4 data-i18n="f.product">Product</h4><a href="#modules" data-i18n="nav.modules">Modules</a><a href="#devices" data-i18n="f.devices">Devices</a><a href="#close" data-i18n="nav.time">Time saved</a><a href="#faq" data-i18n="nav.faq">FAQ</a></nav>
-        <nav class="footer__col" aria-label="Company"><h4 data-i18n="f.company">Company</h4><a href="#" data-i18n="f.about">About</a><a href="#demo" data-i18n="f.contact">Contact</a></nav>
-        <nav class="footer__col" aria-label="Legal"><h4 data-i18n="f.legal">Legal</h4><a href="#" data-i18n="f.privacy">Privacy policy</a><a href="#" data-i18n="f.terms">Terms of service</a></nav>
+        <p class="footer__status"><span><svg viewBox="0 0 12 12"><path d="M3 6.2l2 2L9 4"/></svg></span><span data-i18n="f.status">All systems running</span></p>
       </div>
-      <div class="footer__bot">
-        <span>© <span id="yr"></span> MTK.</span>
-        <div class="lang lang--light" role="group" aria-label="Language">
+      <nav class="footer__col" aria-label="Product"><h4 data-i18n="f.product">Product</h4><a href="#modules" data-i18n="nav.modules">Modules</a><a href="#devices" data-i18n="f.devices">Devices</a><a href="#close" data-i18n="nav.time">Time saved</a><a href="#faq" data-i18n="nav.faq">FAQ</a></nav>
+      <nav class="footer__col" aria-label="Company"><h4 data-i18n="f.company">Company</h4><a href="#" data-i18n="f.about">About</a><a href="#demo" data-i18n="f.contact">Contact</a></nav>
+      <nav class="footer__col" aria-label="Legal"><h4 data-i18n="f.legal">Legal</h4><a href="#" data-i18n="f.privacy">Privacy policy</a><a href="#" data-i18n="f.terms">Terms of service</a></nav>
+    </div>
+    <div class="footer__bot">
+      <span>© <span id="yr"></span> MTK.</span>
+      <div class="lang" role="group" aria-label="Language">
         <button type="button" data-lang="my" aria-pressed="false" lang="my"><img src="assets/flags/mm.svg" alt="" width="20" height="15"><span>မြန်မာ</span></button>
         <button type="button" data-lang="en" aria-pressed="true" lang="en"><img src="assets/flags/gb.svg" alt="" width="20" height="15"><span>EN</span></button>
         <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans"><img src="assets/flags/cn.svg" alt="" width="20" height="15"><span>中文</span></button>
       </div>
-        <span class="footer__acts"><a href="#" data-i18n="f.login">Log in</a><a href="#demo" class="footer__go"><span data-i18n="cta.book">Book a demo</span> <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></span>
-      </div>
-      <div class="footer__art" aria-hidden="true">
-        <svg viewBox="0 0 1600 440" preserveAspectRatio="xMidYMax slice">
-          <defs>
-            <filter id="paint" x="-5%" y="-5%" width="110%" height="110%">
-              <feTurbulence type="fractalNoise" baseFrequency=".022 .07" numOctaves="4" seed="7" result="n"/>
-              <feDisplacementMap in="SourceGraphic" in2="n" scale="13"/>
-            </filter>
-            <filter id="paintS" x="-10%" y="-10%" width="120%" height="120%">
-              <feTurbulence type="fractalNoise" baseFrequency=".08" numOctaves="2" seed="4" result="n"/>
-              <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
-            </filter>
-            <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .1  0 0 0 0 .2  0 0 0 0 .12  0 0 0 .3 0"/></filter>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f2ea" stop-opacity="0"/><stop offset=".45" stop-color="#e3ebd9" stop-opacity="0"/><stop offset="1" stop-color="#cfe0c4" stop-opacity="0"/></linearGradient>
-            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".2" stop-color="#fff"/></linearGradient>
-            <mask id="fadeMask"><rect width="1600" height="440" fill="url(#fade)"/></mask>
-            <g id="tr"><path d="M-3 0h6l-1-34h-4z" fill="#4a3a28"/><circle cx="0" cy="-48" r="22" fill="#2f5a3c"/><circle cx="-16" cy="-38" r="16" fill="#3d6b46"/><circle cx="15" cy="-36" r="17" fill="#3d6b46"/><circle cx="-4" cy="-62" r="15" fill="#4f7d52"/><circle cx="22" cy="-52" r="11" fill="#2f5a3c"/><circle cx="8" cy="-50" r="10" fill="#7fa978"/><circle cx="-10" cy="-54" r="6" fill="#9cc08f"/><circle cx="-20" cy="-30" r="8" fill="#2f5a3c"/><circle cx="14" cy="-68" r="7" fill="#6e9a66"/></g>
-            <g id="hA"><rect x="-34" y="-46" width="68" height="46" fill="#f5ecd8"/><rect x="18" y="-82" width="10" height="22" fill="#8e4529"/><path d="M-42 -44 L0 -80 L42 -44Z" fill="#c4683f"/><path d="M-42 -44 L0 -80 L42 -44" fill="none" stroke="#8e4529" stroke-width="3" stroke-linejoin="round"/><path d="M-7 0v-17a7 7 0 0 1 14 0v17z" fill="#5c4030"/><rect x="-27" y="-35" width="13" height="13" rx="2" fill="#ffd66b" stroke="#8e4529" stroke-width="2"/><rect x="14" y="-35" width="13" height="13" rx="2" fill="#ffd66b" stroke="#8e4529" stroke-width="2"/><path d="M-36 0h72" stroke="#5c7d4d" stroke-width="4"/></g>
-            <g id="hB"><rect x="-24" y="-64" width="48" height="64" fill="#efe5cc"/><path d="M-31 -62 L0 -96 L31 -62Z" fill="#2f5a3c"/><path d="M-31 -62 L0 -96 L31 -62" fill="none" stroke="#1f3f2a" stroke-width="3" stroke-linejoin="round"/><circle cx="0" cy="-72" r="6" fill="#ffd66b" stroke="#1f3f2a" stroke-width="2"/><rect x="-16" y="-48" width="11" height="13" rx="2" fill="#ffd66b" stroke="#1f3f2a" stroke-width="2"/><rect x="5" y="-48" width="11" height="13" rx="2" fill="#ffd66b" stroke="#1f3f2a" stroke-width="2"/><path d="M-7 0v-16a7 7 0 0 1 14 0v16z" fill="#c4683f"/></g>
-            <g id="hC"><rect x="-48" y="-38" width="96" height="38" fill="#f6eddb"/><path d="M-54 -36 L-30 -64 L30 -64 L54 -36Z" fill="#d9a441"/><path d="M-54 -36 L-30 -64 L30 -64 L54 -36" fill="none" stroke="#9c6d1f" stroke-width="3" stroke-linejoin="round"/><rect x="-13" y="-30" width="26" height="30" fill="#8e4529"/><path d="M-13 -30 L13 0 M13 -30 L-13 0" stroke="#f6eddb" stroke-width="2.5"/><rect x="-38" y="-28" width="13" height="11" rx="2" fill="#ffd66b" stroke="#9c6d1f" stroke-width="2"/><rect x="25" y="-28" width="13" height="11" rx="2" fill="#ffd66b" stroke="#9c6d1f" stroke-width="2"/></g>
-            <g id="fence" stroke="#e9dfc8" stroke-width="3" stroke-linecap="round"><path d="M0 0v-14M14 0v-14M28 0v-14M42 0v-14M56 0v-14M70 0v-14M-2 -10h74M-2 -4h74"/></g>
-          </defs>
-          <g mask="url(#fadeMask)">
-            <rect width="1600" height="440" fill="url(#sky)"/>
-            <g filter="url(#paint)">
-              <path d="M0 250 C160 214 300 232 460 218 S760 186 900 206 S1200 184 1360 200 S1540 192 1600 202 V440 H0Z" fill="#b7cdb0"/>
-              <g fill="#6f9a68" opacity=".8"><ellipse cx="90" cy="276" rx="40" ry="11"/><ellipse cx="330" cy="272" rx="60" ry="12"/><ellipse cx="1180" cy="266" rx="70" ry="12"/><ellipse cx="1480" cy="264" rx="46" ry="10"/></g>
-              <path d="M0 290 C200 272 380 284 560 274 S900 260 1100 272 S1440 262 1600 270 V440 H0Z" fill="#94b68b"/>
-              <path d="M0 322 C260 310 520 326 800 316 S1340 306 1600 318 V440 H0Z" fill="#76a06c"/>
-              <g stroke="#5f8f5c" stroke-width="6" fill="none" opacity=".7"><path d="M800 318 L60 440"/><path d="M800 318 L380 440"/><path d="M800 318 L680 440"/><path d="M800 318 L960 440"/><path d="M800 318 L1260 440"/><path d="M800 318 L1560 440"/></g>
-              <path d="M0 378 C300 364 600 384 900 372 S1400 364 1600 378 V440 H0Z" fill="#4f7d52"/>
-              <use href="#tr" transform="translate(150 336) scale(.9)"/><use href="#tr" transform="translate(250 322) scale(.55)"/>
-              <use href="#tr" transform="translate(470 352) scale(1.05)"/><use href="#tr" transform="translate(600 300) scale(.5)"/>
-              <use href="#tr" transform="translate(1010 312) scale(.6)"/><use href="#tr" transform="translate(1110 344) scale(.95)"/>
-              <use href="#tr" transform="translate(1340 330) scale(.7)"/><use href="#tr" transform="translate(1440 400) scale(2)"/>
-              <use href="#tr" transform="translate(1560 360) scale(1.15)"/><use href="#tr" transform="translate(40 404) scale(1.5)"/>
-            </g>
-            <g filter="url(#paintS)">
-              <use href="#hA" transform="translate(560 286) scale(.55)"/>
-              <use href="#hC" transform="translate(705 318) scale(1.05)"/>
-              <use href="#hA" transform="translate(818 324) scale(1.15)"/>
-              <use href="#hB" transform="translate(905 318)"/>
-              <use href="#fence" transform="translate(948 330) scale(.9)"/>
-              <use href="#fence" transform="translate(600 334) scale(.9)"/>
-              <use href="#hA" transform="translate(300 340) scale(.8)"/>
-              <use href="#hB" transform="translate(1235 308) scale(.7)"/>
-              <use href="#tr" transform="translate(990 336) scale(.75)"/>
-            </g>
-            <g class="smoke" fill="#fff"><circle cx="840" cy="230" r="5"/><circle cx="846" cy="218" r="7"/><circle cx="842" cy="202" r="9"/></g>
-            <rect y="420" width="1600" height="20" fill="#4f7d52"/>
-            <rect width="1600" height="440" filter="url(#grain)" opacity=".7"/>
-          </g>
-        </svg>
-      </div>
+      <span class="footer__acts"><a href="#" data-i18n="f.login">Log in</a><a href="#demo" class="footer__go"><span data-i18n="cta.book">Book a demo</span> <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></span>
     </div>
+    <div class="footer__word" aria-hidden="true">MTK</div>
   </footer>
 
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>

@@ -1,7 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 25 255 250" role="img" aria-label="Green monogram with yellow star ornament">
-<defs><mask id="center-cutout"><rect width="320" height="300" fill="white"/><polygon points="208.79,190.50 201.00,195.00 193.21,190.50 193.21,181.50 201.00,177.00 208.79,181.50" fill="black"/></mask></defs>
-<g fill="#0b4737"><path d="M49 45H71L147 121 127 141 77 91V254H49Z"/><path d="M93 129 121 157 244 45H267V254H239V91L140 177 219 254H179L121 198V254H93Z"/></g>
-<g fill="#ffdb54"><g mask="url(#center-cutout)"><circle cx="201" cy="186" r="15"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 25 255 250" role="img" aria-label="MTK"><defs><linearGradient id="kg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd9bd"/><stop offset=".55" stop-color="#f3a98a"/><stop offset="1" stop-color="#d9786a"/></linearGradient><mask id="km"><rect width="320" height="300" fill="white"/><polygon points="208.79,190.50 201.00,195.00 193.21,190.50 193.21,181.50 201.00,177.00 208.79,181.50" fill="black"/></mask></defs><g fill="#0c0c0e"><path d="M49 45H71L147 121 127 141 77 91V254H49Z"/><path d="M93 129 121 157 244 45H267V254H239V91L140 177 219 254H179L121 198V254H93Z"/></g><g fill="url(#kg)"><g mask="url(#km)"><circle cx="201" cy="186" r="15"/>
 <polygon points="201.00,160.00 204.06,167.79 212.41,168.29 205.95,173.61 208.05,181.71 201.00,177.20 193.95,181.71 196.05,173.61 189.59,168.29 197.94,167.79"/>
 <polygon points="223.52,173.00 218.30,179.54 222.04,187.03 214.21,184.09 208.24,189.96 208.62,181.60 201.19,177.75 209.26,175.52 210.63,167.26 215.24,174.25"/>
 <polygon points="223.52,199.00 215.24,197.75 210.63,204.74 209.26,196.48 201.19,194.25 208.62,190.40 208.24,182.04 214.21,187.91 222.04,184.97 218.30,192.46"/>
