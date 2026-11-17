@@ -3,100 +3,52 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  /* ---------- Seeded random so the treeline is the same on every load ---------- */
-  const rng = seed => () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
-
-  /* ---------- Dusk treeline (SVG) ---------- */
-  const TONES = [
-    ['#6a5068', '#7d5f74', '#94707f'],                        // far, hazy
-    ['#8a4d5c', '#a95f69', '#c97a7c', '#e39b8f', '#f3bba6'],  // mid, sun-lit blossom
-    ['#3a1d2a', '#5e2f3f', '#8a4655', '#b9686b', '#e6998a'],  // near
-    ['#140a10', '#2c1520', '#55293a', '#93505a', '#d8897f', '#eeb19c']  // foreground, lit from above
-  ];
-  function buildCanopy(svg, seed, opts = {}) {
-    const W = 1600, H = 500, r = rng(seed);
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-    const gap = opts.gap ?? .3;  // empty share of the width kept clear in the middle
-    let out = `<defs><linearGradient id="cf${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#050506" stop-opacity="0"/><stop offset=".85" stop-color="#050506" stop-opacity=".7"/><stop offset="1" stop-color="#050506"/></linearGradient>`
-      + `<filter id="leaf${seed}" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="${seed}" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9"/></filter></defs>`;
-    TONES.forEach((tones, li) => {
-      const base = H - 30 - (3 - li) * 40;   // farther layers sit higher
-      const size = 6 + li * 3;
-      let g = '';
-      const clusters = 10 + li * 4;
-      for (let c = 0; c < clusters; c++) {
-        // keep trees toward the edges so the middle of the dashboard stays visible
-        const t = r(), side = r() < .5 ? 0 : 1;
-        let x = side ? W * (.5 + gap / 2 + t * (.5 - gap / 2)) : W * (t * (.5 - gap / 2));
-        const edge = Math.min(x, W - x) / (W / 2);           // 0 at the edges, 1 in the centre
-        const lift = (1 - edge) ** 1.4 * (110 + li * 34);
-        const spread = size * (4 + r() * 2.2);
-        const cy = base - lift * (.65 + r() * .35) - spread * .3;
-        const n = 70 + (r() * 40 | 0);
-        const puffs = [];
-        for (let k = 0; k < n; k++) {
-          const a = r() * Math.PI * 2, dd = Math.sqrt(r()) * spread;
-          const px = x + Math.cos(a) * dd * 1.25, py = cy + Math.sin(a) * dd * .75;
-          const pr = size * (.8 + r() * .8);
-          // sun from above and in front: higher puffs catch more light
-          const v = 1.12 - (py - (cy - spread * .75)) / (spread * 1.25) + (r() - .5) * .3;
-          const tone = tones[Math.round(clamp(v) * (tones.length - 1))];
-          puffs.push([py, `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${pr.toFixed(1)}" fill="${tone}"/>`]);
+  /* ---------- Flowing line pattern (hero + closing CTA) ---------- */
+  function makeFlow(cv, { lines = 24, peach = [7, 15] } = {}) {
+    const ctx = cv.getContext('2d');
+    let w = 0, h = 0, on = false;
+    const size = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = cv.clientWidth; h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const draw = now => {
+      const t = reduce ? 0 : now / 1000;
+      ctx.clearRect(0, 0, w, h);
+      const step = Math.max(12, w / 100);
+      for (let k = 0; k < lines; k++) {
+        const f = k / (lines - 1);
+        const base = h * (.08 + f * .84);
+        const amp = h * (.03 + .045 * Math.sin(f * 3.1));
+        const g = ctx.createLinearGradient(0, 0, w, 0);
+        const c = peach.includes(k) ? '244,185,156' : '255,255,255';
+        const a = peach.includes(k) ? .55 : .05 + .11 * Math.sin(f * Math.PI);
+        g.addColorStop(0, `rgba(${c},0)`); g.addColorStop(.3, `rgba(${c},${a})`);
+        g.addColorStop(.7, `rgba(${c},${a})`); g.addColorStop(1, `rgba(${c},0)`);
+        ctx.strokeStyle = g; ctx.lineWidth = peach.includes(k) ? 1.2 : 1;
+        ctx.beginPath();
+        for (let x = -step; x <= w + step; x += step) {
+          const u = x / w;
+          const y = base
+            + Math.sin(u * 6.2 + t * .35 + f * 2.4) * amp
+            + Math.sin(u * 13.5 - t * .22 + f * 5.1) * amp * .28
+            - Math.cos((u - .5) * Math.PI) * h * .05 * Math.sin(t * .15 + f * 1.7);
+          x === -step ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
         }
-        puffs.sort((a, b) => b[0] - a[0]).forEach(([, c2]) => { g += c2; });
+        ctx.stroke();
       }
-      if (li === 3) g += `<path d="M0 ${base + 6} C${W * .25} ${base - 6} ${W * .4} ${base + 14} ${W / 2} ${base + 8} S${W * .8} ${base - 4} ${W} ${base + 4} V${H} H0Z" fill="${tones[0]}"/>`;
-      out += `<g class="layer" data-depth="${(li + 1) * .25}"><g filter="url(#leaf${seed})">${g}</g></g>`;
-    });
-    out += `<rect width="${W}" height="${H}" fill="url(#cf${seed})"/>`;
-    svg.innerHTML = out;
-    return [...svg.querySelectorAll('.layer')];
+      if (on && !reduce) requestAnimationFrame(draw);
+    };
+    size();
+    new IntersectionObserver(([en]) => {
+      const was = on; on = en.isIntersecting;
+      if (on && !was) requestAnimationFrame(draw);
+    }).observe(cv);
+    let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { size(); if (!on || reduce) requestAnimationFrame(draw); }, 150); });
+    requestAnimationFrame(draw);
   }
-  const canopyLayers = buildCanopy(document.getElementById('canopy'), 11, { gap: .46 });
-  buildCanopy(document.getElementById('canopy2'), 29, { gap: .5 });
-
-  /* ---------- Flowing contour lines across the sky ---------- */
-  const sc = document.getElementById('flow');
-  const sctx = sc.getContext('2d');
-  let sw = 0, sh = 0, sOn = true;
-  const LINES = 26;
-  function sizeStars() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    sw = sc.clientWidth; sh = sc.clientHeight;
-    sc.width = sw * dpr; sc.height = sh * dpr; sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  function drawStars(now) {
-    const t = reduce ? 0 : now / 1000;
-    sctx.clearRect(0, 0, sw, sh);
-    const fade = sctx.createLinearGradient(0, 0, sw, 0);
-    fade.addColorStop(0, 'rgba(255,255,255,0)');
-    fade.addColorStop(.25, 'rgba(255,236,224,.9)');
-    fade.addColorStop(.75, 'rgba(255,236,224,.9)');
-    fade.addColorStop(1, 'rgba(255,255,255,0)');
-    sctx.strokeStyle = fade;
-    sctx.lineWidth = 1;
-    const step = Math.max(14, sw / 90);
-    for (let k = 0; k < LINES; k++) {
-      const f = k / (LINES - 1);
-      const base = sh * (.16 + f * .7);
-      const amp = sh * (.035 + .05 * Math.sin(f * 3.1));
-      sctx.globalAlpha = .1 + .26 * Math.sin(f * Math.PI);
-      sctx.beginPath();
-      for (let x = -step; x <= sw + step; x += step) {
-        const u = x / sw;
-        // two travelling waves plus a slow swell that bends the lines toward the centre
-        const y = base
-          + Math.sin(u * 6.2 + t * .35 + f * 2.4) * amp
-          + Math.sin(u * 13.5 - t * .22 + f * 5.1) * amp * .28
-          - Math.cos((u - .5) * Math.PI) * sh * .06 * Math.sin(t * .15 + f * 1.7);
-        x === -step ? sctx.moveTo(x, y) : sctx.lineTo(x, y);
-      }
-      sctx.stroke();
-    }
-    sctx.globalAlpha = 1;
-    if (sOn && !reduce) requestAnimationFrame(drawStars);
-  }
-  sizeStars(); requestAnimationFrame(drawStars);
+  makeFlow(document.getElementById('flow'));
+  makeFlow(document.getElementById('flow2'), { lines: 18, peach: [6, 12] });
 
   /* ---------- Dashboard: cash chart, gauge, count-ups ---------- */
   const dash = document.getElementById('dash');
@@ -106,7 +58,6 @@
   const BAL = [48, 52, 49, 55, 58, 61, 60, 63, 66, 64, 69, 72];
   document.querySelector('.chart__bars').innerHTML = [...ACT, ...FC].map((h, i) =>
     `<i class="${i >= ACT.length ? 'f' : ''}" style="--h:${h}%;--i:${i}"></i>`).join('');
-  const step = 100 / 12;
   const pts = BAL.map((b, i) => [(1.6 + (i + .5) * (100 - 3.2) / 12) * 1.2, 100 - b]);
   let d = `M${pts[0][0]} ${pts[0][1]}`;
   for (let i = 1; i < pts.length; i++) {
@@ -115,7 +66,6 @@
   }
   document.getElementById('balLine').setAttribute('d', d);
   document.querySelector('.chart__today').style.setProperty('--x', (1.6 + 6.5 * (100 - 3.2) / 12) + '%');
-  void step;
 
   const gauge = document.getElementById('gaugeVal');
   const GL = gauge.getTotalLength();
@@ -190,17 +140,7 @@
     const vh = innerHeight, y = scrollY;
     nav.classList.toggle('is-scrolled', y > 24);
 
-    // dashboard flattens as it scrolls into view
-    const dr = dash.getBoundingClientRect();
-    const p = reduce ? 1 : clamp(1 - (dr.top - vh * .18) / (vh * .55));
-    dash.style.setProperty('--tilt', (14 * (1 - p)).toFixed(2) + 'deg');
-    if (dr.top < vh * .7) playDash();
-
-    // treeline parallax + stars pause once the hero is gone
-    if (y < hero.offsetHeight) {
-      canopyLayers.forEach(l => { l.style.transform = `translateY(${(-y * +l.dataset.depth * .18).toFixed(1)}px)`; });
-      if (!sOn) { sOn = true; requestAnimationFrame(drawStars); }
-    } else sOn = false;
+    if (dash.getBoundingClientRect().top < vh * .7) playDash();
 
     const r = scrub.getBoundingClientRect();
     const sp = clamp((vh * .85 - r.top) / (r.height + vh * .35));
@@ -209,8 +149,6 @@
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
-  let rz;
-  addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(sizeStars, 150); });
 
   /* ---------- Module explorer ---------- */
   const explorer = document.getElementById('explorer');
@@ -484,4 +422,78 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
   }, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- GSAP ScrollTrigger scenes ---------- */
+  if (window.gsap && window.ScrollTrigger && !reduce) {
+    gsap.registerPlugin(ScrollTrigger);
+    document.documentElement.classList.add('has-gsap');
+    const mm = gsap.matchMedia();
+
+    // Industry marquee that speeds up with scroll velocity
+    const rows = gsap.utils.toArray('.strip__row');
+    const marquee = gsap.to(rows, { xPercent: -100, duration: 34, ease: 'none', repeat: -1 });
+    ScrollTrigger.create({
+      onUpdate: self => {
+        const v = Math.min(Math.abs(self.getVelocity()) / 250, 6);
+        gsap.to(marquee, { timeScale: 1 + v, duration: .2, overwrite: true });
+        gsap.to(marquee, { timeScale: 1, duration: 1.2, delay: .25, overwrite: false });
+      }
+    });
+
+    mm.add({ desk: '(min-width: 900px)', mob: '(max-width: 899px)' }, ctx => {
+      const { desk } = ctx.conditions;
+
+      // 1. Hero: copy drifts up and fades, dashboard lifts from tilted and small to flat and wide
+      gsap.to('.hero__copy', { yPercent: -18, opacity: .1, ease: 'none',
+        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom 30%', scrub: true } });
+      gsap.fromTo('#dash',
+        { rotationX: desk ? 26 : 16, scale: desk ? .8 : .9, transformOrigin: '50% 100%' },
+        { rotationX: 0, scale: desk ? 1.06 : 1, ease: 'none',
+          scrollTrigger: { trigger: '#dashWrap', start: 'top 95%', end: desk ? 'top 12%' : 'top 25%', scrub: .6, onEnter: playDash } });
+      gsap.to('.sky__grid', { yPercent: 20, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+      // 2. Panels expand from an inset card to the full section as they arrive
+      const inset = desk ? 'inset(8% 12% 8% 12% round 56px)' : 'inset(4% 5% 4% 5% round 36px)';
+      gsap.utils.toArray('.fx, .explorer__panels').forEach(el => {
+        gsap.fromTo(el, { clipPath: inset }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 30%', scrub: .5 } });
+      });
+      gsap.fromTo('.cta', { clipPath: desk ? 'inset(0% 14% 0% 14% round 64px)' : 'inset(0% 4% 0% 4% round 36px)' },
+        { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none',
+          scrollTrigger: { trigger: '.cta', start: 'top 95%', end: 'top 25%', scrub: .5 } });
+      gsap.fromTo('.cta__in > *', { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: .08, ease: 'power3.out', duration: 1,
+        scrollTrigger: { trigger: '.cta', start: 'top 60%' } });
+
+      // 3. Feature cards fan in
+      gsap.fromTo('.fcard', { y: i => 90 + i * 30, rotation: i => (i - 1.5) * (desk ? 3 : 0) },
+        { y: 0, rotation: 0, ease: 'none', scrollTrigger: { trigger: '.fgrid', start: 'top 95%', end: 'top 45%', scrub: .6 } });
+
+      // 4. How it works: pinned on laptops, cards rise one by one; scaled per card on phones
+      if (desk) {
+        gsap.timeline({ scrollTrigger: { trigger: '#how', start: 'bottom bottom', end: '+=110%', pin: true, scrub: .6 } })
+          .fromTo('.step', { yPercent: 70, opacity: 0, scale: .9 }, { yPercent: 0, opacity: 1, scale: 1, stagger: .45, ease: 'power2.out' });
+      } else {
+        gsap.utils.toArray('.step').forEach(el => gsap.fromTo(el, { scale: .86, y: 60 }, { scale: 1, y: 0, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 55%', scrub: .5 } }));
+      }
+
+      // 5. Devices assemble: laptop grows, tablet and phone slide in from the sides
+      gsap.timeline({ scrollTrigger: { trigger: '.devices', start: 'top 95%', end: 'top 30%', scrub: .6 } })
+        .fromTo('.mac', { scale: .82, y: 40 }, { scale: 1, y: 0, ease: 'none' }, 0)
+        .fromTo('.ipad', { xPercent: -70, rotation: -8 }, { xPercent: 0, rotation: 0, ease: 'none' }, 0)
+        .fromTo('.phone', { xPercent: 90, rotation: 8 }, { xPercent: 0, rotation: 0, ease: 'none' }, 0);
+
+      // 6. Big headings slide up a touch as they pass
+      gsap.utils.toArray('.section__head h2, .faq-h').forEach(h => gsap.fromTo(h, { y: 50 }, { y: 0, ease: 'none',
+        scrollTrigger: { trigger: h, start: 'top 100%', end: 'top 55%', scrub: .5 } }));
+
+      // 7. Footer wordmark rises and grows
+      gsap.fromTo('.footer__word', { yPercent: 40, scale: .8, opacity: .2 }, { yPercent: 0, scale: 1, opacity: 1, ease: 'none',
+        scrollTrigger: { trigger: '.footer', start: 'top 80%', end: 'bottom bottom', scrub: .6 } });
+    });
+
+    // layout changes (fonts, language switch) need fresh measurements
+    document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+    document.addEventListener('langchange', () => ScrollTrigger.refresh());
+  }
 })();

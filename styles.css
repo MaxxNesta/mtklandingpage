@@ -915,3 +915,43 @@ html:lang(zh-Hans) .scrub { line-height: 1.4; }
 .sky--cta { background: linear-gradient(180deg, #181a28 0%, #2b2b40 30%, #50485f 55%, #976d7a 78%, #e3a084 100%); }
 .hero__copy { padding-top: 12px; }
 @media (prefers-reduced-motion: reduce) { .mesh i, .sky__grid { animation: none; } }
+
+/* ==========================================================================
+   Flat surfaces: solid colours, motion comes from patterns and scroll
+   ========================================================================== */
+.sky { background: #0b0b0e; }
+.sky--cta { background: #111115; }
+.sky__flow { mix-blend-mode: normal; }
+.sky__grid { opacity: 1; mix-blend-mode: normal; background-image: radial-gradient(circle, rgba(255, 255, 255, .16) 1px, transparent 1.3px); }
+.hero { padding-bottom: clamp(60px, 8vw, 120px); }
+.hero::after { display: none; }
+.hero__title { text-shadow: none; }
+.hero em.mark { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--peach); }
+.cta h2 em { color: var(--peach); }
+.hero__sub { color: var(--text-2); }
+
+.fcard, .step { background: #0f0f12; }
+.fcard__ico { background: transparent; }
+.explorer__panels { background: #101013; }
+.fx { background: #0e0e11; }
+.devices::before { display: none; }
+.footer__word { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: rgba(255, 255, 255, .06); }
+
+/* step artwork: flat panel with a panning dot pattern and a peach horizon line */
+.mini-sky { background: #18181d; }
+.mini-sky::before, .mini-sky::after { display: none; }
+.mini-sky { background-image: radial-gradient(circle, rgba(255, 255, 255, .14) 1px, transparent 1.3px); background-size: 16px 16px; animation: gridpan 30s linear infinite; }
+.mini-sky i { position: absolute; left: 0; right: 0; bottom: 22%; height: 1px; background: rgba(244, 185, 156, .5); }
+.mini-sky i::after { content: ""; position: absolute; left: 0; top: -1px; width: 22%; height: 3px; border-radius: 3px; background: var(--peach); animation: scan 4s ease-in-out infinite; }
+@keyframes scan { 50% { left: 78%; } }
+.feed, .note { background: rgba(28, 28, 34, .82); }
+.conn__src span { background: rgba(28, 28, 34, .82); }
+
+/* ---------- When GSAP drives motion, hand transforms over to it ---------- */
+.has-gsap .dash { transform: none; transition: none; }
+.has-gsap .dash-wrap { animation: none; }
+.has-gsap .strip__row { animation: none; }
+.has-gsap .devices.is-in .ipad, .has-gsap .devices.is-in .phone { animation: none; }
+.has-gsap .fcard.reveal, .has-gsap .step.reveal { transform: none; }
+.dash { --tilt: 0deg; }
+.explorer__panels, .fx, .cta { will-change: clip-path; }
