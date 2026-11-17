@@ -955,3 +955,100 @@ html:lang(zh-Hans) .scrub { line-height: 1.4; }
 .has-gsap .fcard.reveal, .has-gsap .step.reveal { transform: none; }
 .dash { --tilt: 0deg; }
 .explorer__panels, .fx, .cta { will-change: clip-path; }
+
+/* ==========================================================================
+   MacBook that opens on scroll
+   ========================================================================== */
+.dash-wrap { perspective: 2400px; perspective-origin: 50% -20%; }
+.mbp { position: relative; transform-style: preserve-3d; }
+.mbp__lid { position: relative; transform-origin: 50% 100%; transform-style: preserve-3d; }
+.mbp__screen { position: relative; padding: 1.5% 1.5% 2.4%; border-radius: 22px 22px 6px 6px; background: #0b0b0c;
+  box-shadow: inset 0 0 0 1.5px #3b3b40, 0 50px 120px -40px rgba(0, 0, 0, .85); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.mbp__cam { position: absolute; left: 50%; top: .55%; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: #1d1d22; box-shadow: inset 0 0 0 1.5px #2c2c33; }
+.mbp__back { position: absolute; inset: 0; border-radius: 22px 22px 6px 6px; display: grid; place-items: center; transform: rotateX(180deg);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden; background: #26272b; box-shadow: inset 0 0 0 1.5px #3b3c42; }
+.mbp__back img { width: 9%; opacity: .85; }
+.mbp__base { position: relative; z-index: 2; height: clamp(10px, 1.7vw, 22px); margin: 0 -7%; border-radius: 2px 2px 26px 26px / 2px 2px 18px 18px;
+  background: #2a2b30; box-shadow: inset 0 1.5px 0 #4a4b52, inset 0 -3px 0 #16171a, 0 30px 60px -20px rgba(0, 0, 0, .85); }
+.mbp__base i { position: absolute; left: 50%; top: 0; width: 13%; height: 42%; transform: translateX(-50%); border-radius: 0 0 10px 10px; background: #1a1b1f; }
+.mbp .dash { border-radius: 8px; box-shadow: none; }
+@media (max-width: 760px) {
+  .mbp__screen { border-radius: 12px 12px 4px 4px; }
+  .mbp__back { border-radius: 12px 12px 4px 4px; }
+  .mbp__cam { width: 4px; height: 4px; margin-left: -2px; }
+  .mbp__base { margin: 0 -5%; }
+  /* keep the real laptop layout inside the MacBook on phones */
+  .mbp .dash { grid-template-columns: 17.5% 1fr; aspect-ratio: 1180 / 640; border-radius: 4px; box-shadow: none; }
+  .mbp .dash__side { display: flex; }
+  .mbp .dash__main { font-size: 1.02cqw; }
+  .mbp .dash__acts .pill:not(.pill--ink), .mbp .dash__tabs em { display: inline-flex; }
+  .mbp .card--alerts, .mbp .card--due { display: flex; }
+  .mbp .dash__grid { grid-template-columns: 1fr 1fr 1fr; }
+  .mbp .card--cash { grid-column: span 2; height: auto; }
+  .mbp .card--gauge, .mbp .card--list { grid-column: auto; }
+}
+/* dashboard pieces animated by GSAP instead of CSS transitions */
+.has-gsap .chart__bars i, .has-gsap .chart__line path, .has-gsap .chart__today, .has-gsap .alert, .has-gsap .dash .gauge__val { transition: none; }
+.has-gsap .br i::after { transition: none; transform: scaleX(var(--p, 0)); }
+
+/* ==========================================================================
+   Floating files pulled into the ledger
+   ========================================================================== */
+.chaos { position: relative; }
+.chaos__pin { height: 100vh; height: 100svh; min-height: 680px; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; padding: 96px var(--gutter) 28px; }
+.chaos__head { text-align: center; max-width: 780px; margin: 0 auto; position: relative; z-index: 3; }
+.chaos__head h2 { font-size: clamp(28px, 3.4vw, 46px); }
+.chaos__head .body { margin: 14px auto 0; max-width: 580px; }
+.chaos__stage { --dw: 196px; --dh: 128px; position: relative; flex: 1; min-height: 360px; margin-top: 26px; }
+.doc { position: absolute; left: min(var(--l), calc(100% - var(--dw))); top: min(var(--t), calc(100% - var(--dh))); width: 196px; z-index: 2; }
+.doc__in { position: relative; transform: rotate(var(--r)); padding: 10px 11px 12px; border-radius: 12px; background: #f7f6f3; color: #18181b; font-size: 11px; line-height: 1.35;
+  box-shadow: 0 24px 40px -18px rgba(0, 0, 0, .75), 0 0 0 1px rgba(255, 255, 255, .06); }
+.doc__h { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.doc__h b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc__t { flex-shrink: 0; padding: 2px 5px; border-radius: 4px; font: 700 8.5px/1.3 var(--mono); letter-spacing: .04em; color: #fff; background: #3f3f46; }
+.doc--xls .doc__t { background: #1f7a4d; } .doc--pdf .doc__t { background: #d4442f; } .doc--doc .doc__t { background: #2b5fd9; } .doc--inv .doc__t { background: #18181b; }
+.doc__b { margin-top: 8px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.grid4 i { height: 13px; border-radius: 2px; background: #e7e7e3; font: 600 8.5px/13px var(--mono); font-style: normal; text-align: center; }
+.grid4 i.err { background: #ffe0da; color: #b91c1c; box-shadow: inset 0 0 0 1.5px #ef4444; }
+.ln { display: block; height: 5px; margin-top: 5px; border-radius: 3px; background: #e2e2de; }
+.ln.s { width: 58%; }
+.rcpt { padding: 6px 8px; border: 1px dashed #c9c9c4; border-radius: 6px; font-family: var(--mono); }
+.rcpt b { display: block; font-size: 14px; } .rcpt span { font-size: 9.5px; color: #71717a; }
+.doc code { display: block; font: 9.5px/1.5 var(--mono); color: #52525b; }
+.kv2 { display: flex; justify-content: space-between; gap: 6px; } .kv2 b { font-family: var(--mono); }
+.doc--note .doc__in { background: #f9d3bd; }
+.doc--note .doc__t { background: #9a4a33; }
+.hand { font-style: italic; font-size: 12px; color: #4a2a1e; }
+.doc__flag { position: absolute; right: -8px; top: -11px; display: grid; height: 22px; padding: 0 9px; border-radius: 99px; overflow: hidden;
+  background: #ef4444; color: #fff; font-size: 10.5px; font-weight: 600; white-space: nowrap; box-shadow: 0 6px 16px -6px rgba(239, 68, 68, .7); }
+.doc__flag b { grid-area: 1 / 1; line-height: 22px; font-weight: 600; }
+.doc__flag .v { visibility: hidden; }
+.core { position: absolute; left: 50%; top: 50%; width: 140px; margin: -78px 0 0 -70px; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.core__tile { position: relative; z-index: 1; width: 96px; height: 96px; border-radius: 26px; background: #fff; display: grid; place-items: center;
+  box-shadow: 0 0 0 2px var(--volt), 0 0 50px -6px rgba(212, 255, 58, .45), 0 30px 60px -20px rgba(0, 0, 0, .8); }
+.core__tile img { width: 58px; }
+.core__ring { position: absolute; left: 50%; top: 48px; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 30px; border: 1px solid rgba(212, 255, 58, .5); animation: coreRing 2.8s ease-out infinite; }
+.core__ring + .core__ring { animation-delay: 1.4s; }
+@keyframes coreRing { to { transform: scale(2.4); opacity: 0; } }
+.core__count { font: 500 12px var(--mono); color: var(--text-2); } .core__count b { color: var(--volt); font-weight: 600; }
+.res { position: absolute; left: 0; right: 0; top: 50%; width: min(420px, 94%); margin: -150px auto 0; z-index: 3; padding: 18px 20px; border-radius: 18px; background: #fff; color: var(--ink);
+  box-shadow: 0 0 0 1.5px var(--volt), 0 40px 90px -30px rgba(212, 255, 58, .35), 0 30px 60px -20px rgba(0, 0, 0, .8); }
+.res__h { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; font-size: 15px; }
+.res__h b { font-weight: 600; } .res__h em { margin-left: auto; font-style: normal; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 99px; background: #effcc4; color: #3d5200; }
+.res__logo { width: 28px; height: 28px; border-radius: 8px; background: #111114; display: grid; place-items: center; } .res__logo img { width: 18px; }
+.res p { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid #f0f0ee; font-size: 14px; }
+.res p i { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; font-style: normal; font-size: 11px; font-weight: 700; background: var(--volt); color: var(--ink); }
+.res__t { display: flex; justify-content: space-between; margin-top: 8px; padding: 10px 14px; border-radius: 10px; background: #111114; color: #fff; font: 500 13px var(--mono); }
+.res__t b { color: var(--volt); }
+/* without GSAP: show the corrected summary over a calm layout */
+html:not(.has-gsap) .core { display: none; }
+@media (max-width: 760px) {
+  .chaos__pin { padding-top: 84px; min-height: 620px; }
+  .chaos__head .body { font-size: 14.5px; }
+  .chaos__stage { --dw: 122px; --dh: 84px; margin-top: 14px; }
+  .doc { scale: .62; transform-origin: 0 0; }
+  .core { scale: .8; }
+  .res { margin-top: -140px; padding: 14px 16px; }
+  .res p { font-size: 13px; padding: 7px 0; }
+}

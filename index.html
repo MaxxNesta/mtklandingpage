@@ -185,6 +185,10 @@
       </div>
 
       <div class="dash-wrap" id="dashWrap">
+        <div class="mbp" id="mbp">
+          <div class="mbp__lid" id="mbpLid">
+            <div class="mbp__back" aria-hidden="true"><img src="assets/logo-white.svg" alt=""></div>
+            <div class="mbp__screen"><span class="mbp__cam"></span>
         <div class="dash" id="dash" role="img" aria-label="MTK overview dashboard showing cash on hand, cash conversion cycle, branch sales, ledger alerts and upcoming payments">
           <aside class="dash__side">
             <div class="ws"><span class="ws__logo"><img src="assets/logo-white.svg" alt=""></span><b>MTK</b><svg viewBox="0 0 12 12"><path d="M4 4.5 6 2.5l2 2M4 7.5l2 2 2-2"/></svg></div>
@@ -253,7 +257,11 @@
                 <p class="due"><span class="date"><b>08</b>Jul</span><span>Import duty</span><b class="neg">−$12K</b></p>
               </div>
             </div>
+        </div>
+            </div>
+            </div>
           </div>
+          <div class="mbp__base" aria-hidden="true"><i></i></div>
         </div>
       </div>
     </section>
@@ -307,6 +315,78 @@
 
     <section class="problem">
       <p class="scrub" id="scrub" data-i18n="problem">A typical growing business keeps sales in one app, stock in a spreadsheet and the books in an accounting package, then spends the last week of every month making the three agree. MTK keeps all of it in one database, so the stock report and the balance sheet are built from the same records.</p>
+    </section>
+
+    <section class="chaos" id="chaos" aria-label="Files pulled into MTK and corrected">
+      <div class="chaos__pin">
+        <div class="chaos__head">
+          <span class="chip-tag"><i></i><span data-i18n="chaos.chip">From scattered files to clean books</span></span>
+          <h2 data-i18n="chaos.h">Every file your business runs on, pulled into one ledger and checked.</h2>
+          <p class="body" data-i18n="chaos.p">Spreadsheets, manuals, receipts and exports arrive with duplicates and numbers that don't agree. MTK reads them in, fixes what it can, flags the rest, and posts clean records.</p>
+        </div>
+        <div class="chaos__stage" id="chaosStage">
+          <div class="doc doc--xls" style="--l:3%;--t:6%;--r:-6deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">XLS</span><b>stock_final_v3.xlsx</b></div>
+            <div class="doc__b"><div class="grid4"><i></i><i></i><i class="err">17</i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <span class="doc__flag"><b class="x">Qty 17 ≠ 18</b><b class="v">✓ Count matched</b></span>
+          </div></div>
+          <div class="doc doc--pdf" style="--l:30%;--t:1%;--r:4deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">PDF</span><b>Warehouse SOP v2.pdf</b></div>
+            <div class="doc__b"><span class="ln"></span><span class="ln"></span><span class="ln s"></span></div>
+            <span class="doc__flag"><b class="x">Outdated steps</b><b class="v">✓ Linked to v4</b></span>
+          </div></div>
+          <div class="doc doc--img" style="--l:60%;--t:3%;--r:-3deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">JPG</span><b>receipt_shwe_mart.jpg</b></div>
+            <div class="doc__b"><div class="rcpt"><b>45,000</b><span>Shwe Mart · 12 Oct</span></div></div>
+            <span class="doc__flag"><b class="x">No tax line</b><b class="v">✓ Tax 5% added</b></span>
+          </div></div>
+          <div class="doc doc--csv" style="--l:82%;--t:9%;--r:7deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">CSV</span><b>pos_export_oct.csv</b></div>
+            <div class="doc__b"><code>1042,iPhone 16,1<br>1042,iPhone 16,1<br>1043,AirPods,2</code></div>
+            <span class="doc__flag"><b class="x">Duplicate rows</b><b class="v">✓ 3 rows merged</b></span>
+          </div></div>
+          <div class="doc doc--doc" style="--l:0%;--t:41%;--r:5deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">DOC</span><b>Price list 2025.docx</b></div>
+            <div class="doc__b"><span class="ln"></span><span class="ln s"></span><span class="ln"></span></div>
+            <span class="doc__flag"><b class="x">Old prices</b><b class="v">✓ Prices synced</b></span>
+          </div></div>
+          <div class="doc doc--inv" style="--l:84%;--t:44%;--r:-5deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">INV</span><b>INV‑S‑2041</b></div>
+            <div class="doc__b"><div class="kv2"><span>Shwe Supply Co.</span><b>$6,240</b></div></div>
+            <span class="doc__flag"><b class="x">No matching PO</b><b class="v">✓ Matched PO‑8842</b></span>
+          </div></div>
+          <div class="doc doc--note" style="--l:8%;--t:78%;--r:-8deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">NOTE</span><b>Sticky note</b></div>
+            <div class="doc__b"><p class="hand">Ko Min took 2 chargers for Mandalay??</p></div>
+            <span class="doc__flag"><b class="x">Not recorded</b><b class="v">✓ Transfer TR‑77</b></span>
+          </div></div>
+          <div class="doc doc--mail" style="--l:33%;--t:84%;--r:3deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">MAIL</span><b>Fwd: Re: stock count</b></div>
+            <div class="doc__b"><span class="ln"></span><span class="ln s"></span></div>
+            <span class="doc__flag"><b class="x">Never posted</b><b class="v">✓ Posted to GL</b></span>
+          </div></div>
+          <div class="doc doc--xls" style="--l:60%;--t:82%;--r:-4deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">XLS</span><b>Assets 2019.xlsx</b></div>
+            <div class="doc__b"><div class="grid4"><i></i><i></i><i></i><i></i><i class="err">—</i><i></i><i></i><i></i></div></div>
+            <span class="doc__flag"><b class="x">No depreciation</b><b class="v">✓ Depreciation run</b></span>
+          </div></div>
+          <div class="doc doc--img" style="--l:85%;--t:79%;--r:6deg"><div class="doc__in">
+            <div class="doc__h"><span class="doc__t">JPG</span><b>delivery_note.jpg</b></div>
+            <div class="doc__b"><div class="rcpt"><b>40 units</b><span>Truck YGN‑4471</span></div></div>
+            <span class="doc__flag"><b class="x">Missing GRN</b><b class="v">✓ GRN‑551 linked</b></span>
+          </div></div>
+          <div class="core" id="core"><span class="core__ring"></span><span class="core__ring"></span><div class="core__tile"><img src="assets/logo.svg" alt=""></div><p class="core__count"><b id="coreN">0</b>/10 files</p></div>
+          <div class="res" id="res">
+            <div class="res__h"><span class="res__logo"><img src="assets/logo-white.svg" alt=""></span><b>October ledger</b><em>0 open issues</em></div>
+            <p><i>✓</i>10 files read and filed</p>
+            <p><i>✓</i>3 duplicate rows merged</p>
+            <p><i>✓</i>SKU 10‑442 count corrected to 18</p>
+            <p><i>✓</i>Tax added to 4 receipts</p>
+            <p><i>✓</i>Every record posted to the ledger</p>
+            <div class="res__t"><span>Trial balance</span><b>Balanced</b></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section how" id="how">

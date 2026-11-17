@@ -2,6 +2,8 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   document.getElementById('yr').textContent = new Date().getFullYear();
+  const GS = !!(window.gsap && window.ScrollTrigger) && !reduce;
+  if (GS) document.documentElement.classList.add('has-gsap');
 
   /* ---------- Flowing line pattern (hero + closing CTA) ---------- */
   function makeFlow(cv, { lines = 24, peach = [7, 15] } = {}) {
@@ -81,7 +83,7 @@
   };
   let dashIn = false;
   function playDash() {
-    if (dashIn) return; dashIn = true;
+    if (dashIn || GS) return; dashIn = true;
     dash.classList.add('is-in');
     gauge.style.strokeDasharray = `${GL * 39 / 60} ${GL}`;
     dash.querySelectorAll('[data-count]').forEach(countUp);
@@ -424,14 +426,12 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   /* ---------- GSAP ScrollTrigger scenes ---------- */
-  if (window.gsap && window.ScrollTrigger && !reduce) {
+  if (GS) {
     gsap.registerPlugin(ScrollTrigger);
-    document.documentElement.classList.add('has-gsap');
     const mm = gsap.matchMedia();
 
     // Industry marquee that speeds up with scroll velocity
-    const rows = gsap.utils.toArray('.strip__row');
-    const marquee = gsap.to(rows, { xPercent: -100, duration: 34, ease: 'none', repeat: -1 });
+    const marquee = gsap.to(gsap.utils.toArray('.strip__row'), { xPercent: -100, duration: 34, ease: 'none', repeat: -1 });
     ScrollTrigger.create({
       onUpdate: self => {
         const v = Math.min(Math.abs(self.getVelocity()) / 250, 6);
@@ -440,35 +440,87 @@
       }
     });
 
+    // Floating files: idle drift (independent of scroll)
+    const docs = gsap.utils.toArray('.doc');
+    docs.forEach(d => {
+      const inn = d.querySelector('.doc__in');
+      const r = parseFloat(d.style.getPropertyValue('--r')) || 0;
+      gsap.set(inn, { rotation: r });
+      gsap.to(inn, { y: gsap.utils.random(-16, 16), x: gsap.utils.random(-8, 8), rotation: r + gsap.utils.random(-4, 4),
+        duration: gsap.utils.random(2.2, 3.8), ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    });
+
     mm.add({ desk: '(min-width: 900px)', mob: '(max-width: 899px)' }, ctx => {
       const { desk } = ctx.conditions;
 
-      // 1. Hero: copy drifts up and fades, dashboard lifts from tilted and small to flat and wide
-      gsap.to('.hero__copy', { yPercent: -18, opacity: .1, ease: 'none',
-        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom 30%', scrub: true } });
-      gsap.fromTo('#dash',
-        { rotationX: desk ? 26 : 16, scale: desk ? .8 : .9, transformOrigin: '50% 100%' },
-        { rotationX: 0, scale: desk ? 1.06 : 1, ease: 'none',
-          scrollTrigger: { trigger: '#dashWrap', start: 'top 95%', end: desk ? 'top 12%' : 'top 25%', scrub: .6, onEnter: playDash } });
+      /* 1. Hero: pinned, the MacBook rises, opens, then the dashboard builds itself */
+      const bars = gsap.utils.toArray('.chart__bars i');
+      const cash = document.querySelector('.cash strong'), days = document.querySelector('.gauge__n [data-count]');
+      const num = { c: 0, d: 0 };
+      gsap.set('#mbpLid', { rotationX: -84 });
+      gsap.set(bars, { scaleY: 0 });
+      gsap.set('#balLine', { clipPath: 'inset(0 100% 0 0)' });
+      gsap.set('.chart__today, .alert', { autoAlpha: 0 });
+      gsap.set('.alert', { y: 12 });
+      gsap.set('#gaugeVal', { strokeDasharray: `0 ${GL}` });
+      gsap.set('.br i', { '--p': 0 });
+      const paintNums = () => { cash.textContent = '$' + Math.round(num.c).toLocaleString('en-US'); days.textContent = Math.round(num.d); };
+      paintNums();
+      const mbpEl = document.getElementById('mbp'), wrapEl = document.getElementById('dashWrap');
+      const endScale = desk ? .9 : 1, startScale = desk ? .74 : .92;
+      // start with the closed laptop's hinge just below the buttons, in the first screen
+      const peek = () => {
+        const h = mbpEl.offsetHeight, hinge = wrapEl.offsetTop + h * (1 + startScale) / 2;
+        return Math.min(0, innerHeight * (desk ? .9 : .94) - hinge);
+      };
+      // move the laptop so it ends centred in the viewport (scale is applied from its centre)
+      const lift = () => {
+        const h = mbpEl.offsetHeight, target = Math.max(76, (innerHeight - h * endScale) / 2 + 24);
+        return target - wrapEl.offsetTop - h * (1 - endScale) / 2;
+      };
+      gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: desk ? '+=170%' : '+=130%', pin: true, scrub: .7, anticipatePin: 1, invalidateOnRefresh: true } })
+        .to('.hero__copy', { yPercent: -25, autoAlpha: 0, duration: .55, ease: 'power1.in' }, 0)
+        .fromTo('#mbp', { y: peek, scale: startScale }, { y: lift, scale: endScale, duration: .8, ease: 'power2.out' }, 0)
+        .to('#mbpLid', { rotationX: 0, duration: .9, ease: 'power2.inOut' }, .2)
+        .to(bars, { scaleY: 1, duration: .45, stagger: .04, ease: 'power2.out' }, 1.05)
+        .to(num, { c: 1214800, d: 39, duration: .9, ease: 'power1.out', onUpdate: paintNums }, 1.05)
+        .to('#gaugeVal', { strokeDasharray: `${GL * 39 / 60} ${GL}`, duration: .8, ease: 'power2.out' }, 1.1)
+        .to('#balLine', { clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'none' }, 1.25)
+        .to('.chart__today', { autoAlpha: 1, duration: .2 }, 1.55)
+        .to('.br i', { '--p': 1, duration: .5, stagger: .08, ease: 'power2.out' }, 1.3)
+        .to('.alert', { autoAlpha: 1, y: 0, duration: .3, stagger: .15 }, 1.6)
+        .to({}, { duration: .35 });
       gsap.to('.sky__grid', { yPercent: 20, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
 
-      // 2. Panels expand from an inset card to the full section as they arrive
-      const inset = desk ? 'inset(8% 12% 8% 12% round 56px)' : 'inset(4% 5% 4% 5% round 36px)';
-      gsap.utils.toArray('.fx, .explorer__panels').forEach(el => {
-        gsap.fromTo(el, { clipPath: inset }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none',
-          scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 30%', scrub: .5 } });
-      });
-      gsap.fromTo('.cta', { clipPath: desk ? 'inset(0% 14% 0% 14% round 64px)' : 'inset(0% 4% 0% 4% round 36px)' },
-        { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none',
-          scrollTrigger: { trigger: '.cta', start: 'top 95%', end: 'top 25%', scrub: .5 } });
-      gsap.fromTo('.cta__in > *', { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: .08, ease: 'power3.out', duration: 1,
-        scrollTrigger: { trigger: '.cta', start: 'top 60%' } });
-
-      // 3. Feature cards fan in
+      /* 2. Feature cards fan in */
       gsap.fromTo('.fcard', { y: i => 90 + i * 30, rotation: i => (i - 1.5) * (desk ? 3 : 0) },
         { y: 0, rotation: 0, ease: 'none', scrollTrigger: { trigger: '.fgrid', start: 'top 95%', end: 'top 45%', scrub: .6 } });
 
-      // 4. How it works: pinned on laptops, cards rise one by one; scaled per card on phones
+      /* 3. Floating files: flags flip to fixed, files fly into MTK, a clean ledger comes out */
+      const stage = document.getElementById('chaosStage');
+      const toX = d => stage.clientWidth / 2 - (d.offsetLeft + d.offsetWidth * (desk ? 1 : .62) / 2);
+      const toY = d => stage.clientHeight / 2 - (d.offsetTop + d.offsetHeight * (desk ? 1 : .62) / 2);
+      const core = { n: 0 }, coreN = document.getElementById('coreN');
+      gsap.set('#res', { autoAlpha: 0, y: 40, scale: .9 });
+      gsap.set('#res p', { autoAlpha: 0, x: -14 });
+      gsap.set('.doc__flag .v', { yPercent: 100, autoAlpha: 0 });
+      const ctl = gsap.timeline({ scrollTrigger: { trigger: '#chaos', start: 'top top', end: desk ? '+=230%' : '+=200%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      docs.forEach((d, i) => {
+        const at = .15 + i * .11, flag = d.querySelector('.doc__flag');
+        ctl.to(flag.querySelector('.x'), { yPercent: -100, autoAlpha: 0, duration: .25 }, at)
+           .to(flag.querySelector('.v'), { yPercent: 0, autoAlpha: 1, duration: .25 }, at)
+           .to(flag, { backgroundColor: '#7fd3a6', color: '#0c0c0e', boxShadow: '0 6px 16px -6px rgba(127,211,166,.7)', duration: .25 }, at)
+           .to(d.querySelectorAll('.err'), { backgroundColor: '#dcf5e6', color: '#166534', boxShadow: 'inset 0 0 0 1.5px #22c55e', duration: .25 }, at);
+      });
+      ctl.to(docs, { x: (i, d) => toX(d), y: (i, d) => toY(d), scale: .12, autoAlpha: 0, duration: 1, ease: 'power3.in', stagger: .08 }, 1.5)
+         .to(core, { n: 10, duration: 1.6, ease: 'none', onUpdate: () => { coreN.textContent = Math.round(core.n); } }, 1.5)
+         .fromTo('.core__tile', { scale: 1 }, { scale: 1.14, duration: .2, ease: 'power1.inOut', yoyo: true, repeat: 7 }, 1.6)
+         .to('#core', { scale: .5, autoAlpha: 0, duration: .4 }, 3.3)
+         .to('#res', { autoAlpha: 1, y: 0, scale: 1, duration: .5, ease: 'back.out(1.4)' }, 3.4)
+         .to('#res p', { autoAlpha: 1, x: 0, duration: .25, stagger: .12 }, 3.6)
+         .to({}, { duration: .5 });
+
+      /* 4. How it works: pinned on laptops, per-card on phones */
       if (desk) {
         gsap.timeline({ scrollTrigger: { trigger: '#how', start: 'bottom bottom', end: '+=110%', pin: true, scrub: .6 } })
           .fromTo('.step', { yPercent: 70, opacity: 0, scale: .9 }, { yPercent: 0, opacity: 1, scale: 1, stagger: .45, ease: 'power2.out' });
@@ -477,22 +529,32 @@
           scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 55%', scrub: .5 } }));
       }
 
-      // 5. Devices assemble: laptop grows, tablet and phone slide in from the sides
+      /* 5. Panels expand from an inset card to the full section */
+      const inset = desk ? 'inset(8% 12% 8% 12% round 56px)' : 'inset(4% 5% 4% 5% round 36px)';
+      gsap.utils.toArray('.explorer__panels, .fx').forEach(el => {
+        gsap.fromTo(el, { clipPath: inset }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 30%', scrub: .5 } });
+      });
+
+      /* 6. Devices assemble */
       gsap.timeline({ scrollTrigger: { trigger: '.devices', start: 'top 95%', end: 'top 30%', scrub: .6 } })
         .fromTo('.mac', { scale: .82, y: 40 }, { scale: 1, y: 0, ease: 'none' }, 0)
         .fromTo('.ipad', { xPercent: -70, rotation: -8 }, { xPercent: 0, rotation: 0, ease: 'none' }, 0)
         .fromTo('.phone', { xPercent: 90, rotation: 8 }, { xPercent: 0, rotation: 0, ease: 'none' }, 0);
 
-      // 6. Big headings slide up a touch as they pass
+      /* 7. Closing CTA expands, its content rises in */
+      gsap.fromTo('.cta', { clipPath: desk ? 'inset(0% 14% 0% 14% round 64px)' : 'inset(0% 4% 0% 4% round 36px)' },
+        { clipPath: 'inset(0% 0% 0% 0% round 28px)', ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top 95%', end: 'top 25%', scrub: .5 } });
+      gsap.fromTo('.cta__in > *', { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: .08, ease: 'power3.out', duration: 1,
+        scrollTrigger: { trigger: '.cta', start: 'top 60%' } });
+
+      /* 8. Headings lift as they pass, footer wordmark grows */
       gsap.utils.toArray('.section__head h2, .faq-h').forEach(h => gsap.fromTo(h, { y: 50 }, { y: 0, ease: 'none',
         scrollTrigger: { trigger: h, start: 'top 100%', end: 'top 55%', scrub: .5 } }));
-
-      // 7. Footer wordmark rises and grows
       gsap.fromTo('.footer__word', { yPercent: 40, scale: .8, opacity: .2 }, { yPercent: 0, scale: 1, opacity: 1, ease: 'none',
         scrollTrigger: { trigger: '.footer', start: 'top 80%', end: 'bottom bottom', scrub: .6 } });
     });
 
-    // layout changes (fonts, language switch) need fresh measurements
     document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
     document.addEventListener('langchange', () => ScrollTrigger.refresh());
   }
