@@ -61,7 +61,7 @@
     }
   }
 
-  const COLORS = ['#cfe9d8', '#ffdb54', 'rgba(185,226,201,.28)'];
+  const COLORS = ['rgba(255,255,255,.9)', '#f3c1a4', 'rgba(255,255,255,.22)'];
   function frame(t) {
     if (!start) start = t;
     const el = t - start;
