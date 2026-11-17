@@ -830,3 +830,61 @@ html:lang(zh-Hans) .scrub { line-height: 1.4; }
   .dash { --tilt: 0deg !important; }
   .strip__row { animation: none; }
 }
+
+/* ==========================================================================
+   Three-colour system
+   80%: ink (#050506 → #131317) and dusk peach (#f4b99c family)
+   20%: "volt" lime, reserved for actions and attention outlines
+   ========================================================================== */
+@property --ang { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+:root { --volt: #d4ff3a; --volt-2: #ecff9c; --volt-glow: rgba(212, 255, 58, .45); }
+::selection { background: var(--volt); color: var(--ink); }
+:focus-visible { outline-color: var(--volt); }
+
+/* filled primary: lime with a soft glow and a light sweep */
+.btn--volt {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: var(--volt); color: var(--ink); font-weight: 600;
+  box-shadow: 0 0 0 1px rgba(212, 255, 58, .6), 0 10px 34px -10px var(--volt-glow), inset 0 1px 0 rgba(255, 255, 255, .55);
+}
+.btn--volt::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%);
+  transform: translateX(-120%); animation: voltSweep 4.5s 1.6s ease-in-out infinite;
+}
+@keyframes voltSweep { 0% { transform: translateX(-120%); } 30%, 100% { transform: translateX(120%); } }
+.btn--volt:hover { background: var(--volt-2); box-shadow: 0 0 0 4px rgba(212, 255, 58, .22), 0 16px 44px -10px var(--volt-glow), inset 0 1px 0 rgba(255, 255, 255, .6); }
+
+/* secondary: dark glass with a rotating lime outline */
+.btn--ring { position: relative; isolation: isolate; }
+.btn--ring::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: conic-gradient(from var(--ang), transparent 0 55%, rgba(212, 255, 58, .15) 62%, var(--volt) 80%, rgba(244, 185, 156, .9) 88%, transparent 96%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: spinRing 3.2s linear infinite;
+}
+@keyframes spinRing { to { --ang: 360deg; } }
+.btn--ring:hover::before { background: var(--volt); animation: none; }
+
+/* quiet outline: white hairline that turns lime on hover */
+.btn--line { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35); }
+.btn--line:hover { box-shadow: inset 0 0 0 1px var(--volt); color: var(--volt); }
+
+.pill--volt { background: var(--volt); border-color: var(--volt); color: var(--ink); font-weight: 600; }
+
+/* lime as a signal colour in small doses */
+.eyebrow { border-color: rgba(212, 255, 58, .35); }
+.eyebrow__dot { background: var(--volt); animation-name: pingVolt; }
+@keyframes pingVolt { 0% { box-shadow: 0 0 0 0 rgba(212, 255, 58, .6); } 70%, 100% { box-shadow: 0 0 0 8px rgba(212, 255, 58, 0); } }
+.chip-tag i { background: var(--volt); box-shadow: 0 0 12px var(--volt); }
+.explorer__tabs button i { background: var(--volt); height: 2px; }
+.fcard::before { background: radial-gradient(260px circle at var(--mx) var(--my), rgba(212, 255, 58, .75), rgba(244, 185, 156, .35) 40%, transparent 65%); }
+.faq details[open] summary::after { background: var(--volt); color: var(--ink); }
+.faq summary:hover::after { border-color: var(--volt); color: var(--volt); }
+#docs::-webkit-slider-thumb { box-shadow: 0 2px 8px rgba(0, 0, 0, .35), 0 0 0 5px rgba(212, 255, 58, .3); }
+.pillform { border-color: rgba(212, 255, 58, .3); }
+.pillform:focus-within { border-color: var(--volt); box-shadow: 0 0 0 4px rgba(212, 255, 58, .15), 0 20px 40px -20px rgba(0, 0, 0, .6); }
+.footer__go { color: var(--volt); }
+.conn__hub { box-shadow: 0 0 0 2px var(--volt), 0 0 0 8px rgba(212, 255, 58, .14), 0 20px 40px -12px rgba(0, 0, 0, .55); }
+@media (prefers-reduced-motion: reduce) { .btn--volt::after, .btn--ring::before { animation: none; } }
